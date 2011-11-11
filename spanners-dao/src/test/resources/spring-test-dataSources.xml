@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+    <description>Datasource and hibernate config to be used for unit testing.</description>
+
+	<!-- Use Apache Commons Connection Pooling to get our HSQL in memory datasource.
+	     This allows us to test without dependency on JBoss configured datasource or a pre-configured DB -->
+    <bean id="spannersDS" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
+        <property name="url" value="jdbc:hsqldb:mem:test-myProductDB"/>
+        <property name="username" value="sa"/>
+        <property name="password" value=""/>
+    </bean>
+
+    <bean id="hibernateProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="properties">
+			<props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <!-- Always recreate the schema according to mapping config -->
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
+                <!-- Disable caching so we can be sure we always retrieve from disk -->
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
+			</props>
+		</property>
+	</bean>
+
+</beans>

@@ -1,0 +1,45 @@
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+             http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+    version="2.4">
+
+    <display-name>Spanners WS</display-name>
+
+    <context-param>
+    	<param-name>contextConfigLocation</param-name>
+    	<param-value>
+            /WEB-INF/applicationContext*.xml,
+            classpath:/spring-hibernate.xml,
+            classpath:/spring-dataSources.xml
+        </param-value>
+  	</context-param>
+
+    <listener>
+    	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  	</listener>
+
+    <servlet>
+        <servlet-name>spring-ws</servlet-name>
+        <servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>transformWsdlLocations</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>spring-ws</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- Don't define a datasource
+    <resource-ref>
+        <description>Spanners database</description>
+        <res-ref-name>jdbc/Spanners</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+    -->
+
+</web-app>

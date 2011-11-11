@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.dontpanic</groupId>
+    <artifactId>spanners-pom</artifactId>
+    <name>spanners pom</name>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    
+    <modules>
+        <module>spanners-ws</module>
+        <module>spanners-dao</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <defaultGoal>package</defaultGoal>
+        
+        <pluginManagement>
+            <plugins>
+                
+            </plugins>
+        </pluginManagement>
+    </build>
+    
+</project>
