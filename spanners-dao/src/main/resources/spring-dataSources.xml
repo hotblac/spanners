@@ -11,9 +11,7 @@
     <bean id="hibernateProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="properties">
             <props>
-                <!-- Glassbox does not like this!
-                    <prop key="hibernate.hbm2ddl.auto">validate</prop>
-                -->
+                <prop key="hibernate.hbm2ddl.auto">validate</prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
             </props>

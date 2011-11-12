@@ -8,7 +8,7 @@
 	     This allows us to test without dependency on JBoss configured datasource or a pre-configured DB -->
     <bean id="spannersDS" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
-        <property name="url" value="jdbc:hsqldb:mem:test-myProductDB"/>
+        <property name="url" value="jdbc:hsqldb:mem:spannersDB"/>
         <property name="username" value="sa"/>
         <property name="password" value=""/>
     </bean>

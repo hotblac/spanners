@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.dontpanic</groupId>
     <artifactId>spanners-ws</artifactId>
-    <name>spannersws-ws</name>
+    <name>spanners-ws</name>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     
@@ -85,6 +85,7 @@
 
     <build>
         <defaultGoal>package</defaultGoal>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -134,14 +135,21 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>7.2.2.v20101205</version>
                 <configuration>
+                    <stopPort>8081</stopPort>
+                    <stopKey>stop</stopKey>
+                    <useTestClasspath>true</useTestClasspath>
+                    <webAppConfig>
+                        <!-- Override the main app web.xml. The original contains JNDI config that
+                             we do not want to configure in Jetty. This test web.xml does not contain
+                             JNDI references. It points at Spring configured stub DAOs instead. -->
+                        <descriptor>${basedir}/src/test/web.xml</descriptor>
+                    </webAppConfig>
                     <connectors>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
                             <port>${jetty.port}</port>
                             <maxIdleTime>60000</maxIdleTime>
                         </connector>
                     </connectors>
-                    <stopPort>8081</stopPort>
-                    <stopKey>stop</stopKey>
                 </configuration>
                 <executions>
                     <execution>

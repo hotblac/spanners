@@ -2,16 +2,15 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
              http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
-    version="2.4">
-
+    version="2.4">    
+    
     <display-name>Spanners WS</display-name>
 
     <context-param>
     	<param-name>contextConfigLocation</param-name>
     	<param-value>
             /WEB-INF/applicationContext*.xml,
-            classpath:/spring-hibernate.xml,
-            classpath:/spring-dataSources.xml
+            classpath:/spring-test-dao.xml
         </param-value>
   	</context-param>
 
@@ -32,14 +31,5 @@
         <servlet-name>spring-ws</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
-
-    <!-- Don't define a datasource
-    <resource-ref>
-        <description>Spanners database</description>
-        <res-ref-name>jdbc/Spanners</res-ref-name>
-        <res-type>javax.sql.DataSource</res-type>
-        <res-auth>Container</res-auth>
-    </resource-ref>
-    -->
 
 </web-app>
