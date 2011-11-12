@@ -7,7 +7,12 @@ public class SpannersDAOStub implements SpannersDAO {
 
     @Override
     public Spanner get(int i) {
-        return null;
+        Spanner spanner = new Spanner();
+        spanner.setId(1);
+        spanner.setName("Spanner 1");
+        spanner.setSize(42);
+        return spanner;
+
     }
 
     @Override
