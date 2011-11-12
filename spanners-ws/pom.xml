@@ -24,7 +24,7 @@
     <dependencies>
         <dependency>
             <groupId>org.dontpanic</groupId>
-            <artifactId>spanners</artifactId>
+            <artifactId>spanners-dao</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
