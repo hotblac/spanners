@@ -15,6 +15,11 @@
         <module>spanners-dao</module>
     </modules>
 
+    <scm>
+        <connection>scm:svn:http://lustytuna:90/svn/repo1/spanners/trunk</connection>
+        <developerConnection>scm:svn:http://lustytuna:90/svn/repo1/spanners/trunk</developerConnection>
+    </scm>
+
     <dependencyManagement>
         <dependencies>
             

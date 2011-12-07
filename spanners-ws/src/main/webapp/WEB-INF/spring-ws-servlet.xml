@@ -62,4 +62,9 @@
     <bean id="schema" class="org.springframework.xml.xsd.SimpleXsdSchema"
           p:xsd="/WEB-INF/spanners.xsd"/>
 
+    <!-- Log all uncaught exceptions and transform to SOAP faults -->
+    <bean id="exceptionResolver" class="org.springframework.ws.soap.server.endpoint.SimpleSoapExceptionResolver"
+          p:warnLogCategory="org.dontpanic.spannersws.Endpoint"/>
+
+
 </beans>
