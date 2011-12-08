@@ -18,6 +18,19 @@
         <developerConnection>scm:svn:http://lustytuna:90/svn/repo1/spanners/trunk</developerConnection>
     </scm>
 
+    <distributionManagement>
+        <repository>
+            <id>fakerepo</id>
+            <name>Local file system</name>
+            <url>file:///c:/svnFakeRepo/repo</url>
+        </repository>
+        <snapshotRepository>
+            <id>fakesnapshotrepo</id>
+            <name>Local file system</name>
+            <url>file:///c:/svnFakeRepo/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <dependencyManagement>
         <dependencies>
             
