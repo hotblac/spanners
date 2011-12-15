@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.dontpanic</groupId>
+    <artifactId>spanners-pom</artifactId>
+    <name>spanners pom</name>
+    <version>1.4</version>
+    <packaging>pom</packaging>
+    
+    <modules>
+        <module>spanners-ws</module>
+        <module>spanners-dao</module>
+    </modules>
+
+    <scm>
+        <connection>scm:svn:http://lustytuna:90/svn/repo1/spanners/tags/spanners-pom-1.4</connection>
+        <developerConnection>scm:svn:http://lustytuna:90/svn/repo1/spanners/tags/spanners-pom-1.4</developerConnection>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>fakerepo</id>
+            <name>Local file system</name>
+            <url>file:///c:/svnFakeRepo/repo</url>
+        </repository>
+        <snapshotRepository>
+            <id>fakesnapshotrepo</id>
+            <name>Local file system</name>
+            <url>file:///c:/svnFakeRepo/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <dependencyManagement>
+        <dependencies>
+            
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <defaultGoal>package</defaultGoal>
+        
+        <pluginManagement>
+            <plugins>
+                
+            </plugins>
+        </pluginManagement>
+    </build>
+    
+</project>
