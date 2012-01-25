@@ -11,8 +11,8 @@
     <modules>
         <module>spanners-ws</module>
         <module>spanners-dao</module>
-    <module>spanners-webapp</module>
-  </modules>
+        <module>spanners-tapestry</module>
+    </modules>
 
     <scm>
         <connection>scm:svn:http://lustytuna:90/svn/repo1/spanners/trunk</connection>
