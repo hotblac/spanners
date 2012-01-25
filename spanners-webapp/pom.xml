@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+    <artifactId>spanners-pom</artifactId>
+    <groupId>org.dontpanic</groupId>
+    <version>1.6-SNAPSHOT</version>
+  </parent>
+    <groupId>org.dontpanic</groupId>
+    <artifactId>spanners-webapp</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>spanners-webapp Tapestry 5 Application</name>
+        <dependencies>
+        <dependency>
+            <groupId>org.apache.tapestry</groupId>
+            <artifactId>tapestry-core</artifactId>
+            <version>${tapestry-release-version}</version>
+        </dependency>
+        <!-- A dependency on either JUnit or TestNG is required, or the surefire plugin (which runs the tests)
+will fail, preventing Maven from packaging the WAR. Tapestry includes a large number
+of testing facilities designed for use with TestNG (http://testng.org/), so it's recommended. -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>5.8</version>
+            <classifier>jdk15</classifier>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>2.4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- tapestry-test will conflict with RunJettyRun inside Eclipse. tapestry-test brings in Selenium, which
+             is based on Jetty 5.1; RunJettyRun uses Jetty 6.
+        <dependency>
+            <groupId>org.apache.tapestry</groupId>
+            <artifactId>tapestry-test</artifactId>
+            <version>${tapestry-release-version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        -->
+
+        <!-- Provided by the servlet container, but sometimes referenced in the application
+       code. -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+    <build>
+        <finalName>spanners-webapp</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                    <optimize>true</optimize>
+                </configuration>
+            </plugin>
+
+            <!-- Run the application using "mvn jetty:run" -->
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <version>6.1.9</version>
+                <configuration>
+                    <!-- Log to the console. -->
+                    <requestLog implementation="org.mortbay.jetty.NCSARequestLog">
+                        <!-- This doesn't do anything for Jetty, but is a workaround for a Maven bug
+                             that prevents the requestLog from being set. -->
+                        <append>true</append>
+                    </requestLog>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+
+        <!-- Adds a report detailing the components, mixins and base classes defined by this module. -->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tapestry</groupId>
+                <artifactId>tapestry-component-report</artifactId>
+                <version>${tapestry-release-version}</version>
+                <configuration>
+                    <rootPackage>org.dontpanic.spanners.webapp</rootPackage>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+
+    <repositories>
+
+        <!-- This repository is only needed if the Tapestry released artifacts haven't made it to the central Maven repository yet. -->
+        <repository>
+            <id>tapestry</id>
+            <url>http://tapestry.formos.com/maven-repository/</url>
+        </repository>
+
+        <!-- This repository is only needed when the tapestry-release-version is a snapshot release. -->
+        <repository>
+            <id>tapestry-snapshots</id>
+            <url>http://tapestry.formos.com/maven-snapshot-repository/</url>
+        </repository>
+
+        <repository>
+            <id>codehaus.snapshots</id>
+            <url>http://snapshots.repository.codehaus.org</url>
+        </repository>
+        <repository>
+            <id>OpenQA_Release</id>
+            <name>OpenQA Release Repository</name>
+            <url>http://archiva.openqa.org/repository/releases/</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+
+        <!-- As above, this can be commented out when access to the snapshot version
+of a Tapestry Maven plugin is not required.   -->
+        <pluginRepository>
+            <id>tapestry-snapshots</id>
+            <url>http://tapestry.formos.com/maven-snapshot-repository/</url>
+        </pluginRepository>
+
+
+    </pluginRepositories>
+
+    <properties>
+        <tapestry-release-version>5.1.0.5</tapestry-release-version>
+    </properties>
+</project>
