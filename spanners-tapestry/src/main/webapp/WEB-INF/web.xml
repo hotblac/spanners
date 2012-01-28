@@ -10,9 +10,18 @@ of where to look for pages, components and mixins. -->
         <param-name>tapestry.app-package</param-name>
         <param-value>org.dontpanic.spanners.tapestry</param-value>
     </context-param>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            /WEB-INF/applicationContext*.xml,
+            classpath:/spring-hibernate.xml,
+            classpath:/spring-dataSources.xml
+        </param-value>
+    </context-param>
     <filter>
         <filter-name>app</filter-name>
-        <filter-class>org.apache.tapestry5.TapestryFilter</filter-class>
+        <!-- Special filter that adds in a T5 IoC module derived from the Spring WebApplicationContext. -->
+        <filter-class>org.apache.tapestry5.spring.TapestrySpringFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>app</filter-name>

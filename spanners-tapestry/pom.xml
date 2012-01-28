@@ -14,13 +14,27 @@
             
     <dependencies>
         <dependency>
+            <groupId>org.dontpanic</groupId>
+            <artifactId>spanners-dao</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.tapestry</groupId>
             <artifactId>tapestry-core</artifactId>
             <version>${tapestry-release-version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.tapestry</groupId>
+            <artifactId>tapestry-spring</artifactId>
+            <version>${tapestry-release-version}</version>
+          </dependency>
         <!-- A dependency on either JUnit or TestNG is required, or the surefire plugin (which runs the tests)
-will fail, preventing Maven from packaging the WAR. Tapestry includes a large number
-of testing facilities designed for use with TestNG (http://testng.org/), so it's recommended. -->
+            will fail, preventing Maven from packaging the WAR. Tapestry includes a large number
+            of testing facilities designed for use with TestNG (http://testng.org/), so it's recommended. -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -52,7 +66,6 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
             <scope>provided</scope>
         </dependency>
 
