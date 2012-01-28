@@ -20,7 +20,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring</artifactId>
+            <artifactId>spring-core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.tapestry</groupId>
@@ -31,7 +31,7 @@
             <groupId>org.apache.tapestry</groupId>
             <artifactId>tapestry-spring</artifactId>
             <version>${tapestry-release-version}</version>
-          </dependency>
+        </dependency>
         <!-- A dependency on either JUnit or TestNG is required, or the surefire plugin (which runs the tests)
             will fail, preventing Maven from packaging the WAR. Tapestry includes a large number
             of testing facilities designed for use with TestNG (http://testng.org/), so it's recommended. -->
@@ -99,58 +99,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <reporting>
-
-        <!-- Adds a report detailing the components, mixins and base classes defined by this module. -->
-        <plugins>
-            <plugin>
-                <groupId>org.apache.tapestry</groupId>
-                <artifactId>tapestry-component-report</artifactId>
-                <version>${tapestry-release-version}</version>
-                <configuration>
-                    <rootPackage>org.dontpanic.spanners.tapestry</rootPackage>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
-
-    <repositories>
-
-        <!-- This repository is only needed if the Tapestry released artifacts haven't made it to the central Maven repository yet. -->
-        <repository>
-            <id>tapestry</id>
-            <url>http://tapestry.formos.com/maven-repository/</url>
-        </repository>
-
-        <!-- This repository is only needed when the tapestry-release-version is a snapshot release. -->
-        <repository>
-            <id>tapestry-snapshots</id>
-            <url>http://tapestry.formos.com/maven-snapshot-repository/</url>
-        </repository>
-
-        <repository>
-            <id>codehaus.snapshots</id>
-            <url>http://snapshots.repository.codehaus.org</url>
-        </repository>
-        <repository>
-            <id>OpenQA_Release</id>
-            <name>OpenQA Release Repository</name>
-            <url>http://archiva.openqa.org/repository/releases/</url>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-
-        <!-- As above, this can be commented out when access to the snapshot version
-of a Tapestry Maven plugin is not required.   -->
-        <pluginRepository>
-            <id>tapestry-snapshots</id>
-            <url>http://tapestry.formos.com/maven-snapshot-repository/</url>
-        </pluginRepository>
-
-
-    </pluginRepositories>
 
     <properties>
         <tapestry-release-version>5.1.0.5</tapestry-release-version>

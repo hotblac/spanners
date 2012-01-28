@@ -12,7 +12,9 @@
         <property name="dataSource" ref="spannersDS"/>
         <property name="hibernateProperties" ref="hibernateProperties"/>
         <property name="mappingLocations">
-            <value>classpath:org/dontpanic/spanners/*.hbm.xml</value>
+            <!-- TODO Figure out why wildcard search works for unit test, spanners-ws but not spanners-tapestry.
+                      Something to do with Tapestry classloader perhaps? -->
+            <value>classpath:org/dontpanic/spanners/Spanners.hbm.xml</value>
         </property>
     </bean>
 
