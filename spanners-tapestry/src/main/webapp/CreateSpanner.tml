@@ -1,0 +1,12 @@
+<html t:type="layout" title="Spanners Tapestry Demo - Create Spanner"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+      xmlns:p="tapestry:parameter">
+
+    <form t:type="form" t:id="form">
+        <t:errors/>
+        <t:label for="name"/>:<input t:type="TextField" t:id="name" t:validate="required" size="30"/><br/>
+        <t:label for="size"/>:<input t:type="TextField" t:id="size" t:validate="required,min=1,max=100" size="3"/><br/>
+        <input type="submit" value="Create"/>
+    </form>
+
+</html>

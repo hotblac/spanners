@@ -39,6 +39,6 @@ public class Layout
 
     public String[] getPageNames()
     {
-      return new String[] { "Index"};
+      return new String[] { "Index", "CreateSpanner"};
     }
 }
