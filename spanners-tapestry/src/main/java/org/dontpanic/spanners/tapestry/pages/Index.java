@@ -5,9 +5,4 @@ package org.dontpanic.spanners.tapestry.pages;
  */
 public class Index extends SpannerPage {
 
-    public String getSpanner1() {
-        return getSpannersDAO().get(1).getName();
-    }
-
-
 }

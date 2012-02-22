@@ -4,6 +4,4 @@
 
     <p>${message:greeting}</p>
 
-    <p>Spanner name is: ${spanner1}</p>
-
 </html>
