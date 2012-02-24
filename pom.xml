@@ -12,6 +12,7 @@
         <module>spanners-ws</module>
         <module>spanners-dao</module>
         <module>spanners-tapestry</module>
+        <module>spanners-struts</module>
     </modules>
 
     <properties>

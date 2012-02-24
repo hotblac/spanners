@@ -8,5 +8,9 @@
   
   <include file="example.xml"/>
   
-  <!-- Add addition packages and configuration here. -->
+   <package name="spanners" namespace="/spanners" extends="struts-default">
+    <action name="spannerDetail" class="spannerDetailAction">
+      <result>/spanners/SpannerDetail.jsp</result>
+    </action>
+  </package>
 </struts>
