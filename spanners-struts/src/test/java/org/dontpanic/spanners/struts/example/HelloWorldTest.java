@@ -22,9 +22,9 @@
 package org.dontpanic.spanners.struts.example;
 
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.struts2.StrutsTestCase;
+import org.apache.struts2.StrutsSpringTestCase;
 
-public class HelloWorldTest extends StrutsTestCase {
+public class HelloWorldTest extends StrutsSpringTestCase {
 
     public void testHelloWorld() throws Exception {
         HelloWorld hello_world = new HelloWorld();
