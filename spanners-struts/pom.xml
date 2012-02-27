@@ -19,6 +19,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>org.dontpanic</groupId>
+            <artifactId>spanners-dao</artifactId>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-core</artifactId>
             <version>${struts2.version}</version>

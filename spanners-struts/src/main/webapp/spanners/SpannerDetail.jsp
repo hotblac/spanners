@@ -7,6 +7,10 @@
 </head>
 
 <body>
-<h1>Body goes here!</h1>
+    <h1>Spanner</h1>
+    <p>Spanner id: <s:property value="spanner.id"/></p>
+    <p>Spanner name: <s:property value="spanner.name"/></p>
+    <p>Spanner size: <s:property value="spanner.size"/></p>
+
 </body>
 </html>

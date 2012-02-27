@@ -6,7 +6,6 @@
 
     <display-name>Spanners Struts</display-name>
 
-    <!-- Wire this up later
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
@@ -15,7 +14,6 @@
             classpath:/spring-dataSources.xml
         </param-value>
     </context-param>
-    -->
 
     <filter>
         <filter-name>struts2</filter-name>
