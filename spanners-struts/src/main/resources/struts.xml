@@ -12,5 +12,8 @@
     <action name="spannerDetail" class="spannerDetailAction">
       <result>/spanners/SpannerDetail.jsp</result>
     </action>
-  </package>
+    <action name="createSpanner" class="createSpannerAction">
+      <result>/spanners/CreateSpanner.jsp</result>
+    </action>
+   </package>
 </struts>

@@ -8,4 +8,6 @@
 
     <bean id="spannerDetailAction" class="org.dontpanic.spanners.struts.SpannerDetailAction"
             p:spannersDAO-ref="spannersDAO"/>
+    <bean id="createSpannerAction" class="org.dontpanic.spanners.struts.CreateSpannerAction"
+            p:spannersDAO-ref="spannersDAO"/>
 </beans>

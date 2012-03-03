@@ -9,14 +9,9 @@ import org.dontpanic.spanners.SpannersDAO;
  * User: Stevie
  * Date: 24/02/12
  */
-public class SpannerDetailAction extends ActionSupport {
+public class SpannerDetailAction extends SpannerAction {
 
-    private SpannersDAO spannersDAO;
     private Spanner spanner;
-
-    public void setSpannersDAO(SpannersDAO spannersDAO) {
-        this.spannersDAO = spannersDAO;
-    }
 
     public Spanner getSpanner() {
         return spanner;
