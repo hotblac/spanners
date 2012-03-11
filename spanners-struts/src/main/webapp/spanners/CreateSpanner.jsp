@@ -17,6 +17,9 @@
             <!-- This is not XSS safe -->
             <s:property value="message" escape="false"/>
             <br/>
+
+            <!-- This is not XSS safe -->
+            <%= request.getAttribute("message") %>
         </div>
     </s:if>
 
