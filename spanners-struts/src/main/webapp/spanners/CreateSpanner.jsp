@@ -9,13 +9,15 @@
     <h1>Create Spanner</h1>
     <s:if test="%{message != null}">
 
-        <!-- This is XSS safe -->
-        <s:property value="message"/>
-        <br/>
+        <div class="message">
+            <!-- This is XSS safe -->
+            <s:property value="message"/>
+            <br/>
 
-        <!-- This is not XSS safe -->
-        <s:property value="message" escape="false"/>
-        <br/>
+            <!-- This is not XSS safe -->
+            <s:property value="message" escape="false"/>
+            <br/>
+        </div>
     </s:if>
 
     <s:form action="createSpanner">

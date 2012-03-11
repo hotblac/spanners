@@ -5,21 +5,23 @@
     <form t:type="form" t:id="form">
         <t:errors/>
         <t:if test="message">
-            <!-- This is XSS Safe -->
-            ${message}
-            <br/>
+            <div class="success">
+                <!-- This is XSS Safe -->
+                <!--${message} -->
+                <!--<br/>   -->
 
-            <!-- This is XSS safe -->
-            <t:output format="defaultFormat" value="message"/>
-            <br/>
+                <!-- This is XSS safe -->
+                <!--<t:output format="defaultFormat" value="message"/>   -->
+                <!--<br/>   -->
 
-            <!-- This is not XSS safe -->
-            <t:output format="defaultFormat" value="message" filter="false"/>
-            <br/>
+                <!-- This is not XSS safe -->
+                <t:output format="defaultFormat" value="message" filter="false"/>
+                <br/>
 
-            <!-- This is not XSS safe -->
-            <t:outputRaw value="message"/>
-            <br/>
+                <!-- This is not XSS safe -->
+                <!--<t:outputRaw value="message"/>   -->
+                <!--<br/>     -->
+            </div>
         </t:if>
 
         <t:label for="name"/>:<input t:type="TextField" t:id="name" t:validate="required" size="30"/><br/>
