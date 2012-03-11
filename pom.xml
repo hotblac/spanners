@@ -5,13 +5,14 @@
     <groupId>org.dontpanic</groupId>
     <artifactId>spanners-pom</artifactId>
     <name>spanners pom</name>
-    <version>1.6-SNAPSHOT</version>
+    <version>1.6</version>
     <packaging>pom</packaging>
     
     <modules>
         <module>spanners-ws</module>
         <module>spanners-dao</module>
         <module>spanners-tapestry</module>
+        <module>spanners-struts</module>
     </modules>
 
     <properties>
@@ -19,8 +20,8 @@
     </properties>
 
     <scm>
-        <connection>scm:svn:http://lustytuna:90/svn/repo1/spanners/trunk</connection>
-        <developerConnection>scm:svn:http://lustytuna:90/svn/repo1/spanners/trunk</developerConnection>
+        <connection>scm:svn:http://lustytuna:90/svn/repo1/spanners/tags/spanners-pom-1.6</connection>
+        <developerConnection>scm:svn:http://lustytuna:90/svn/repo1/spanners/tags/spanners-pom-1.6</developerConnection>
     </scm>
 
     <distributionManagement>
