@@ -2,7 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
-    <title>Welcome</title>
+    <title>Spanner detail</title>
     <link href="<s:url value="/css/examplecss"/>" rel="stylesheet" type="text/css"/>
 </head>
 
