@@ -78,6 +78,7 @@
 
     <build>
         <defaultGoal>package</defaultGoal>
+        <finalName>spanners-ws</finalName>
 
         <plugins>
             <plugin>
@@ -118,6 +119,15 @@
                         <version>1.3</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+
+            <!-- Deploy to Tomcat with mvn tomcat:deploy or tomcat:redeploy -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>tomcat-maven-plugin</artifactId>
+                <configuration>
+                    <path>/spanners-ws</path>
+                </configuration>
             </plugin>
 
             <!-- Jetty Server. run and stop goals are bound to maven phases such that it will

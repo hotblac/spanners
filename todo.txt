@@ -1,0 +1,4 @@
+- Implement remove spanner in struts and / or tapestry
+- Create struts landing page
+- Upgrade Spring + spring security (spanners-ws)
+- Implement Spring securiy (AOP?) on DAO layer 

@@ -83,6 +83,15 @@
                 </configuration>
             </plugin>
 
+            <!-- Deploy to Tomcat with mvn tomcat:deploy or tomcat:redeploy -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>tomcat-maven-plugin</artifactId>
+                <configuration>
+                    <path>/spanners-tapestry</path>
+                </configuration>
+            </plugin>
+
             <!-- Run the application using "mvn jetty:run" -->
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
