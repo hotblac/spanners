@@ -117,7 +117,7 @@ public class SpannersTest {
         int numberOfSpanners = spanners.size();
         assertTrue(numberOfSpanners > 0);
         for (Spanner spanner : spanners) {
-            spannersDAO.delete(spanner.getId());
+            spannersDAO.delete(spanner);
             numberOfSpanners--;
 
             spanners = spannersDAO.getAll();

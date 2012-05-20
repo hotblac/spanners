@@ -1,4 +1,2 @@
-- Implement remove spanner in struts and / or tapestry
-- Fix spanner detail page in struts to return a specified spanner
 - Upgrade Spring + spring security (spanners-ws)
 - Implement Spring securiy (AOP?) on DAO layer 

@@ -29,6 +29,6 @@ public class SpannersDAOStub implements SpannersDAO {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Spanner spanner) {
     }
 }

@@ -19,5 +19,8 @@
         <action name="createSpanner" class="createSpannerAction">
             <result>/spanners/CreateSpanner.jsp</result>
         </action>
+        <action name="deleteSpanner" class="deleteSpannerAction">
+            <result>/spanners/DeleteSpanner.jsp</result>
+        </action>
     </package>
 </struts>

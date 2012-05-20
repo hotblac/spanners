@@ -21,13 +21,16 @@
             <s:url var="spannerDetail" action="spannerDetail">
                 <s:param name="id" value="id"/>
             </s:url>
+            <s:url var="deleteSpanner" action="deleteSpanner">
+                <s:param name="id" value="id"/>
+            </s:url>
 
             <tr>
                 <td><s:property value="id"/></td>
                 <td><s:property value="name"/></td>
                 <td><s:property value="size"/></td>
                 <td><s:a href="%{spannerDetail}">View</s:a></td>
-                <td>***TODO***</td>
+                <td><s:a href="%{deleteSpanner}">Delete</s:a></td>
             </tr>
         </s:iterator>
     </table>

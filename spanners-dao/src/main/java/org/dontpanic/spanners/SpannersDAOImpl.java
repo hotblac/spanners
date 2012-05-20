@@ -39,8 +39,7 @@ public class SpannersDAOImpl extends HibernateDaoSupport implements SpannersDAO 
     }
 
     @Override
-    public void delete(int id) {
-        Spanner spanner = get(id);
+    public void delete(Spanner spanner) {
         getHibernateTemplate().delete(spanner);
     }
 
