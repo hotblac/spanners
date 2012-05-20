@@ -13,4 +13,6 @@ public interface SpannersDAO {
 
     public int create(Spanner spanner);
 
+    public void delete(int id);
+
 }

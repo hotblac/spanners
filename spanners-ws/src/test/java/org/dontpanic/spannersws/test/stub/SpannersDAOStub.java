@@ -27,4 +27,8 @@ public class SpannersDAOStub implements SpannersDAO {
     public int create(Spanner spanner) {
         return 0;
     }
+
+    @Override
+    public void delete(int id) {
+    }
 }

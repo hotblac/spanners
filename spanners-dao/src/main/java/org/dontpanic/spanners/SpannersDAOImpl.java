@@ -9,10 +9,12 @@ import java.util.List;
 
 public class SpannersDAOImpl extends HibernateDaoSupport implements SpannersDAO {
 
+    @Override
     public Spanner get(int id) {
         return (Spanner)getHibernateTemplate().get(Spanner.class, id);
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public List<Spanner> getAll() {
         DetachedCriteria criteria = DetachedCriteria.forClass(Spanner.class);
@@ -20,6 +22,7 @@ public class SpannersDAOImpl extends HibernateDaoSupport implements SpannersDAO 
         return getHibernateTemplate().findByCriteria(criteria);
     }
 
+    @Override
     public int create(Spanner spanner) {
     	
     	if (spanner == null) {
@@ -33,6 +36,12 @@ public class SpannersDAOImpl extends HibernateDaoSupport implements SpannersDAO 
     	}
     	
     	return (Integer)getHibernateTemplate().save(spanner);
+    }
+
+    @Override
+    public void delete(int id) {
+        Spanner spanner = get(id);
+        getHibernateTemplate().delete(spanner);
     }
 
 }

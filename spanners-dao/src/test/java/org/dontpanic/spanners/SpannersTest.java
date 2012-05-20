@@ -109,6 +109,24 @@ public class SpannersTest {
 		spannersDAO.create(kate);	
     }
 
+
+    @Test
+    public void testDelete() {
+
+        List<Spanner> spanners = spannersDAO.getAll();
+        int numberOfSpanners = spanners.size();
+        assertTrue(numberOfSpanners > 0);
+        for (Spanner spanner : spanners) {
+            spannersDAO.delete(spanner.getId());
+            numberOfSpanners--;
+
+            spanners = spannersDAO.getAll();
+            assertEquals(numberOfSpanners, spanners.size());
+            assertNotPresent(spanner, spanners);
+        }
+        assertEquals(0, numberOfSpanners);
+    }
+
     /**
      * Bertha
      * @return A new Spanner called Bertha
@@ -157,6 +175,22 @@ public class SpannersTest {
         assertEquals(id, spanner.getId());
         assertEquals(name, spanner.getName());
         assertEquals(size, spanner.getSize());
+    }
+
+
+    /**
+     * Assert that the given spanner is not present in list of spanners
+     */
+    private void assertNotPresent(Spanner spanner, List<Spanner> spanners) {
+        for (Spanner thisSpanner : spanners) {
+            if (spanner.getId() == thisSpanner.getId()) {
+                fail("Spanner id=" + spanner.getId() + " should not be present");
+            } else if (spanner.getSize() == thisSpanner.getSize()) {
+                fail("Spanner size=" + spanner.getSize() + " should not be present");
+            } else if (spanner.getName().equals(thisSpanner.getName())) {
+                fail("Spanner name=" + spanner.getName() + " should not be present");
+            }
+        }
     }
 
 }
