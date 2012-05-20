@@ -16,6 +16,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.sql.DataSource;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -51,7 +53,16 @@ public class SpannersTest {
     public void testGet() {
         Spanner hazell = spannersDAO.get(1);
         checkSpanner(hazell, 1, "Hazell", 12);
-    }    
+    }
+
+    @Test
+    public void testGetAll() {
+        List<Spanner> spanners = spannersDAO.getAll();
+        assertNotNull(spanners);
+        assertEquals(2, spanners.size());
+        checkSpanner(spanners.get(0), 1, "Hazell", 12);
+        checkSpanner(spanners.get(1), 2, "Kitty", 18);
+    }
 
 
     @Test
@@ -96,6 +107,24 @@ public class SpannersTest {
     	// Create a spanner with zero size
     	Spanner kate = zeroSizeSpanner();
 		spannersDAO.create(kate);	
+    }
+
+
+    @Test
+    public void testDelete() {
+
+        List<Spanner> spanners = spannersDAO.getAll();
+        int numberOfSpanners = spanners.size();
+        assertTrue(numberOfSpanners > 0);
+        for (Spanner spanner : spanners) {
+            spannersDAO.delete(spanner);
+            numberOfSpanners--;
+
+            spanners = spannersDAO.getAll();
+            assertEquals(numberOfSpanners, spanners.size());
+            assertNotPresent(spanner, spanners);
+        }
+        assertEquals(0, numberOfSpanners);
     }
 
     /**
@@ -146,6 +175,22 @@ public class SpannersTest {
         assertEquals(id, spanner.getId());
         assertEquals(name, spanner.getName());
         assertEquals(size, spanner.getSize());
+    }
+
+
+    /**
+     * Assert that the given spanner is not present in list of spanners
+     */
+    private void assertNotPresent(Spanner spanner, List<Spanner> spanners) {
+        for (Spanner thisSpanner : spanners) {
+            if (spanner.getId() == thisSpanner.getId()) {
+                fail("Spanner id=" + spanner.getId() + " should not be present");
+            } else if (spanner.getSize() == thisSpanner.getSize()) {
+                fail("Spanner size=" + spanner.getSize() + " should not be present");
+            } else if (spanner.getName().equals(thisSpanner.getName())) {
+                fail("Spanner name=" + spanner.getName() + " should not be present");
+            }
+        }
     }
 
 }

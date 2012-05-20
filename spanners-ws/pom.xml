@@ -9,7 +9,7 @@
     <parent>
         <groupId>org.dontpanic</groupId>
         <artifactId>spanners-pom</artifactId>
-        <version>1.7-SNAPSHOT</version>
+        <version>1.7</version>
     </parent>
     
     <properties>
@@ -78,15 +78,14 @@
 
     <build>
         <defaultGoal>package</defaultGoal>
+        <finalName>spanners-ws</finalName>
 
         <plugins>
+
+            <!--Set JVM version-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
             </plugin>
 
             <!-- soapui plugin runs SOAP UI tests during test phase.
@@ -118,6 +117,15 @@
                         <version>1.3</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+
+            <!-- Deploy to Tomcat with mvn tomcat:deploy or tomcat:redeploy -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>tomcat-maven-plugin</artifactId>
+                <configuration>
+                    <path>/spanners-ws</path>
+                </configuration>
             </plugin>
 
             <!-- Jetty Server. run and stop goals are bound to maven phases such that it will
