@@ -8,7 +8,7 @@ import org.apache.tapestry5.BindingConstants;
 /**
  * Layout component for pages of application spanners-tapestry.
  */
-@IncludeStylesheet({"context:layout/layout.css", "context:layout/messages.css"})
+@Import(stylesheet = {"context:layout/layout.css", "context:layout/messages.css"})
 public class Layout
 {
     /** The page title, for the <title> element and the <h1> element. */

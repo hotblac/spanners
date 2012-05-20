@@ -51,12 +51,9 @@
             <version>3.9.0.GA</version>
         </dependency>
 
-        <!-- JUnit versions higher than 4.4 are not compatible with spring-test 2.5.6 -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.4</version>
-            <scope>test</scope>
         </dependency>
         
         <dependency>
@@ -69,13 +66,13 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.5.8</version>
+            <version>1.6.4</version>
         </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>1.5.8</version>
+            <version>1.6.4</version>
         </dependency>
 
         <dependency>

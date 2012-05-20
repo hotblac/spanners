@@ -1,2 +1,3 @@
-- Upgrade Spring + spring security (spanners-ws)
+- Upgrade hibernate
+- Upgrade to Maven 3
 - Implement Spring securiy (AOP?) on DAO layer 
