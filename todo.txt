@@ -1,3 +1,2 @@
-- New version
 - Upgrade Spring + spring security (spanners-ws)
 - Implement Spring securiy (AOP?) on DAO layer 
