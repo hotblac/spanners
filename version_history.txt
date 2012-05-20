@@ -1,0 +1,17 @@
+1.0
+- Initial version
+
+1.1 - 1.5
+- Maven release plugin tests
+
+1.6
+- Added spanners-tapestry
+- Added spanners-struts
+- Upgraded to spring 2.5.6
+- Added XSS vulnerability demos in tapestry and struts
+
+1.7
+- Added tomcat deployer plugin to all apps
+- Added getAll and delete methods to SpannersDAO
+- Added DisplaySpanners and DeleteSpanner pages to spanners-struts
+- Fixed links and CSS in spanners-struts
