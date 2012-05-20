@@ -3,6 +3,9 @@ package org.dontpanic.spannersws.test.stub;
 import org.dontpanic.spanners.Spanner;
 import org.dontpanic.spanners.SpannersDAO;
 
+import java.util.Collections;
+import java.util.List;
+
 public class SpannersDAOStub implements SpannersDAO {
 
     @Override
@@ -13,6 +16,11 @@ public class SpannersDAOStub implements SpannersDAO {
         spanner.setSize(42);
         return spanner;
 
+    }
+
+    @Override
+    public List<Spanner> getAll() {
+        return Collections.emptyList();
     }
 
     @Override

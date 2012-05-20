@@ -6,6 +6,8 @@
             http://www.springframework.org/schema/beans
             http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="displaySpannersAction" class="org.dontpanic.spanners.struts.DisplaySpannersAction"
+          p:spannersDAO-ref="spannersDAO"/>
     <bean id="spannerDetailAction" class="org.dontpanic.spanners.struts.SpannerDetailAction"
             p:spannersDAO-ref="spannersDAO"/>
     <bean id="createSpannerAction" class="org.dontpanic.spanners.struts.CreateSpannerAction"
