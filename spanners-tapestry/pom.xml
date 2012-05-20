@@ -73,14 +73,10 @@
     <build>
         <finalName>spanners-tapestry</finalName>
         <plugins>
+            <!--Set JVM version-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                    <optimize>true</optimize>
-                </configuration>
             </plugin>
 
             <!-- Deploy to Tomcat with mvn tomcat:deploy or tomcat:redeploy -->

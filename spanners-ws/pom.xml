@@ -81,13 +81,11 @@
         <finalName>spanners-ws</finalName>
 
         <plugins>
+
+            <!--Set JVM version-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
             </plugin>
 
             <!-- soapui plugin runs SOAP UI tests during test phase.
