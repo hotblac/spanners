@@ -5,7 +5,7 @@
     <groupId>org.dontpanic</groupId>
     <artifactId>spanners-pom</artifactId>
     <name>spanners pom</name>
-    <version>1.7-SNAPSHOT</version>
+    <version>1.7</version>
     <packaging>pom</packaging>
     
     <modules>
@@ -20,8 +20,8 @@
     </properties>
 
     <scm>
-        <connection>scm:svn:http://lustytuna:90/svn/repo1/spanners/trunk</connection>
-        <developerConnection>scm:svn:http://lustytuna:90/svn/repo1/spanners/trunk</developerConnection>
+        <connection>scm:svn:http://lustytuna:90/svn/repo1/spanners/tags/spanners-pom-1.7</connection>
+        <developerConnection>scm:svn:http://lustytuna:90/svn/repo1/spanners/tags/spanners-pom-1.7</developerConnection>
     </scm>
 
     <distributionManagement>
