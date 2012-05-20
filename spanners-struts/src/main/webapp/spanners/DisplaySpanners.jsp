@@ -34,5 +34,7 @@
             </tr>
         </s:iterator>
     </table>
+
+    <p><a href="<s:url action="createSpanner"/>">Create spanner</a></p>
 </body>
 </html>

@@ -1,2 +1,4 @@
+- Add simple CSS to struts app
+- New version
 - Upgrade Spring + spring security (spanners-ws)
 - Implement Spring securiy (AOP?) on DAO layer 

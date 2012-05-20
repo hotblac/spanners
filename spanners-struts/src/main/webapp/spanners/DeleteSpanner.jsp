@@ -15,5 +15,7 @@
     <p>Spanner name: <s:property value="spanner.name"/></p>
     <p>Spanner size: <s:property value="spanner.size"/></p>
 
+    <p><a href="<s:url action="displaySpanners"/>">Back</a></p>
+
 </body>
 </html>
