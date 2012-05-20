@@ -9,14 +9,23 @@ import org.dontpanic.spanners.Spanner;
  */
 public class SpannerDetailAction extends SpannerAction {
 
+    private int id;
     private Spanner spanner;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Spanner getSpanner() {
         return spanner;
     }
 
     public String execute() throws Exception {
-        spanner = spannersDAO.get(1);
+        spanner = spannersDAO.get(id);
 		return SUCCESS;
 	}
 
