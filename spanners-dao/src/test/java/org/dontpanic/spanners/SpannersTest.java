@@ -16,6 +16,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.sql.DataSource;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -51,7 +53,16 @@ public class SpannersTest {
     public void testGet() {
         Spanner hazell = spannersDAO.get(1);
         checkSpanner(hazell, 1, "Hazell", 12);
-    }    
+    }
+
+    @Test
+    public void testGetAll() {
+        List<Spanner> spanners = spannersDAO.getAll();
+        assertNotNull(spanners);
+        assertEquals(2, spanners.size());
+        checkSpanner(spanners.get(0), 1, "Hazell", 12);
+        checkSpanner(spanners.get(1), 2, "Kitty", 18);
+    }
 
 
     @Test
