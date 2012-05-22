@@ -13,7 +13,7 @@
     </parent>
     
     <properties>
-        <spring-ws.version>2.0.3.RELEASE</spring-ws.version>
+        <spring-ws.version>2.0.5.RELEASE</spring-ws.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jetty.port>8888</jetty.port>
     </properties>
