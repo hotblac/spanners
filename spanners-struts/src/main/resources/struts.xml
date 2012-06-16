@@ -6,8 +6,6 @@
     <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
     <constant name="struts.devMode" value="true"/>
 
-    <include file="example.xml"/>
-
     <package name="spanners" namespace="/spanners" extends="struts-default">
 
         <action name="displaySpanners" class="displaySpannersAction">
@@ -18,6 +16,9 @@
         </action>
         <action name="createSpanner" class="createSpannerAction">
             <result>/spanners/CreateSpanner.jsp</result>
+        </action>
+        <action name="editSpanner" class="editSpannerAction">
+            <result>/spanners/EditSpanner.jsp</result>
         </action>
         <action name="deleteSpanner" class="deleteSpannerAction">
             <result>/spanners/DeleteSpanner.jsp</result>

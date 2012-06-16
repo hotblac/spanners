@@ -6,12 +6,12 @@
             http://www.springframework.org/schema/beans
             http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="displaySpannersAction" class="org.dontpanic.spanners.struts.DisplaySpannersAction"
-          p:spannersDAO-ref="spannersDAO"/>
-    <bean id="spannerDetailAction" class="org.dontpanic.spanners.struts.SpannerDetailAction"
-            p:spannersDAO-ref="spannersDAO"/>
-    <bean id="createSpannerAction" class="org.dontpanic.spanners.struts.CreateSpannerAction"
-            p:spannersDAO-ref="spannersDAO"/>
-    <bean id="deleteSpannerAction" class="org.dontpanic.spanners.struts.DeleteSpannerAction"
-            p:spannersDAO-ref="spannersDAO"/>
+    <bean id="abstractSpannerAction" class="org.dontpanic.spanners.struts.SpannerAction" abstract="true"
+           p:spannersDAO-ref="spannersDAO"/>
+
+    <bean id="displaySpannersAction" class="org.dontpanic.spanners.struts.DisplaySpannersAction" parent="abstractSpannerAction"/>
+    <bean id="spannerDetailAction" class="org.dontpanic.spanners.struts.SpannerDetailAction" parent="abstractSpannerAction"/>
+    <bean id="createSpannerAction" class="org.dontpanic.spanners.struts.CreateSpannerAction" parent="abstractSpannerAction"/>
+    <bean id="editSpannerAction" class="org.dontpanic.spanners.struts.EditSpannerAction" parent="abstractSpannerAction"/>
+    <bean id="deleteSpannerAction" class="org.dontpanic.spanners.struts.DeleteSpannerAction" parent="abstractSpannerAction"/>
 </beans>

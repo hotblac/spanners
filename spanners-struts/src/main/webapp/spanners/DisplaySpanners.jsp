@@ -15,11 +15,15 @@
             <th>Name</th>
             <th>Size</th>
             <th>View</th>
+            <th>Edit</th>
             <th>Remove</th>
         </tr>
         <s:iterator value="spanners" var="spanner">
 
             <s:url var="spannerDetail" action="spannerDetail">
+                <s:param name="id" value="id"/>
+            </s:url>
+            <s:url var="editSpanner" action="editSpanner">
                 <s:param name="id" value="id"/>
             </s:url>
             <s:url var="deleteSpanner" action="deleteSpanner">
@@ -31,6 +35,7 @@
                 <td><s:property value="name"/></td>
                 <td><s:property value="size"/></td>
                 <td><s:a href="%{spannerDetail}">View</s:a></td>
+                <td><s:a href="%{editSpanner}">Edit</s:a></td>
                 <td><s:a href="%{deleteSpanner}">Delete</s:a></td>
             </tr>
         </s:iterator>

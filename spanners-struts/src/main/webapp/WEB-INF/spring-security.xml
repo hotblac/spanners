@@ -12,6 +12,7 @@
         <authentication-provider>
             <user-service>
                 <user name="viewer" password="password" authorities="ROLE_VIEWER" />
+                <user name="editor" password="password" authorities="ROLE_VIEWER, ROLE_EDITOR"/>
             </user-service>
         </authentication-provider>
     </authentication-manager>

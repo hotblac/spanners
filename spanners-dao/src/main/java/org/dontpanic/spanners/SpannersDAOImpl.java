@@ -51,6 +51,11 @@ public class SpannersDAOImpl implements SpannersDAO {
     }
 
     @Override
+    public void update(Spanner spanner) {
+        getSession().saveOrUpdate(spanner);
+    }
+
+    @Override
     public void delete(Spanner spanner) {
         getSession().delete(spanner);
     }

@@ -109,6 +109,20 @@ public class SpannersTest {
 		spannersDAO.create(kate);	
     }
 
+    @Test
+    public void testUpdate() {
+        Spanner hazell = spannersDAO.get(1);
+        hazell.setName("Bertha");
+        hazell.setSize(10);
+        spannersDAO.update(hazell);
+
+        // Check it's updated
+        Spanner updated = spannersDAO.get(1);
+        assertEquals(hazell.getId(), updated.getId());
+        assertEquals(hazell.getName(), updated.getName());
+        assertEquals(hazell.getSize(), updated.getSize());
+    }
+
 
     @Test
     public void testDelete() {

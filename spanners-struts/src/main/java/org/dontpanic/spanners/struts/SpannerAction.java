@@ -8,7 +8,7 @@ import org.dontpanic.spanners.SpannersDAO;
  * User: Stevie
  * Date: 03/03/12
  */
-public class SpannerAction extends ActionSupport {
+public abstract class SpannerAction extends ActionSupport {
 
     protected SpannersDAO spannersDAO;
 
