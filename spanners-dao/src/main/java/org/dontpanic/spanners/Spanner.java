@@ -9,6 +9,7 @@ public class Spanner {
     private int id;
     private String name;
     private int size;
+    private String owner;
 
     public int getId() {
         return id;
@@ -32,5 +33,13 @@ public class Spanner {
 
     public void setSize(int size) {
         this.size = size;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 }

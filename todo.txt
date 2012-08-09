@@ -1,1 +1,3 @@
-- Implement Spring securiy (AOP?) on DAO layer 
+- Add owners to dummy security config
+- Handle spring security exceptions (use a handler?)
+- Replace dummy security with database tables

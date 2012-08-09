@@ -20,6 +20,10 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+
+/**
+ * Test functionality of SpannersDAO.
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
                 "classpath:spring-hibernate.xml", // Containing Hibernate session bean, transaction config and DAOs
