@@ -1,4 +1,4 @@
-package org.dontpanic.spanners;
+package org.dontpanic.spanners.dao;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -20,9 +20,9 @@ public interface SpannersDAO {
     @PreAuthorize("hasRole('ROLE_EDITOR')")
     public int create(Spanner spanner);
 
-    @PreAuthorize("hasRole('ROLE_EDITOR')")
+    @PreAuthorize("hasRole('ROLE_EDITOR') or hasPermission(#spanner, 'owner')")
     public void update(Spanner spanner);
 
-    @PreAuthorize("hasRole('ROLE_EDITOR')")
+    @PreAuthorize("hasRole('ROLE_EDITOR') or hasPermission(#spanner, 'owner')")
     public void delete(Spanner spanner);
 }

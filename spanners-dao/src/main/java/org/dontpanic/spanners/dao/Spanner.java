@@ -1,4 +1,4 @@
-package org.dontpanic.spanners;
+package org.dontpanic.spanners.dao;
 
 public class Spanner {
 

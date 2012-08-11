@@ -2,7 +2,7 @@ package org.dontpanic.spanners.tapestry.pages;
 
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
-import org.dontpanic.spanners.Spanner;
+import org.dontpanic.spanners.dao.Spanner;
 
 import java.text.FieldPosition;
 import java.text.Format;

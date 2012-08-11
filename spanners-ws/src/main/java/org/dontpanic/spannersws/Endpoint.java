@@ -1,7 +1,7 @@
 package org.dontpanic.spannersws;
 
-import org.dontpanic.spanners.Spanner;
-import org.dontpanic.spanners.SpannersDAO;
+import org.dontpanic.spanners.dao.Spanner;
+import org.dontpanic.spanners.dao.SpannersDAO;
 import org.jdom.Namespace;
 import org.springframework.ws.server.endpoint.AbstractJDomPayloadEndpoint;
 import org.jdom.Element;

@@ -1,9 +1,11 @@
-package org.dontpanic.spanners;
+package org.dontpanic.spanners.dao;
 
 import org.dbunit.DataSourceDatabaseTester;
 import org.dbunit.IDatabaseTester;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
+import org.dontpanic.spanners.dao.Spanner;
+import org.dontpanic.spanners.dao.SpannersDAO;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -86,6 +88,23 @@ public class SpannersSecurityTest {
         // Editor should not have access to get* methods (seems daft but them's the rules...)
         verifyException(spannersDAO, AccessDeniedException.class).get(1);
         verifyException(spannersDAO, AccessDeniedException.class).getAll();
+    }
+
+    @Test
+    public void testOwnerAccess() {
+
+        // Login as owner of specific spanner - smith
+        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("smith", "password"));
+
+        // Smith should be able to update / delete spanner 1
+        Spanner spanner1 = spannersDAO.get(1);
+        spannersDAO.update(spanner1);
+        spannersDAO.delete(spanner1);
+
+        // Smith should not be able to update / delete spanner 2
+        Spanner spanner2 = spannersDAO.get(2);
+        verifyException(spannersDAO, AccessDeniedException.class).update(spanner2);
+        verifyException(spannersDAO, AccessDeniedException.class).delete(spanner2);
     }
 
     @Test

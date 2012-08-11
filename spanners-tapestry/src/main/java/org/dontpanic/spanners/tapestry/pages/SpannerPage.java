@@ -1,7 +1,7 @@
 package org.dontpanic.spanners.tapestry.pages;
 
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.dontpanic.spanners.SpannersDAO;
+import org.dontpanic.spanners.dao.SpannersDAO;
 import org.springframework.context.ApplicationContext;
 
 /**

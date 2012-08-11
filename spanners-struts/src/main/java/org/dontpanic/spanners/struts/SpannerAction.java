@@ -1,7 +1,7 @@
 package org.dontpanic.spanners.struts;
 
 import com.opensymphony.xwork2.ActionSupport;
-import org.dontpanic.spanners.SpannersDAO;
+import org.dontpanic.spanners.dao.SpannersDAO;
 
 /**
  * Superclass of Spanner pages

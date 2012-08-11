@@ -1,6 +1,6 @@
 package org.dontpanic.spanners.struts;
 
-import org.dontpanic.spanners.Spanner;
+import org.dontpanic.spanners.dao.Spanner;
 
 /**
  * Delete given spanner

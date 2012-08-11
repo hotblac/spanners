@@ -3,7 +3,7 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="org.dontpanic.spanners">
+<hibernate-mapping package="org.dontpanic.spanners.dao">
 
     <class name="Spanner" table="spanner">
         <id name="id">
@@ -11,6 +11,7 @@
         </id>
         <property name="name" unique="true"/>
         <property name="size"/>
+        <property name="owner"/>
     </class>
 
 </hibernate-mapping>

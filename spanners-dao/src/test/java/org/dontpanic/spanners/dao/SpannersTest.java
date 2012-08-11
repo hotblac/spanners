@@ -1,9 +1,11 @@
-package org.dontpanic.spanners;
+package org.dontpanic.spanners.dao;
 
 import org.dbunit.DataSourceDatabaseTester;
 import org.dbunit.IDatabaseTester;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
+import org.dontpanic.spanners.dao.Spanner;
+import org.dontpanic.spanners.dao.SpannersDAO;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.After;
 import org.junit.Before;

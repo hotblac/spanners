@@ -1,7 +1,7 @@
 package org.dontpanic.spannersws.test.stub;
 
-import org.dontpanic.spanners.Spanner;
-import org.dontpanic.spanners.SpannersDAO;
+import org.dontpanic.spanners.dao.Spanner;
+import org.dontpanic.spanners.dao.SpannersDAO;
 
 import java.util.Collections;
 import java.util.List;

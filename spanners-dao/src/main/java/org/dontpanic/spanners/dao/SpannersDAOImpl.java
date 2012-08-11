@@ -1,4 +1,4 @@
-package org.dontpanic.spanners;
+package org.dontpanic.spanners.dao;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;

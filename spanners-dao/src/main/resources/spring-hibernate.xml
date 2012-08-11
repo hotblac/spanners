@@ -6,7 +6,7 @@
    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
-    <bean id="spannersDAO" class="org.dontpanic.spanners.SpannersDAOImpl">
+    <bean id="spannersDAO" class="org.dontpanic.spanners.dao.SpannersDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
@@ -17,7 +17,7 @@
         <property name="mappingLocations">
             <!-- TODO Figure out why wildcard search works for unit test, spanners-ws but not spanners-tapestry.
                       Something to do with Tapestry classloader perhaps? -->
-            <value>classpath:org/dontpanic/spanners/Spanners.hbm.xml</value>
+            <value>classpath:org/dontpanic/spanners/dao/Spanners.hbm.xml</value>
         </property>
     </bean>
 
