@@ -29,6 +29,8 @@ public class Endpoint extends AbstractJDomPayloadEndpoint {
 
         Spanner spanner = spannersDAO.get(spannerId);
 
+        // The following was added to generate database load to demonstrate AppDynamics
+        //http://www.disasterarea.co.uk/blog/?p=435
         int retries = 0;
         while (spanner == null && retries < 1000) {
             // If at first you don't succeed, get a bigger spanner...
