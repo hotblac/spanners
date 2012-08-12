@@ -28,7 +28,7 @@
         </div>
     </s:if>
 
-    <s:form action="createSpanner">
+    <s:form action="submitCreateSpanner">
         <s:textfield name="spanner.name" label="Name"/>
         <s:textfield name="spanner.size" label="Size"/>
         <s:submit/>

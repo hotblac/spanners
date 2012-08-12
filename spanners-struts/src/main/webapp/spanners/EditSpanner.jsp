@@ -16,7 +16,7 @@
         </div>
     </s:if>
 
-    <s:form action="editSpanner">
+    <s:form action="submitEditSpanner">
         <s:textfield name="spanner.name" label="Name"/>
         <s:textfield name="spanner.size" label="Size"/>
         <s:submit/>

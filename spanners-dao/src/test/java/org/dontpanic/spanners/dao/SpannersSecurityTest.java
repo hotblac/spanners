@@ -96,10 +96,20 @@ public class SpannersSecurityTest {
         // Login as owner of specific spanner - smith
         SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("smith", "password"));
 
+        // Smith can create a spanner only if he's the owner
+        Spanner newSpanner = newSpanner();
+        newSpanner.setOwner("smith");
+        spannersDAO.create(newSpanner);
+
         // Smith should be able to update / delete spanner 1
         Spanner spanner1 = spannersDAO.get(1);
         spannersDAO.update(spanner1);
         spannersDAO.delete(spanner1);
+
+        // Smith should not be able to create a spanner for another user
+        newSpanner = newSpanner();
+        newSpanner.setOwner("jones");
+        verifyException(spannersDAO, AccessDeniedException.class).create(newSpanner);
 
         // Smith should not be able to update / delete spanner 2
         Spanner spanner2 = spannersDAO.get(2);

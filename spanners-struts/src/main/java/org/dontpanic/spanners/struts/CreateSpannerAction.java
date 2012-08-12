@@ -24,11 +24,22 @@ public class CreateSpannerAction extends SpannerAction {
         return message;
     }
 
-    public String execute() throws Exception {
-        if (spanner != null) {
-            spannersDAO.create(spanner);
-            message = "You have created a spanner called: " + spanner.getName();
-        }
+    /**
+     * Draws the CreateSpanner page ready for user input
+     */
+    public String draw() throws Exception {
+        spanner = new Spanner();
+        message = null;
+        return SUCCESS;
+    }
+
+    /**
+     * Submits user inputted spanner to database
+     */
+    public String submit() throws Exception {
+        spanner.setOwner(getUsername());
+        spannersDAO.create(spanner);
+        message = "You have created a spanner called: " + spanner.getName();
         return SUCCESS;
     }
 }

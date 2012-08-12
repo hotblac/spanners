@@ -29,15 +29,17 @@ public class EditSpannerAction extends SpannerAction {
         return message;
     }
 
-    public String execute() throws Exception {
-        if (spanner == null) {
-            // Retrieve it for display
-            spanner = spannersDAO.get(id);
-        } else {
-            // Submit edits
-            spannersDAO.update(spanner);
-            message = "Spanner successfuly updated";
-        }
+    public String draw() throws Exception {
+        // Retrieve it for display
+        spanner = spannersDAO.get(id);
+        message = null;
+        return SUCCESS;
+    }
+
+    public String submit() throws Exception {
+        // Submit edits
+        spannersDAO.update(spanner);
+        message = "Spanner successfuly updated";
         return SUCCESS;
     }
 

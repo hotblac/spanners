@@ -14,6 +14,7 @@
             <th>ID</th>
             <th>Name</th>
             <th>Size</th>
+            <th>Owner</th>
             <th>View</th>
             <th>Edit</th>
             <th>Remove</th>
@@ -23,7 +24,7 @@
             <s:url var="spannerDetail" action="spannerDetail">
                 <s:param name="id" value="id"/>
             </s:url>
-            <s:url var="editSpanner" action="editSpanner">
+            <s:url var="editSpanner" action="drawEditSpanner">
                 <s:param name="id" value="id"/>
             </s:url>
             <s:url var="deleteSpanner" action="deleteSpanner">
@@ -34,6 +35,7 @@
                 <td><s:property value="id"/></td>
                 <td><s:property value="name"/></td>
                 <td><s:property value="size"/></td>
+                <td><s:property value="owner"/></td>
                 <td><s:a href="%{spannerDetail}">View</s:a></td>
                 <td><s:a href="%{editSpanner}">Edit</s:a></td>
                 <td><s:a href="%{deleteSpanner}">Delete</s:a></td>
@@ -41,6 +43,6 @@
         </s:iterator>
     </table>
 
-    <p><a href="<s:url action="createSpanner"/>">Create spanner</a></p>
+    <p><a href="<s:url action="drawCreateSpanner"/>">Create spanner</a></p>
 </body>
 </html>

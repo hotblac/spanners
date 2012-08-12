@@ -14,10 +14,10 @@
         <action name="spannerDetail" class="spannerDetailAction">
             <result>/spanners/SpannerDetail.jsp</result>
         </action>
-        <action name="createSpanner" class="createSpannerAction">
+        <action name="*CreateSpanner" method="{1}" class="createSpannerAction">
             <result>/spanners/CreateSpanner.jsp</result>
         </action>
-        <action name="editSpanner" class="editSpannerAction">
+        <action name="*EditSpanner" method="{1}" class="editSpannerAction">
             <result>/spanners/EditSpanner.jsp</result>
         </action>
         <action name="deleteSpanner" class="deleteSpannerAction">
