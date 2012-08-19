@@ -22,3 +22,6 @@
 - Hibernate 4.1.3.Final
 - Tapestry 5.3.3
 - Spring-ws 2.0.5.RELEASE
+
+2.1
+- Added Spring security to spanners-struts and spanners-dao

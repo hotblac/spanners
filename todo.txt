@@ -1,3 +1,2 @@
-- Add owners to dummy security config
-- Handle spring security exceptions (use a handler?)
-- Replace dummy security with database tables
+- Handle spring security exceptions in spanners-struts
+- Replace dummy security with users in database tables
