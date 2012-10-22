@@ -17,7 +17,7 @@ public class SpannerPermissionEvaluator implements PermissionEvaluator{
 
     @Override
     public boolean hasPermission(Authentication authentication, Object targetDomainObject, Object permission) {
-        boolean hasPermission = true;
+        boolean hasPermission = false;
         if (targetDomainObject instanceof Spanner && permission.toString().equals(OWNER)) {
             Spanner spanner = (Spanner)targetDomainObject;
             hasPermission = authentication.getName().equals(spanner.getOwner());
