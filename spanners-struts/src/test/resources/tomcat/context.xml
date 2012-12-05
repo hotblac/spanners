@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context>
+
+    <!-- Default set of monitored resources -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+
+     <Resource name="jdbc/Spanners"
+           auth="Container"
+           type="javax.sql.DataSource"
+           username="spanners"
+           password="password"
+           driverClassName="com.mysql.jdbc.Driver"
+           description="spanners"
+           url="jdbc:mysql://localhost:3306/spanners"
+           maxActive="15"
+           maxIdle="3"/>
+
+</Context>
