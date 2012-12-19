@@ -136,49 +136,51 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
-
-
-            <plugin>
-                <!-- hibernate ddl generation -->
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>hibernate3-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <components>
-                        <component>
-                            <name>hbm2ddl</name>
-                            <outputDirectory>.</outputDirectory>
-                        </component>
-                    </components>
-                    <componentProperties>
-                        <configurationfile>hibernate.cfg.xml</configurationfile>
-                        <propertyfile>hibernate-hsqldb.properties</propertyfile>
-                        <outputfilename>hsqldb/${project.ddl.name}.sql</outputfilename>
-                        <drop>false</drop>
-                        <create>true</create>
-                        <export>false</export>
-                        <jdk5>true</jdk5>
-                        <format>true</format>
-                    </componentProperties>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>export-mysql</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>hbm2ddl</goal>
-                        </goals>
-                        <configuration>
-                            <componentProperties>
-                                <propertyfile>hibernate-mysql.properties</propertyfile>
-                                <outputfilename>mysql/${project.ddl.name}.sql</outputfilename>
-                            </componentProperties>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>hbm2ddl</id>
+            <build>
+                <plugins>
+                    <!-- hibernate ddl generation -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>hibernate3-maven-plugin</artifactId>
+                        <version>2.2</version>
+                        <configuration>
+                            <components>
+                                <component>
+                                    <name>hbm2ddl</name>
+                                    <outputDirectory>target/hbm2ddl</outputDirectory>
+                                </component>
+                            </components>
+                            <componentProperties>
+                                <configurationfile>src/main/hbm2ddl/hibernate.cfg.xml</configurationfile>
+                                <propertyfile>src/main/hbm2ddl/hibernate-mysql.properties</propertyfile>
+                                <outputfilename>hbm2ddl.sql</outputfilename>
+                                <drop>false</drop>
+                                <create>true</create>
+                                <export>false</export>
+                                <jdk5>true</jdk5>
+                                <format>true</format>
+                            </componentProperties>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>hbm2ddl</id>
+                                <phase>process-classes</phase>
+                                <goals>
+                                    <goal>hbm2ddl</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    </profiles>
 
 </project>
