@@ -98,14 +98,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Used to allow Integration Tests to run against MySQL database -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.21</version>
-            <scope>test</scope>
-        </dependency>
-
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-htmlunit-driver</artifactId>
@@ -124,7 +116,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
 
-            <!-- Failsafe plugin for Integration Tests -->
+            <!-- Failsafe plugin to run Integration Tests -->
             <plugin>
             	<groupId>org.apache.maven.plugins</groupId>
             	<artifactId>maven-failsafe-plugin</artifactId>
@@ -139,15 +131,12 @@
                 </executions>
             </plugin>
 
-            <!-- Deploy to Tomcat with mvn tomcat:deploy or tomcat:redeploy -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>tomcat-maven-plugin</artifactId>
-                <configuration>
-                    <path>/spanners-struts</path>
-                </configuration>
-            </plugin>
-
+            <!-- The tomcat7-maven-plugin is invoked at the pre-integration-test phase to launch the built war in an
+                 embedded Tomcat server. The integration tests are run against this instance.
+                 This plugin is also used from command line to deploy / redeploy the war to a local Tomcat server:
+                 mvn tomcat:deploy (or)
+                 mvn tomcat:redeploy
+             -->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
@@ -158,17 +147,19 @@
                     <useTestClasspath>true</useTestClasspath>
                 </configuration>
                 <executions>
+                    <!-- At pre-integration-test phase, run the war in an embedded Tomcat server. -->
                     <execution>
                         <id>start-tomcat</id>
                         <phase>pre-integration-test</phase>
                         <goals>
-                            <goal>run</goal>
+                            <goal>run-war-only</goal>
                         </goals>
                         <configuration>
                             <port>9090</port>
                             <fork>true</fork>
                         </configuration>
                     </execution>
+                    <!-- At post-integration-test phase, stop the embedded Tomcat server. -->
                     <execution>
                         <id>stop-tomcat</id>
                         <phase>post-integration-test</phase>
@@ -177,6 +168,14 @@
                         </goals>
                     </execution>
                 </executions>
+                <dependencies>
+                    <!-- Used to allow embedded Tomcat to connect to a MySQL database -->
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.21</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
         </plugins>
