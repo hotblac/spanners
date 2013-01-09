@@ -106,6 +106,12 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-htmlunit-driver</artifactId>
+            <version>2.28.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -116,6 +122,21 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+
+            <!-- Failsafe plugin for Integration Tests -->
+            <plugin>
+            	<groupId>org.apache.maven.plugins</groupId>
+            	<artifactId>maven-failsafe-plugin</artifactId>
+            	<version>2.13</version>
+                <executions>
+                    <execution>
+                      <goals>
+                          <goal>integration-test</goal>
+                          <goal>verify</goal>
+                      </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <!-- Deploy to Tomcat with mvn tomcat:deploy or tomcat:redeploy -->
@@ -143,6 +164,10 @@
                         <goals>
                             <goal>run</goal>
                         </goals>
+                        <configuration>
+                            <port>9090</port>
+                            <fork>true</fork>
+                        </configuration>
                     </execution>
                     <execution>
                         <id>stop-tomcat</id>
