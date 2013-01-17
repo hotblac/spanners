@@ -1,5 +1,3 @@
 - Handle spring security exceptions in spanners-struts
 - Replace dummy security with users in database tables
 - Add a goal on release to zip up source
-
-- Replace codehaus tomcat-maven-plugin with apache tomcat7-maven-plugin

@@ -25,3 +25,6 @@
 
 2.1
 - Added Spring security to spanners-struts and spanners-dao
+
+2.2
+- Added Selenium integration test to spanners-struts
