@@ -1,3 +1,4 @@
+- Add spring-mvc project
 - Handle spring security exceptions in spanners-struts
 - Replace dummy security with users in database tables
 - Add a goal on release to zip up source
