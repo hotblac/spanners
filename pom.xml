@@ -5,7 +5,7 @@
     <groupId>org.dontpanic</groupId>
     <artifactId>spanners-pom</artifactId>
     <name>spanners pom</name>
-    <version>2.3-SNAPSHOT</version>
+    <version>2.3</version>
     <packaging>pom</packaging>
     
     <modules>
