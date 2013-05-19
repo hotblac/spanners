@@ -4,3 +4,7 @@
 *.jar
 *.war
 *.ear
+
+# IntelliJ Idea #
+.idea
+*.iml
