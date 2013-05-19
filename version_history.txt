@@ -28,3 +28,6 @@
 
 2.2
 - Added Selenium integration test to spanners-struts
+
+2.3
+- Migrated from SVN to Git
