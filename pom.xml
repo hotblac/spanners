@@ -20,8 +20,8 @@
     </properties>
 
     <scm>
-        <connection>scm:svn:http://lustytuna:90/svn/repo1/spanners/trunk</connection>
-        <developerConnection>scm:svn:http://lustytuna:90/svn/repo1/spanners/trunk</developerConnection>
+        <connection>scm:git:https://github.com/hotblac/spanners.git</connection>
+        <developerConnection>scm:git:https://github.com/hotblac/spanners.git</developerConnection>
     </scm>
 
     <distributionManagement>
