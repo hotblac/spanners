@@ -8,3 +8,6 @@
 # IntelliJ Idea #
 .idea
 *.iml
+
+# Ignore build target #
+target
