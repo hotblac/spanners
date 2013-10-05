@@ -3,7 +3,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>spanners-dao</artifactId>
-    <name>spanners dao</name>
+    <name>Spanners database module</name>
     <packaging>jar</packaging>
     
     <parent>

@@ -3,7 +3,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>spanners-struts</artifactId>
-    <name>spanners-struts</name>
+    <name>Spanners Struts Demo Application</name>
     <packaging>war</packaging>
 
     <parent>
