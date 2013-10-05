@@ -140,7 +140,6 @@
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.0</version>
                 <configuration>
                     <path>/spanners-struts</path>
                     <contextFile>${basedir}/src/test/resources/tomcat/context.xml</contextFile>

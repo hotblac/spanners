@@ -4,8 +4,8 @@ Spanners Demo application
 This application demonstrates various features and techniques described in Stuart 'Stevie' Leitch's blog: http://www.disasterarea.co.uk/blog/     
    
 This demo contains:
+    - Spring MVC web application
     - Struts web application
-    - Tapestry web application
     - Spring-WS SOAP server application
     - DAO component shared by all applications
     
@@ -29,7 +29,7 @@ CREATE TABLE `spanner` (
 
 
 Configuring Tomcat
-The application has been tested against Tomcat 6. The context.xml must be configured to make the database available to the application using JNDI:
+The application has been tested against Tomcat 7. The context.xml must be configured to make the database available to the application using JNDI:
 
      <Resource name="jdbc/Spanners" 
            auth="Container"
@@ -41,6 +41,9 @@ The application has been tested against Tomcat 6. The context.xml must be config
            url="jdbc:mysql://localhost:3306/spanners"
            maxActive="15" 
        maxIdle="3"/>
+       
+In addition, the MySQL driver jar should be copied to Tomcat's lib directory. I used this jar:
+http://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.21/mysql-connector-java-5.1.21.jar
        
 Starting the applications
 Each of the web applications can be deployed to Tomcat from the Tomcat Manager Console. Alternatively they can be deployed using maven:
