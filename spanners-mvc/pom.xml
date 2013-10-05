@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.dontpanic</groupId>
+    <modelVersion>4.0.0</modelVersion>
     <artifactId>spanners-mvc</artifactId>
-    <packaging>war</packaging>
-    <version>2.4-SNAPSHOT</version>
     <name>Spring MVC Application</name>
+    <packaging>war</packaging>
+
+    <parent>
+        <groupId>org.dontpanic</groupId>
+        <artifactId>spanners-pom</artifactId>
+        <version>2.4-SNAPSHOT</version>
+    </parent>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java-version>1.7</java-version>
-        <org.springframework-version>3.2.2.RELEASE</org.springframework-version>
-        <org.springframework.security-version>3.1.3.RELEASE</org.springframework.security-version>
         <org.aspectj-version>1.7.0</org.aspectj-version>
         <org.slf4j-version>1.7.2</org.slf4j-version>
         <ch.qos.logback-version>1.0.7</ch.qos.logback-version>
@@ -37,7 +40,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>${org.springframework-version}</version>
             <exclusions>
                 <!-- Exclude Commons Logging in favor of SLF4j -->
                 <exclusion>
@@ -49,23 +51,19 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>${org.springframework-version}</version>
         </dependency>
         <!-- Security -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>${org.springframework.security-version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>${org.springframework.security-version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
-            <version>${org.springframework.security-version}</version>
         </dependency>
         <!-- javax.validation (JSR-303) -->
         <dependency>
@@ -147,7 +145,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>${org.springframework-version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
