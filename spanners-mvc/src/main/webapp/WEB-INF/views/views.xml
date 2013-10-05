@@ -3,7 +3,15 @@
 	"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-	<definition name="*/*" extends="default">
+    <definition name="signin" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/signin.jsp" />
+        <put-attribute name="header" value="" type="string" />
+        <put-attribute name="footer" value="" type="string" />
+        <put-list-attribute name="styles">
+            <add-attribute value="signin.css" />
+        </put-list-attribute>
+    </definition>
+    <definition name="*/*" extends="default">
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute>
 	</definition>
 	<definition name="*" extends="default">
