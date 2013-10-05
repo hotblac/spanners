@@ -3,5 +3,5 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <p>
-	Hello <security:authentication property="principal.username" />! Welcome to the Spring MVC Quickstart application! 	
+	Hello <security:authentication property="principal.username" />! Welcome to the Spanners Spring MVC demo application!
 </p>
