@@ -1,6 +1,4 @@
 - Handle spring security exceptions in spanners-struts
 - Replace dummy security with users in database tables
 - Add a goal on release to zip up source
-- Upgrade all to tomcat7 maven plugin and drop old tomcat plugin
-- Test all tomcat operations - tomcat:run, tomcat:deploy
-- Document deploy procedure - a server config must exist and username / password must be set in tomcat-users.xml
+

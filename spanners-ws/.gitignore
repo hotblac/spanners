@@ -3,3 +3,9 @@
 /pom.xml.releaseBackup
 
 /pom.xml.tag
+
+/global-groovy.log
+
+/soapui-errors.log
+
+/soapui.log
