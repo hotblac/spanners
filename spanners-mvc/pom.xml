@@ -36,6 +36,13 @@
         </repository>
     </repositories>
     <dependencies>
+
+        <dependency>
+            <groupId>org.dontpanic</groupId>
+            <artifactId>spanners-dao</artifactId>
+            <type>jar</type>
+        </dependency>
+
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>

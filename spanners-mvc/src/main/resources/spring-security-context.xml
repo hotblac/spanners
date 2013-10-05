@@ -5,7 +5,7 @@
 	                             http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 	
 	<http auto-config="true" disable-url-rewriting="true" use-expressions="true">
-		<form-login login-page="/signin" authentication-failure-url="/signin?error=1"/>
+		<form-login login-page="/signin" authentication-failure-url="/signin?error=1" default-target-url="/displaySpanners"/>
 		<logout logout-url="/logout" />
 		<intercept-url pattern="/" access="permitAll" />
 		<intercept-url pattern="/resources/**" access="permitAll" />
