@@ -1,27 +1,29 @@
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:security="http://www.springframework.org/schema/security"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-http://www.springframework.org/schema/security
-http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	                             http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 	
-	<security:http auto-config="true" disable-url-rewriting="true" use-expressions="true">
-		<security:form-login login-page="/signin" authentication-failure-url="/signin?error=1"/>
-		<security:logout logout-url="/logout" />
-		<security:remember-me services-ref="rememberMeServices" key="remember-me-key"/>
-		<security:intercept-url pattern="/" access="permitAll" />
-		<security:intercept-url pattern="/resources/**" access="permitAll" />
-		<security:intercept-url pattern="/signin" access="permitAll" />
-		<security:intercept-url pattern="/signup" access="permitAll" />
-		<security:intercept-url pattern="/default/**" access="permitAll" />
-		<security:intercept-url pattern="/**" access="isAuthenticated()" />
-	</security:http>
+	<http auto-config="true" disable-url-rewriting="true" use-expressions="true">
+		<form-login login-page="/signin" authentication-failure-url="/signin?error=1"/>
+		<logout logout-url="/logout" />
+		<remember-me services-ref="rememberMeServices" key="remember-me-key"/>
+		<intercept-url pattern="/" access="permitAll" />
+		<intercept-url pattern="/resources/**" access="permitAll" />
+		<intercept-url pattern="/signin" access="permitAll" />
+		<intercept-url pattern="/signup" access="permitAll" />
+		<intercept-url pattern="/default/**" access="permitAll" />
+		<intercept-url pattern="/**" access="isAuthenticated()" />
+	</http>
 	
-	<security:authentication-manager erase-credentials="true" >
-		<security:authentication-provider user-service-ref="userService">
-			<security:password-encoder ref="passwordEncoder" />
-		</security:authentication-provider>
-	</security:authentication-manager>
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="smith" password="password" authorities="ROLE_VIEWER" />
+                <user name="jones" password="password" authorities="ROLE_VIEWER" />
+                <user name="admin" password="password" authorities="ROLE_VIEWER, ROLE_EDITOR"/>
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
 
-</beans>
+</beans:beans>
