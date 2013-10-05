@@ -11,3 +11,17 @@
 
 # Ignore build target #
 target
+
+/global-groovy.log
+
+/pom.xml.next
+
+/pom.xml.releaseBackup
+
+/pom.xml.tag
+
+/release.properties
+
+/soapui-errors.log
+
+/soapui.log
