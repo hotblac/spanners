@@ -5,9 +5,8 @@
 <p>
 	Hello <security:authentication property="principal.username" />! Welcome to the Spanners Spring MVC demo application!
 
-	<table>
+	<table class="table table-striped table-bordered table-condensed">
         <tr>
-            <th>ID</th>
             <th>Name</th>
             <th>Size</th>
             <th>Owner</th>
@@ -17,7 +16,6 @@
         </tr>
         <c:forEach items="${spanners}" var="spanner">
             <tr>
-                <td><c:out value="${spanner.id}"/></td>
                 <td><c:out value="${spanner.name}"/></td>
                 <td><c:out value="${spanner.size}"/></td>
                 <td><c:out value="${spanner.owner}"/></td>
