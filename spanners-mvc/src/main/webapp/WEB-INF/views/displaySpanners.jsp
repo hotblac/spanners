@@ -15,11 +15,17 @@
             <th>Remove</th>
         </tr>
         <c:forEach items="${spanners}" var="spanner">
+
+            <c:url value="/detailSpanner" var="detailSpannerUrl">
+                <c:param  name="id" value="${spanner.id}"/>
+            </c:url>
             <tr>
                 <td><c:out value="${spanner.name}"/></td>
                 <td><c:out value="${spanner.size}"/></td>
                 <td><c:out value="${spanner.owner}"/></td>
-                <td>TODO</td>
+                <td>
+                    <a href="${detailSpannerUrl}">View</a>
+                </td>
                 <td>TODO</td>
                 <td>TODO</td>
             </tr>
