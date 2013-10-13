@@ -1,6 +1,7 @@
 package org.dontpanic.spanners.springmvc.controllers;
 
 import static org.dontpanic.spanners.springmvc.controllers.DisplaySpannersController.*;
+import static org.dontpanic.spanners.stubs.SpannersStubs.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
@@ -13,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,8 +34,7 @@ public class DisplaySpannersControllerTest {
     public void testDisplaySpanners() {
 
         // Stub behaviours - list of spanners
-        List<Spanner> spannersFromDb = stubSpanners();
-        when(spannersDAO.getAll()).thenReturn(spannersFromDb);
+        when(spannersDAO.getAll()).thenReturn(SPANNERS);
 
         // Call the controller
         ModelAndView response = controller.displaySpanners();
@@ -48,26 +47,8 @@ public class DisplaySpannersControllerTest {
         @SuppressWarnings("unchecked")
         List<Spanner> spannersInModel = (List<Spanner>)response.getModelMap().get(MODEL_ATTRIBUTE_SPANNERS);
         assertNotNull(MODEL_ATTRIBUTE_SPANNERS + " is null", spannersInModel);
-        assertEquals(spannersFromDb, spannersInModel);
+        assertEquals(SPANNERS, spannersInModel);
 
-    }
-
-
-    private List<Spanner> stubSpanners() {
-        List<Spanner> spanners = new ArrayList<Spanner>();
-        for (int i=1; i<=5; i++) {
-            spanners.add(stubSpanner(i));
-        }
-        return spanners;
-    }
-
-    private Spanner stubSpanner(int id) {
-        Spanner spanner = new Spanner();
-        spanner.setId(id);
-        spanner.setName("Spanner number " + id);
-        spanner.setOwner("Owner");
-        spanner.setSize(10 + id);
-        return spanner;
     }
 
 }

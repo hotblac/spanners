@@ -16,7 +16,6 @@ import java.util.List;
  * Date: 05/10/13
  */
 @Controller
-@RequestMapping
 public class DisplaySpannersController {
 
     public static final String VIEW_DISPLAY_SPANNERS = "displaySpanners";
