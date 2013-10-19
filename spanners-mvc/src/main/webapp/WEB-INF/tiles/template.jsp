@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-	<title>Hello World!</title>
+	<title>Spanners MVC</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet" media="screen" />
 	<link href="<c:url value="/resources/css/core.css" />" rel="stylesheet" media="screen" />
