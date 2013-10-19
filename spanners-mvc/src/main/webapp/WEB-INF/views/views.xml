@@ -11,6 +11,9 @@
             <add-attribute value="signin.css" />
         </put-list-attribute>
     </definition>
+    <definition name="modals/*" template="/WEB-INF/tiles/modal.jsp">
+        <put-attribute name="body" value="/WEB-INF/modals/{1}.jsp"></put-attribute>
+    </definition>
     <definition name="*/*" extends="default">
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute>
 	</definition>

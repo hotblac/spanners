@@ -19,8 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class EditSpannerController {
 
-    public static final String VIEW_EDIT_SPANNER = "editSpanner";
-    public static final String VIEW_UPDATE_SUCCESS = VIEW_EDIT_SPANNER;
+    public static final String VIEW_EDIT_SPANNER = "modals/editSpanner";
+    public static final String VIEW_UPDATE_SUCCESS = "redirect:/displaySpanners";
 
     public static final String MODEL_SPANNER = "spanner";
 
