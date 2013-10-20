@@ -8,10 +8,12 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
+
 import static org.dontpanic.spanners.springmvc.controllers.AddSpannerController.*;
-import static org.dontpanic.spanners.stubs.SpannersStubs.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -43,16 +45,28 @@ public class AddSpannerControllerTest {
     public void testAddSpanner() {
 
         // Create the form submission data
-        Spanner newSpanner =  stubSpanner(0);
+        Spanner newSpanner =  new Spanner();
+        newSpanner.setName("Keeley");
+        newSpanner.setSize(12);
+
+        // Stub logged in user
+        Principal currentUser = new TestingAuthenticationToken("user", "pass");
 
         // Submit the form
-        ModelAndView response = controller.addSpanner(newSpanner);
+        ModelAndView response = controller.addSpanner(newSpanner, currentUser);
         assertNotNull("no response", response);
 
         // Verify that spanner was created
         ArgumentCaptor<Spanner> spannerArgumentCaptor = ArgumentCaptor.forClass(Spanner.class);
         verify(spannersDAO).create(spannerArgumentCaptor.capture());
-        assertSpannerEquals(newSpanner, spannerArgumentCaptor.getValue());
+
+        // Verify that spanner has has name and size set from the form submission
+        Spanner createdSpanner = spannerArgumentCaptor.getValue();
+        assertEquals("name", newSpanner.getName(), createdSpanner.getName());
+        assertEquals("size", newSpanner.getSize(), createdSpanner.getSize());
+
+        // Verify that spanner owner is current logged in user
+        assertEquals("owner", currentUser.getName(), createdSpanner.getOwner());
 
         // Assert that we forward to correct page
         assertEquals("view", VIEW_SUCCESS, response.getViewName());

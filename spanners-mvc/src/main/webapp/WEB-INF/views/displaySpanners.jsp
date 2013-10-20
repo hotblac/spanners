@@ -35,6 +35,8 @@
     </c:forEach>
 </table>
 
+<a href="<c:url value="/addSpanner"/>">Create new spanner</a>
+
 <div class="modal fade" id="editSpannerModal">
   <div class="modal-dialog">
     <div class="modal-content">

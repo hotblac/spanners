@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
+
 /**
  * Controller for creating a new spanner
  * User: Stevie
@@ -20,6 +22,8 @@ public class AddSpannerController {
     public static final String VIEW_ADD_SPANNER = "addSpanner";
     public static final String VIEW_SUCCESS = "redirect:/displaySpanners";
 
+    public static final String MODEL_SPANNER = "spanner";
+
     @Autowired private SpannersDAO spannersDAO;
 
     /**
@@ -27,7 +31,8 @@ public class AddSpannerController {
      */
     @RequestMapping(value = "/addSpanner", method = RequestMethod.GET)
     public ModelAndView displayPage() {
-        return new ModelAndView(VIEW_ADD_SPANNER);
+        Spanner newSpanner = new Spanner();
+        return new ModelAndView(VIEW_ADD_SPANNER, MODEL_SPANNER, newSpanner);
     }
 
 
@@ -35,7 +40,8 @@ public class AddSpannerController {
      * Accept a form submission from add spanner page
      */
     @RequestMapping(value = "/addSpanner", method = RequestMethod.POST)
-    public ModelAndView addSpanner(@ModelAttribute Spanner spanner) {
+    public ModelAndView addSpanner(@ModelAttribute Spanner spanner, Principal principal) {
+        spanner.setOwner(principal.getName());
         spannersDAO.create(spanner);
         return new ModelAndView(VIEW_SUCCESS);
     }
