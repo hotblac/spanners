@@ -35,8 +35,9 @@
     </c:forEach>
 </table>
 
-<a href="<c:url value="/addSpanner"/>">Create new spanner</a>
+<a class="btn btn-primary" data-toggle="modal" href="<c:url value="/addSpanner"/>" data-target="#editSpannerModal">Create new spanner</a>
 
+<%-- Modal for add / edit spanner --%>
 <div class="modal fade" id="editSpannerModal">
   <div class="modal-dialog">
     <div class="modal-content">
