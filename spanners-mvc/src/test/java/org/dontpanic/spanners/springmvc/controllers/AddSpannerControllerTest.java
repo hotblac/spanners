@@ -2,6 +2,7 @@ package org.dontpanic.spanners.springmvc.controllers;
 
 import org.dontpanic.spanners.dao.Spanner;
 import org.dontpanic.spanners.dao.SpannersDAO;
+import org.dontpanic.spanners.springmvc.forms.SpannerForm;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -45,15 +46,15 @@ public class AddSpannerControllerTest {
     public void testAddSpanner() {
 
         // Create the form submission data
-        Spanner newSpanner =  new Spanner();
-        newSpanner.setName("Keeley");
-        newSpanner.setSize(12);
+        SpannerForm formData =  new SpannerForm();
+        formData.setName("Keeley");
+        formData.setSize(12);
 
         // Stub logged in user
         Principal currentUser = new TestingAuthenticationToken("user", "pass");
 
         // Submit the form
-        ModelAndView response = controller.addSpanner(newSpanner, currentUser);
+        ModelAndView response = controller.addSpanner(formData, currentUser);
         assertNotNull("no response", response);
 
         // Verify that spanner was created
@@ -62,8 +63,8 @@ public class AddSpannerControllerTest {
 
         // Verify that spanner has has name and size set from the form submission
         Spanner createdSpanner = spannerArgumentCaptor.getValue();
-        assertEquals("name", newSpanner.getName(), createdSpanner.getName());
-        assertEquals("size", newSpanner.getSize(), createdSpanner.getSize());
+        assertEquals("name", formData.getName(), createdSpanner.getName());
+        assertEquals("size", formData.getSize(), createdSpanner.getSize());
 
         // Verify that spanner owner is current logged in user
         assertEquals("owner", currentUser.getName(), createdSpanner.getOwner());

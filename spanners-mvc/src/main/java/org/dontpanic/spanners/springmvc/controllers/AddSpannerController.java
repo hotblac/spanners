@@ -2,6 +2,7 @@ package org.dontpanic.spanners.springmvc.controllers;
 
 import org.dontpanic.spanners.dao.Spanner;
 import org.dontpanic.spanners.dao.SpannersDAO;
+import org.dontpanic.spanners.springmvc.forms.SpannerForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,7 +32,7 @@ public class AddSpannerController {
      */
     @RequestMapping(value = "/addSpanner", method = RequestMethod.GET)
     public ModelAndView displayPage() {
-        Spanner newSpanner = new Spanner();
+        SpannerForm newSpanner = new SpannerForm();
         return new ModelAndView(VIEW_ADD_SPANNER, MODEL_SPANNER, newSpanner);
     }
 
@@ -40,9 +41,21 @@ public class AddSpannerController {
      * Accept a form submission from add spanner page
      */
     @RequestMapping(value = "/addSpanner", method = RequestMethod.POST)
-    public ModelAndView addSpanner(@ModelAttribute Spanner spanner, Principal principal) {
+    public ModelAndView addSpanner(@ModelAttribute SpannerForm formData, Principal principal) {
+
+        // Create a new spanner
+        Spanner spanner = new Spanner();
+
+        // Owner is current user
         spanner.setOwner(principal.getName());
+
+        // Name and size from form data
+        spanner.setName(formData.getName());
+        spanner.setSize(formData.getSize());
+
+        // Save new spanner to database
         spannersDAO.create(spanner);
+
         return new ModelAndView(VIEW_SUCCESS);
     }
 }
