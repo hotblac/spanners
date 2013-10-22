@@ -7,6 +7,7 @@ import static org.dontpanic.spanners.springmvc.controllers.EditSpannerController
 import org.dontpanic.spanners.dao.Spanner;
 import org.dontpanic.spanners.dao.SpannersDAO;
 import org.dontpanic.spanners.springmvc.exception.SpannerNotFoundException;
+import org.dontpanic.spanners.springmvc.forms.SpannerForm;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -45,8 +46,8 @@ public class EditSpannerControllerTest {
         assertEquals("view", VIEW_EDIT_SPANNER, response.getViewName());
 
         // Assert that spanner is in model
-        Spanner spannerInModel =  (Spanner)response.getModelMap().get(MODEL_SPANNER);
-        assertSpannerEquals(SPANNER, spannerInModel);
+        SpannerForm spannerFormData =  (SpannerForm)response.getModelMap().get(MODEL_SPANNER);
+        assertSpannerEquals(SPANNER, spannerFormData);
     }
 
 
@@ -69,9 +70,12 @@ public class EditSpannerControllerTest {
     @Test
     public void testUpdateSpanner() {
 
-        Spanner postData = stubSpanner(99);
+        // Stub behaviours - dao returns spanner detail
+        when(spannersDAO.get(SPANNER_ID)).thenReturn(SPANNER);
 
-        ModelAndView response = controller.updateSpanner(postData);
+        // Submit the form
+        SpannerForm formData = stubSpannerForm(99);
+        ModelAndView response = controller.updateSpanner(formData);
         assertNotNull("no response", response);
 
         // Assert that we forward to correct view
@@ -81,6 +85,6 @@ public class EditSpannerControllerTest {
         ArgumentCaptor<Spanner> spannerArgumentCaptor = ArgumentCaptor.forClass(Spanner.class);
         verify(spannersDAO).update(spannerArgumentCaptor.capture());
         Spanner updatedSpanner = spannerArgumentCaptor.getValue();
-        assertSpannerEquals(postData, updatedSpanner);
+        assertSpannerEquals(formData, updatedSpanner);
     }
 }
