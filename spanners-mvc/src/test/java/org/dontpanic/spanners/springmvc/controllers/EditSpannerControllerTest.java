@@ -14,11 +14,16 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -75,7 +80,8 @@ public class EditSpannerControllerTest {
 
         // Submit the form
         SpannerForm formData = stubSpannerForm(99);
-        ModelAndView response = controller.updateSpanner(formData);
+        BindingResult noErrors = new BeanPropertyBindingResult(formData, MODEL_SPANNER);
+        ModelAndView response = controller.updateSpanner(formData, noErrors);
         assertNotNull("no response", response);
 
         // Assert that we forward to correct view
@@ -86,5 +92,24 @@ public class EditSpannerControllerTest {
         verify(spannersDAO).update(spannerArgumentCaptor.capture());
         Spanner updatedSpanner = spannerArgumentCaptor.getValue();
         assertSpannerEquals(formData, updatedSpanner);
+    }
+
+
+    @Test
+    public void testValidationFail() {
+
+        // Submit the form
+        SpannerForm formData = stubSpannerForm(99);
+        BindingResult validationFail = new BeanPropertyBindingResult(formData, MODEL_SPANNER);
+        validationFail.addError(new ObjectError("size", "TOO_BIG"));
+
+        ModelAndView response = controller.updateSpanner(formData, validationFail);
+        assertNotNull("no response", response);
+
+        // Assert that spanner was NOT updated
+        verify(spannersDAO, never()).update(any(Spanner.class));
+
+        // Assert that we go to validation fail view
+        assertEquals("view", VIEW_VALIDATION_ERRORS, response.getViewName());
     }
 }

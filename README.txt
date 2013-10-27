@@ -47,6 +47,6 @@ http://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.21/mysql-connector-
        
 Starting the applications
 Each of the web applications can be deployed to Tomcat from the Tomcat Manager Console. Alternatively they can be deployed using maven:
-mvn tomcat:deploy
+mvn tomcat7:deploy
 
 

@@ -2,6 +2,10 @@ package org.dontpanic.spanners.springmvc.forms;
 
 import org.dontpanic.spanners.dao.Spanner;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
 /**
  * A form that allows editing of spanner attributes
  * User: Stevie
@@ -10,7 +14,9 @@ import org.dontpanic.spanners.dao.Spanner;
 public class SpannerForm {
 
     private int id;
+    @Size(min=1, max=255)
     private String name;
+    @Min(1) @Max(99)
     private int size;
 
     public SpannerForm() {

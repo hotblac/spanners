@@ -6,11 +6,14 @@ import org.dontpanic.spanners.springmvc.exception.SpannerNotFoundException;
 import org.dontpanic.spanners.springmvc.forms.SpannerForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 /**
  * Controller for changing properties of an existing spanner
@@ -22,6 +25,7 @@ public class EditSpannerController {
 
     public static final String VIEW_EDIT_SPANNER = "modals/editSpanner";
     public static final String VIEW_UPDATE_SUCCESS = "redirect:/displaySpanners";
+    public static final String VIEW_VALIDATION_ERRORS = "modals/editSpanner";
 
     public static final String MODEL_SPANNER = "spanner";
 
@@ -50,7 +54,11 @@ public class EditSpannerController {
      * Accept form submission from edit spanner page
      */
     @RequestMapping(value = "/editSpanner", method = RequestMethod.POST)
-    public ModelAndView updateSpanner(@ModelAttribute SpannerForm formData) {
+    public ModelAndView updateSpanner(@Valid @ModelAttribute(MODEL_SPANNER) SpannerForm formData, BindingResult validationResult) {
+
+        if (validationResult.hasErrors()) {
+            return new ModelAndView(VIEW_VALIDATION_ERRORS);
+        }
 
         // Retrieve the existing spanner
         Spanner spanner = spannersDAO.get(formData.getId());

@@ -4,8 +4,10 @@
 <form:form modelAttribute="spanner" id="editSpannerForm">
     <form:label path="name">Spanner name:</form:label>
     <form:input path="name" class="input-block-level"/>
+    <form:errors path="name"/>
     <form:label path="size">Spanner size:</form:label>
     <form:input path="size" class="input-block-level"/>
+    <form:errors path="size"/>
 
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     <input type="submit" class="btn btn-primary" value="Save changes" />
