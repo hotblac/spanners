@@ -5,11 +5,13 @@ import org.dontpanic.spanners.dao.SpannersDAO;
 import org.dontpanic.spanners.springmvc.forms.SpannerForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.security.Principal;
 
 /**
@@ -22,6 +24,7 @@ public class AddSpannerController {
 
     public static final String VIEW_ADD_SPANNER = "/editSpanner";
     public static final String VIEW_SUCCESS = "redirect:/displaySpanners";
+    public static final String VIEW_VALIDATION_FAIL = "/editSpanner";
 
     public static final String MODEL_SPANNER = "spanner";
 
@@ -41,7 +44,11 @@ public class AddSpannerController {
      * Accept a form submission from add spanner page
      */
     @RequestMapping(value = "/addSpanner", method = RequestMethod.POST)
-    public ModelAndView addSpanner(@ModelAttribute SpannerForm formData, Principal principal) {
+    public ModelAndView addSpanner(@Valid @ModelAttribute(MODEL_SPANNER) SpannerForm formData, BindingResult validationResult, Principal principal) {
+
+        if (validationResult.hasErrors()) {
+            return new ModelAndView(VIEW_VALIDATION_FAIL);
+        }
 
         // Create a new spanner
         Spanner spanner = new Spanner();

@@ -1,6 +1,5 @@
 package org.dontpanic.spanners.springmvc.controllers;
 
-import static org.dontpanic.spanners.springmvc.controllers.DetailSpannerController.MODEL_SPANNER;
 import static org.dontpanic.spanners.stubs.SpannersStubs.*;
 import static org.dontpanic.spanners.springmvc.controllers.EditSpannerController.*;
 

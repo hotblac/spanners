@@ -10,12 +10,16 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.security.authentication.TestingAuthenticationToken;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 
 import static org.dontpanic.spanners.springmvc.controllers.AddSpannerController.*;
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 /**
@@ -54,7 +58,8 @@ public class AddSpannerControllerTest {
         Principal currentUser = new TestingAuthenticationToken("user", "pass");
 
         // Submit the form
-        ModelAndView response = controller.addSpanner(formData, currentUser);
+        BindingResult noErrors = new BeanPropertyBindingResult(formData, MODEL_SPANNER);
+        ModelAndView response = controller.addSpanner(formData, noErrors, currentUser);
         assertNotNull("no response", response);
 
         // Verify that spanner was created
@@ -72,6 +77,33 @@ public class AddSpannerControllerTest {
         // Assert that we forward to correct page
         assertEquals("view", VIEW_SUCCESS, response.getViewName());
 
+    }
+
+
+    @Test
+    public void testValidationFail() {
+
+        // Create the form submission data
+        SpannerForm formData =  new SpannerForm();
+        formData.setName("Keeley");
+        formData.setSize(12);
+
+        // Validation failure
+        BindingResult validationFail = new BeanPropertyBindingResult(formData, MODEL_SPANNER);
+        validationFail.addError(new ObjectError("size", "TOO_BIG"));
+
+        // Stub logged in user
+        Principal currentUser = new TestingAuthenticationToken("user", "pass");
+
+        // Submit form
+        ModelAndView response = controller.addSpanner(formData, validationFail, currentUser);
+        assertNotNull("no response", response);
+
+        // Assert that spanner was NOT updated
+        verify(spannersDAO, never()).update(any(Spanner.class));
+
+        // Assert that we go to validation fail view
+        assertEquals("view", VIEW_VALIDATION_FAIL, response.getViewName());
     }
 
 }
