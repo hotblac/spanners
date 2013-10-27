@@ -22,6 +22,7 @@ import java.security.Principal;
 @Controller
 public class AddSpannerController {
 
+    public static final String CONTROLLER_URL = "/addSpanner";
     public static final String VIEW_ADD_SPANNER = "/editSpanner";
     public static final String VIEW_SUCCESS = "redirect:/displaySpanners";
     public static final String VIEW_VALIDATION_FAIL = "/editSpanner";
@@ -33,7 +34,7 @@ public class AddSpannerController {
     /**
      * Display that add spanner page
      */
-    @RequestMapping(value = "/addSpanner", method = RequestMethod.GET)
+    @RequestMapping(value = CONTROLLER_URL, method = RequestMethod.GET)
     public ModelAndView displayPage() {
         SpannerForm newSpanner = new SpannerForm();
         return new ModelAndView(VIEW_ADD_SPANNER, MODEL_SPANNER, newSpanner);
@@ -43,7 +44,7 @@ public class AddSpannerController {
     /**
      * Accept a form submission from add spanner page
      */
-    @RequestMapping(value = "/addSpanner", method = RequestMethod.POST)
+    @RequestMapping(value = CONTROLLER_URL, method = RequestMethod.POST)
     public ModelAndView addSpanner(@Valid @ModelAttribute(MODEL_SPANNER) SpannerForm formData, BindingResult validationResult, Principal principal) {
 
         if (validationResult.hasErrors()) {

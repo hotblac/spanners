@@ -13,6 +13,9 @@ import javax.validation.constraints.Size;
  */
 public class SpannerForm {
 
+    public static final String FIELD_NAME = "name";
+    public static final String FIELD_SIZE = "size";
+
     private int id;
     @Size(min=1, max=255)
     private String name;
