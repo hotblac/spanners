@@ -23,9 +23,9 @@ import javax.validation.Valid;
 @Controller
 public class EditSpannerController {
 
-    public static final String VIEW_EDIT_SPANNER = "modals/editSpanner";
+    public static final String VIEW_EDIT_SPANNER = "/editSpanner";
     public static final String VIEW_UPDATE_SUCCESS = "redirect:/displaySpanners";
-    public static final String VIEW_VALIDATION_ERRORS = "modals/editSpanner";
+    public static final String VIEW_VALIDATION_ERRORS = "/editSpanner";
 
     public static final String MODEL_SPANNER = "spanner";
 

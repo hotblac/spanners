@@ -29,24 +29,11 @@
             <td><c:out value="${spanner.size}"/></td>
             <td><c:out value="${spanner.owner}"/></td>
             <td><a href="${detailSpannerUrl}">View</a></td>
-            <td><a data-toggle="modal" href="${editSpannerUrl}" data-target="#editSpannerModal">Edit</a></td>
+            <td><a href="${editSpannerUrl}">Edit</a></td>
             <td><a href="${deleteSpannerUrl}">Delete</a></td>
         </tr>
     </c:forEach>
 </table>
 
-<a class="btn btn-primary" data-toggle="modal" href="<c:url value="/addSpanner"/>" data-target="#editSpannerModal">Create new spanner</a>
+<a class="btn btn-primary" href="<c:url value="/addSpanner"/>">Create new spanner</a>
 
-<%-- Modal for add / edit spanner --%>
-<div class="modal fade" id="editSpannerModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Edit spanner</h4>
-      </div>
-      <div class="modal-body">
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->

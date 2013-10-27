@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<form:form modelAttribute="spanner" id="editSpannerForm">
+<form:form modelAttribute="spanner" class="form">
     <form:label path="name">Spanner name:</form:label>
     <form:input path="name" class="input-block-level"/>
     <form:errors path="name"/>
@@ -9,6 +9,6 @@
     <form:input path="size" class="input-block-level"/>
     <form:errors path="size"/>
 
-    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <a href="<c:url value="/displaySpanners"/>" class="btn btn-default">Cancel</a>
     <input type="submit" class="btn btn-primary" value="Save changes" />
 </form:form>

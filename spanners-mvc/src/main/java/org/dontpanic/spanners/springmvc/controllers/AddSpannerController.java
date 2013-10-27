@@ -20,7 +20,7 @@ import java.security.Principal;
 @Controller
 public class AddSpannerController {
 
-    public static final String VIEW_ADD_SPANNER = "modals/editSpanner";
+    public static final String VIEW_ADD_SPANNER = "/editSpanner";
     public static final String VIEW_SUCCESS = "redirect:/displaySpanners";
 
     public static final String MODEL_SPANNER = "spanner";
