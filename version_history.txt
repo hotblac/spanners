@@ -31,3 +31,6 @@
 
 2.3
 - Migrated from SVN to Git
+
+2.4
+- Added Spring MVC
