@@ -49,13 +49,24 @@ public class AddSpannerValidationTest {
 
 
     /**
+     * Assert that GET request opens the page
+     */
+    @Test
+    public void testGetPage() throws Exception {
+        mockMvc.perform(get(CONTROLLER_URL)) // Logged in user requests page
+               .andExpect(status().isOk()) // HTTP 200 returned
+               .andExpect(view().name(VIEW_ADD_SPANNER)) // Controller forwards to correct view
+               .andExpect(model().attributeExists(MODEL_SPANNER)); // Spanner model attribute is set
+    }
+
+    /**
      * Assert that a valid form submission triggers no validation errors
      */
     @Test
     public void testValidateSuccess() throws Exception {
         mockMvc.perform(postForm("Bertha", "16"))
-                    .andExpect(view().name(VIEW_SUCCESS))
-                    .andExpect(model().hasNoErrors());
+                .andExpect(view().name(VIEW_SUCCESS))
+                .andExpect(model().hasNoErrors());
     }
 
 
