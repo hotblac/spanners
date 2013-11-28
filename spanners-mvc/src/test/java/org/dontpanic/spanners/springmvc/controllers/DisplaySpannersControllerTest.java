@@ -17,7 +17,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,10 +51,6 @@ public class DisplaySpannersControllerTest {
         List<Spanner> spannersInModel = (List<Spanner>)response.getModelMap().get(MODEL_ATTRIBUTE_SPANNERS);
         assertNotNull(MODEL_ATTRIBUTE_SPANNERS + " is null", spannersInModel);
         assertEquals(SPANNERS, spannersInModel);
-
-        // Assert date is in model
-        String dateInModel = (String)response.getModelMap().get(MODEL_ATTRIBUTE_DATE);
-        assertNotNull(MODEL_ATTRIBUTE_DATE + " is null", dateInModel);
 
     }
 

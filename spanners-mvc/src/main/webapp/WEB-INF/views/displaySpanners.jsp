@@ -3,7 +3,6 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <p>Hello <security:authentication property="principal.username" />! Welcome to the Spanners Spring MVC demo application!</p>
-<p>Today is ${formattedDate}</p>
 
 <table class="table table-striped table-bordered table-condensed">
     <tr>
