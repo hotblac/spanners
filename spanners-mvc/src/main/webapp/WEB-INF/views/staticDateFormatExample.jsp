@@ -1,0 +1,2 @@
+<h1>Static DateFormat example</h1>
+<p>This page demonstrates the problems with using static instances of DateFormat / SimpleDateFormat. As these classes are not synchronized, using them in multiple simultaneous sessions can sometimes result in error. These errors will usually not be seen when manually testing the page and are only discovered under load.</p>

@@ -3,8 +3,8 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 	                             http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
-	
-	<http auto-config="true" disable-url-rewriting="true" use-expressions="true">
+
+    <http auto-config="true" disable-url-rewriting="true" use-expressions="true">
 		<form-login login-page="/signin" authentication-failure-url="/signin?error=1" default-target-url="/displaySpanners"/>
 		<logout logout-url="/logout" />
 		<intercept-url pattern="/" access="permitAll" />
@@ -12,6 +12,7 @@
 		<intercept-url pattern="/signin" access="permitAll" />
 		<intercept-url pattern="/signup" access="permitAll" />
 		<intercept-url pattern="/default/**" access="permitAll" />
+        <intercept-url pattern="/staticDateFormatExample" access="permitAll" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />
 	</http>
 	
