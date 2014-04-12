@@ -12,7 +12,7 @@
         <module>spanners-ws</module>
         <module>spanners-dao</module>
         <module>spanners-struts</module>
-    	<module>spanners-mvc</module>
+        <module>spanners-mvc</module>
   </modules>
 
     <properties>
@@ -37,6 +37,21 @@
             <url>file:///c:/svnFakeRepo/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
+    
+    <repositories>
+        <repository>
+            <!-- Spring milestone repo. Required for SAML2 extension -->
+            <id>com.springsource.repository.maven.milestone</id>
+            <name>Spring Framework Maven Milestone Releases (Maven Central Format)</name>
+            <url>http://maven.springframework.org/milestone</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <dependencyManagement>
         <dependencies>
@@ -109,7 +124,7 @@
                 <version>${spring.version}</version>
             </dependency>
 
-
+            <!-- Spring security -->
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-config</artifactId>
@@ -130,6 +145,15 @@
                 <artifactId>spring-security-web</artifactId>
                 <version>${spring-security.version}</version>
             </dependency>
+            
+            <!-- SAML -->
+            <dependency>
+              <groupId>org.springframework.security.extensions</groupId>
+              <artifactId>spring-security-saml2-core</artifactId>
+              <version>1.0.0.RC2</version>
+              <scope>compile</scope>
+            </dependency>
+            
         </dependencies>
     </dependencyManagement>
 
