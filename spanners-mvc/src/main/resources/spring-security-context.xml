@@ -84,7 +84,8 @@
 
     <!-- IDP Discovery Service -->
     <bean id="samlIDPDiscovery" class="org.springframework.security.saml.SAMLDiscovery">
-        <property name="idpSelectionPath" value="/WEB-INF/security/idpSelection.jsp"/>
+        <!-- Do not show the IdP selection page. Always use the default IdP. There's only one configured anyway. -->
+        <!--<property name="idpSelectionPath" value="/WEB-INF/security/idpSelection.jsp"/> -->
     </bean>
 
     <bean id="metadataGeneratorFilter" class="org.springframework.security.saml.metadata.MetadataGeneratorFilter">
@@ -131,6 +132,7 @@
         <property name="userDetails" ref="samlUserDetailsService" />
     </bean>
 
+    <!-- Custom user details service to attach app specific roles to federated identities -->
     <bean id="samlUserDetailsService" class="org.dontpanic.spanners.springmvc.saml.SimpleSAMLUserDetailsService">
         <property name="roles">
             <list>
