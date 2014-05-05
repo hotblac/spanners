@@ -2,7 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
-<p>Hello <security:authentication property="principal.username" />! Welcome to the Spanners Spring MVC demo application!</p>
+<p>Hello <security:authentication property="principal.value" />! Welcome to the Spanners Spring MVC demo application!</p>
 
 <table class="table table-striped table-bordered table-condensed">
     <tr>
