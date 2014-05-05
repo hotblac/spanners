@@ -11,16 +11,14 @@
     <context:component-scan base-package="org.springframework.security.saml"/>
 
     <security:http security="none" pattern="/saml/web/**"/>
-    <security:http security="none" pattern="/logout.jsp"/>
-
-    <!-- TODO: Not sure this should be required... -->
-    <security:http security="none" pattern="/WEB-INF/security/**"/>
+    <security:http security="none" pattern="/logout"/>
+    <security:http security="none" pattern="/WEB-INF/tiles/**"/>
 
     <security:http entry-point-ref="samlEntryPoint" use-expressions="true">
 
         <!-- Unsecured pages -->
         <security:intercept-url pattern="/" access="permitAll" />
-        <security:intercept-url pattern="/logout.jsp" access="permitAll"/>
+        <security:intercept-url pattern="/logout" access="permitAll"/>
         <security:intercept-url pattern="/resources/**" access="permitAll"/>
         <security:intercept-url pattern="/generalError" access="permitAll"/>
 
@@ -30,7 +28,7 @@
         <security:custom-filter before="FIRST" ref="metadataGeneratorFilter"/>
         <security:custom-filter after="BASIC_AUTH_FILTER" ref="samlFilter"/>
 
-        <security:access-denied-handler error-page="/403.jsp" />
+        <security:access-denied-handler error-page="/403" />
 
     </security:http>
 
@@ -52,7 +50,7 @@
 
     <!-- Handler for successful logout -->
     <bean id="successLogoutHandler" class="org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler">
-        <property name="defaultTargetUrl" value="/logout.jsp"/>
+        <property name="defaultTargetUrl" value="/logout"/>
     </bean>
 
     <!-- Logout handler terminating local session -->
