@@ -9,7 +9,7 @@ Examples include:
 
 - Java / Spring based web application development in Struts, Hibernate 5 (discontinued) and Spring MVC
 - Maven
-- Web Application Security
+- Web Application Security / SSO
 - Unit / integration testing
 - Hibernate
 - SOAP / Spring-WS

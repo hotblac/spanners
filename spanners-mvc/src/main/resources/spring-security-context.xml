@@ -11,7 +11,6 @@
     <context:component-scan base-package="org.springframework.security.saml"/>
 
     <security:http security="none" pattern="/saml/web/**"/>
-    <security:http security="none" pattern="/logout"/>
     <security:http security="none" pattern="/WEB-INF/tiles/**"/>
 
     <security:http entry-point-ref="samlEntryPoint" use-expressions="true">
@@ -36,26 +35,24 @@
         <security:filter-chain-map request-matcher="ant">
             <security:filter-chain pattern="/saml/login/**" filters="samlEntryPoint"/>
             <security:filter-chain pattern="/saml/SSO/**" filters="samlWebSSOProcessingFilter"/>
-            <security:filter-chain pattern="/saml/metadata/**" filters="metadataDisplayFilter"/>
             <security:filter-chain pattern="/saml/discovery/**" filters="samlIDPDiscovery"/>
             <security:filter-chain pattern="/saml/logout/**" filters="samlLogoutFilter"/>
             <security:filter-chain pattern="/saml/SingleLogout/**" filters="samlLogoutProcessingFilter"/>
         </security:filter-chain-map>
     </bean>
 
-    <bean id="successRedirectHandler"
-          class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+    <!-- On login, redirect to display spanners page -->
+    <bean id="successRedirectHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
         <property name="defaultTargetUrl" value="/displaySpanners"/>
     </bean>
 
-    <!-- Handler for successful logout -->
+    <!-- After logout, show the logout success page -->
     <bean id="successLogoutHandler" class="org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler">
         <property name="defaultTargetUrl" value="/logout"/>
     </bean>
 
     <!-- Logout handler terminating local session -->
-    <bean id="logoutHandler"
-          class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler">
+    <bean id="logoutHandler" class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler">
         <property name="invalidateHttpSession" value="false"/>
     </bean>
 
@@ -65,7 +62,7 @@
     </security:authentication-manager>
 
     <!-- Central storage of cryptographic keys -->
-    <!-- TODO generate own private keys -->
+    <!-- TODO generate own private keys - these are from the Spring SAML sample app. -->
     <bean id="keyManager" class="org.springframework.security.saml.key.JKSKeyManager">
         <constructor-arg value="classpath:security/samlKeystore.jks"/>
         <constructor-arg type="java.lang.String" value="nalle123"/>
@@ -89,14 +86,11 @@
     <bean id="metadataGeneratorFilter" class="org.springframework.security.saml.metadata.MetadataGeneratorFilter">
         <constructor-arg>
             <bean class="org.springframework.security.saml.metadata.MetadataGenerator">
-                <!-- TODO change entity id and regenerate metadata -->
                 <property name="entityId" value="org.dontpanic.spanners"/>
                 <property name="signMetadata" value="false"/>
             </bean>
         </constructor-arg>
     </bean>
-
-    <bean id="metadataDisplayFilter" class="org.springframework.security.saml.metadata.MetadataDisplayFilter"/>
 
     <!-- Entry point to initialize authentication, default values taken from properties file -->
     <bean id="samlEntryPoint" class="org.springframework.security.saml.SAMLEntryPoint">

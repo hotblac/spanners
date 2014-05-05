@@ -1,4 +1,7 @@
 - Move SpannerNotFound exception and logic from spanners-mvc to DAO
 - Handle spring security exceptions in spanners-struts
-- Replace dummy security with users in database tables
+
+- Create custom metadata and crypto key for spanners-mvc SAML
+- Add admin user for spanners-mvc
+
 
