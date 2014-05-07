@@ -34,3 +34,6 @@
 
 2.4
 - Added Spring MVC
+
+2.5
+- Added SAML federated sign on with http://www.ssocircle.com/en/

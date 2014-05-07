@@ -3,5 +3,6 @@
 
 - Create custom metadata and crypto key for spanners-mvc SAML
 - Add admin user for spanners-mvc
+- Allow login to IdP served on any (configurable) URL, not just localhost:8080
 
 
