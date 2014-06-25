@@ -37,3 +37,6 @@
 
 2.5
 - Added SAML federated sign on with http://www.ssocircle.com/en/
+
+2.6
+- Added examples of deployment to Tomcat with Maven
