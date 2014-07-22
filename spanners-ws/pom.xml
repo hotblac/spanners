@@ -17,6 +17,19 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jetty.port>8888</jetty.port>
     </properties>
+    
+    <dependencyManagement>
+        <dependencies>
+            <!-- Workaround for missing dependency of saaj-api.
+                 It requires activation 1.0.2 which is no longer available in Maven Central repo.
+                 It's dependency managed to latest version 1.1.1 -->
+            <dependency>
+                <groupId>javax.activation</groupId>
+                <artifactId>activation</artifactId>
+                <version>1.1.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
