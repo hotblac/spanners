@@ -17,6 +17,9 @@ public interface SpannersDAO {
     @PreAuthorize("hasRole('ROLE_VIEWER')")
     public List<Spanner> getAll();
 
+    @PreAuthorize("hasRole('ROLE_VIEWER')")
+    public List<Integer> getAllSpannerIds();
+
     @PreAuthorize("hasRole('ROLE_EDITOR') or hasPermission(#spanner, 'owner')")
     public int create(Spanner spanner);
 

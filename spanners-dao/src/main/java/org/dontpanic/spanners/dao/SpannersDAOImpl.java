@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
@@ -32,6 +33,17 @@ public class SpannersDAOImpl implements SpannersDAO {
         Criteria criteria = getSession().createCriteria(Spanner.class);
         criteria.addOrder(Order.asc(Spanner.PROP_ID));
         return criteria.list();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Integer> getAllSpannerIds() {
+        List<Spanner> spanners = getAll();
+        List<Integer> spannerIds = new ArrayList<Integer>();
+        for (Spanner spanner : spanners) {
+            spannerIds.add(spanner.getId());
+        }
+        return spannerIds;
     }
 
     @Override

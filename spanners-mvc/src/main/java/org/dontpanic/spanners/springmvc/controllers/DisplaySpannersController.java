@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,10 +32,19 @@ public class DisplaySpannersController {
     @RequestMapping(value = "/displaySpanners", method = RequestMethod.GET)
     public ModelAndView displaySpanners() {
 
-        // Load the spanners from database
-        List<Spanner> spanners = spannersDAO.getAll();
+        List<Spanner> allSpanners = new ArrayList<Spanner>();
 
-        return new ModelAndView(VIEW_DISPLAY_SPANNERS, MODEL_ATTRIBUTE_SPANNERS, spanners);
+        // Load the IDs of all spanners from database
+        List<Integer> spannerIds = spannersDAO.getAllSpannerIds();
+
+        // For each spanner id...
+        for (Integer spannerId : spannerIds) {
+            // Load the spanner object from the database
+            Spanner spanner = spannersDAO.get(spannerId);
+            allSpanners.add(spanner);
+        }
+
+        return new ModelAndView(VIEW_DISPLAY_SPANNERS, MODEL_ATTRIBUTE_SPANNERS, allSpanners);
     }
 
 
