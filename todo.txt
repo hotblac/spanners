@@ -1,4 +1,5 @@
 - Move SpannerNotFound exception and logic from spanners-mvc to DAO
+- Handle exceptions in spanners-mvc - SpannerNotFound currently results in blank page.
 - Handle spring security exceptions in spanners-struts
 
 - Create custom metadata and crypto key for spanners-mvc SAML
