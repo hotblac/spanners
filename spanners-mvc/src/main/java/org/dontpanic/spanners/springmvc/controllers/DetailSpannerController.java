@@ -28,10 +28,9 @@ public class DetailSpannerController {
 
         // Fetch the spanner
         Spanner spanner = spannersDAO.get(id);
-        if (spanner == null) {
-            // No spanner exists for given id. We can't display the page.
-            throw new SpannerNotFoundException(id);
-        }
+
+        // XRebel demo - cause a NPE when spanner is not found
+        System.out.println("Spanner retrieved: " + spanner.toString());
 
         return new ModelAndView(VIEW_DETAIL_SPANNER, MODEL_SPANNER, spanner);
     }

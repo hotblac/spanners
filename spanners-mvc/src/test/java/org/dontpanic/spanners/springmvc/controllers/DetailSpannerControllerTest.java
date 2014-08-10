@@ -6,6 +6,7 @@ import static org.dontpanic.spanners.stubs.SpannersStubs.*;
 import org.dontpanic.spanners.dao.Spanner;
 import org.dontpanic.spanners.dao.SpannersDAO;
 import org.dontpanic.spanners.springmvc.exception.SpannerNotFoundException;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -45,7 +46,7 @@ public class DetailSpannerControllerTest {
         assertSpannerEquals(SPANNER, spannerInModel);
     }
 
-
+    @Ignore("Disabled for XRebel demo")
     @Test
     public void testSpannerNotFound() throws Exception {
 
