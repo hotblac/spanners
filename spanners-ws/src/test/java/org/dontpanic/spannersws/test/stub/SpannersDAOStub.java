@@ -19,6 +19,11 @@ public class SpannersDAOStub implements SpannersDAO {
     }
 
     @Override
+    public Spanner findByName(String name) {
+        return get(1);
+    }
+
+    @Override
     public List<Spanner> getAll() {
         return Collections.emptyList();
     }

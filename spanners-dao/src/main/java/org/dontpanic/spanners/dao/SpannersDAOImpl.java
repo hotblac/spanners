@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static org.hibernate.criterion.Restrictions.eq;
+
 @Transactional
 public class SpannersDAOImpl implements SpannersDAO {
 
@@ -24,6 +26,13 @@ public class SpannersDAOImpl implements SpannersDAO {
     @Override
     public Spanner get(int id) {
         return (Spanner)getSession().get(Spanner.class, id);
+    }
+
+    @Override
+    public Spanner findByName(String name) {
+        Criteria criteria = getSession().createCriteria(Spanner.class);
+        criteria.add(eq(Spanner.PROP_NAME, name));
+        return (Spanner)criteria.uniqueResult();
     }
 
     @Override
