@@ -48,7 +48,7 @@ public class ShortUrlFilterTest {
     public void testForward() throws Exception {
 
         // Spanner name is in request path
-        when(request.getPathInfo()).thenReturn("/" + SPANNER_NAME);
+        when(request.getServletPath()).thenReturn("/" + SPANNER_NAME);
 
         // Filter is invoked as request is made
         filter.doFilter(request, response, filterChain);
@@ -69,7 +69,7 @@ public class ShortUrlFilterTest {
     public void testSpannerNotFound() throws Exception {
 
         // A regular page is requested
-        when(request.getPathInfo()).thenReturn("/displaySpanners");
+        when(request.getServletPath()).thenReturn("/displaySpanners");
 
         // Filter is invoked as request is made
         filter.doFilter(request, response, filterChain);

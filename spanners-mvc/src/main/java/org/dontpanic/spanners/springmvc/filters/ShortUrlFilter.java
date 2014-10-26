@@ -37,8 +37,8 @@ public class ShortUrlFilter implements Filter {
             HttpServletRequest httpRequest = (HttpServletRequest)request;
             HttpServletResponse httpResponse = (HttpServletResponse)response;
 
-            String pathInfo = httpRequest.getPathInfo();
-            String spannerName = StringUtils.removeStart(pathInfo, "/");
+            String servletPath = httpRequest.getServletPath();
+            String spannerName = StringUtils.removeStart(servletPath, "/");
 
             // Find the spanner by name
             Spanner spanner = spannersDao.findByName(spannerName);

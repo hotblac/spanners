@@ -1,10 +1,14 @@
 package org.dontpanic.spanners.springmvc.config;
 
+import org.dontpanic.spanners.dao.SpannersDAO;
+import org.dontpanic.spanners.springmvc.filters.ShortUrlFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.view.tiles3.*;
@@ -19,7 +23,9 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 	
 	private static final String RESOURCES_HANDLER = "/resources/";
 	private static final String RESOURCES_LOCATION = RESOURCES_HANDLER + "**";
-	
+
+    @Autowired SpannersDAO spannersDAO;
+
 	@Override
 	public RequestMappingHandlerMapping requestMappingHandlerMapping() {
 		RequestMappingHandlerMapping requestMappingHandlerMapping = super.requestMappingHandlerMapping();
@@ -47,7 +53,14 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 		configurer.setDefinitions(new String[] {TILES, VIEWS});
 		return configurer;
 	}
-	
+
+    @Bean(name="shortUrlFilter")
+    public ShortUrlFilter configureShortUrlFilter() {
+        ShortUrlFilter filter = new ShortUrlFilter();
+        filter.setSpannersDao(spannersDAO);
+        return filter;
+    }
+
 	@Override
 	public Validator getValidator() {
 		LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();

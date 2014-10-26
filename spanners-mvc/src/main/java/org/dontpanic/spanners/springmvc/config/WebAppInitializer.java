@@ -25,7 +25,10 @@ public class WebAppInitializer implements WebApplicationInitializer {
 		characterEncodingFilter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
 		characterEncodingFilter.setInitParameter("encoding", "UTF-8");
 		characterEncodingFilter.setInitParameter("forceEncoding", "true");
-		
+
+        FilterRegistration.Dynamic shortUrlFilter = servletContext.addFilter("shortUrlFilter", new DelegatingFilterProxy("shortUrlFilter"));
+        shortUrlFilter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
+
 		servletContext.addListener(new ContextLoaderListener(context));
 		servletContext.setInitParameter("defaultHtmlEscape", "true");
 		
