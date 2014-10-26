@@ -14,7 +14,6 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java-version>1.7</java-version>
         <org.aspectj-version>1.7.0</org.aspectj-version>
         <org.slf4j-version>1.7.2</org.slf4j-version>
         <ch.qos.logback-version>1.0.7</ch.qos.logback-version>
@@ -40,6 +39,17 @@
         <dependency>
             <groupId>org.dontpanic</groupId>
             <artifactId>spanners-dao</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.dontpanic</groupId>
+            <artifactId>spanners-dao</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.dontpanic</groupId>
+            <artifactId>shared-web</artifactId>
             <type>jar</type>
         </dependency>
 
