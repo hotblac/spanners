@@ -4,8 +4,6 @@ import org.dbunit.DataSourceDatabaseTester;
 import org.dbunit.IDatabaseTester;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
-import org.dontpanic.spanners.dao.Spanner;
-import org.dontpanic.spanners.dao.SpannersDAO;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.After;
 import org.junit.Before;
@@ -58,14 +56,7 @@ public class SpannersDAOTest {
     @Test
     public void testGet() {
         Spanner hazell = spannersDAO.get(1);
-        checkSpanner(hazell, 1, "Hazell", 12);
-    }
-
-
-    @Test
-    public void testFindByName() {
-        Spanner hazell = spannersDAO.findByName("Hazell");
-        checkSpanner(hazell, 1, "Hazell", 12);
+        checkSpanner(hazell, 1, "Hazell", 12, "smith");
     }
 
     @Test
@@ -73,8 +64,8 @@ public class SpannersDAOTest {
         List<Spanner> spanners = spannersDAO.getAll();
         assertNotNull(spanners);
         assertEquals(2, spanners.size());
-        checkSpanner(spanners.get(0), 1, "Hazell", 12);
-        checkSpanner(spanners.get(1), 2, "Kitty", 18);
+        checkSpanner(spanners.get(0), 1, "Hazell", 12, "smith");
+        checkSpanner(spanners.get(1), 2, "Kitty", 18, "jones");
     }
 
 
@@ -82,16 +73,16 @@ public class SpannersDAOTest {
     public void testCreate() {
 
         // Create the new spanner
-        Spanner newSpanner = newSpanner(); // Bertha
-        int id = spannersDAO.create(newSpanner);
+        Spanner savedSpanner = new SpannerBuilder().createSpanner();
+        int id = spannersDAO.create(savedSpanner);
 
         // Check it's there
-        Spanner bertha = spannersDAO.get(id);
-        checkSpanner(bertha, id, newSpanner.getName(), newSpanner.getSize());
+        Spanner loadedSpanner = spannersDAO.get(id);
+        assertSpannerEquals(savedSpanner, loadedSpanner);
 
         // Check original data is still intact
         Spanner hazell = spannersDAO.get(1);
-        checkSpanner(hazell, 1, "Hazell", 12);
+        checkSpanner(hazell, 1, "Hazell", 12, "smith");
     }
 
 
@@ -99,28 +90,46 @@ public class SpannersDAOTest {
     public void testCreateDuplicate() {
 
         // Create a spanner with the same name as an existing one
-        Spanner evilHazell = duplicateSpanner();
+        Spanner evilHazell = new SpannerBuilder()
+                                    .setName("Hazell")
+                                    .createSpanner();
         try {
             spannersDAO.create(evilHazell); // throws DataIntegrityViolationException - hbm specifies that name must be unique
         } finally {
              // Check real Hazell has not been violated!
             Spanner realHazell = spannersDAO.get(1); // Hazell
-            checkSpanner(realHazell, 1, "Hazell", 12);
+            checkSpanner(realHazell, 1, "Hazell", 12, "smith");
         }
     }
-    
+
     @Test (expected = IllegalArgumentException.class)
     public void testNullSpanner() {
     	spannersDAO.create(null);
     }
-    
+
     @Test (expected = IllegalArgumentException.class)
     public void testZeroSizeSpanner() {
-    	
+
     	// Create a spanner with zero size
-    	Spanner kate = zeroSizeSpanner();
-		spannersDAO.create(kate);	
+    	Spanner zeroSizeSpanner = new SpannerBuilder()
+                                    .setSize(0)
+                                    .createSpanner();
+		spannersDAO.create(zeroSizeSpanner);
     }
+
+
+    @Test (expected = IllegalArgumentException.class)
+    public void testZeroSizeSpannerWithoutBuilder() {
+
+        Spanner spanner = new Spanner();
+        spanner.setId(1); // Better set an id. Not necessary for the test but every spanner should have an id.
+        spanner.setName("Bertha"); // Better set a name too
+        spanner.setOwner("Mr Smith"); // Again, we're not testing this, but every spanner should have an owner
+        spanner.setSize(0); // This is the important bit! The important attribute of this spanner is that its size is zero!
+
+		spannersDAO.create(spanner);
+    }
+
 
     @Test
     public void testUpdate() {
@@ -154,39 +163,63 @@ public class SpannersDAOTest {
         assertEquals(0, numberOfSpanners);
     }
 
-    /**
-     * Bertha
-     * @return A new Spanner called Bertha
-     */
-    private Spanner newSpanner() {
-        Spanner spanner = new Spanner();
-        spanner.setName("Bertha");
-        spanner.setSize(16);
-        return spanner;
+
+    private class SpannerBuilder {
+
+        public static final int DEFAULT_ID = 1;
+        public static final String DEFAULT_NAME = "Bertha";
+        public static final int DEFAULT_SIZE = 16;
+        public static final String DEFAULT_OWNER = "Mr Smith";
+
+        private int id = DEFAULT_ID;
+        private String name = DEFAULT_NAME;
+        private int size = DEFAULT_SIZE;
+        private String owner = DEFAULT_OWNER;
+
+        public SpannerBuilder setId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public SpannerBuilder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public SpannerBuilder setSize(int size) {
+            this.size = size;
+            return this;
+        }
+
+        public SpannerBuilder setOwner(String owner) {
+            this.owner = owner;
+            return this;
+        }
+
+        public Spanner createSpanner() {
+            Spanner spanner = new Spanner();
+            spanner.setId(this.id);
+            spanner.setName(this.name);
+            spanner.setSize(this.size);
+            spanner.setOwner(this.owner);
+            return spanner;
+        }
     }
 
+    /**
+     * Assert that two spanners are equal:
+     * They have same id and all attributes are equal.
+     * Both expected and actual spanner objects are non-null.
+     */
+    public static void assertSpannerEquals(Spanner expected, Spanner actual) {
 
-    /**
-     * Hazell
-     * @return A new Spanner with the same name as an existing Spanner
-     */
-    private Spanner duplicateSpanner() {
-        Spanner spanner = new Spanner();
-        spanner.setName("Hazell");
-        spanner.setSize(8);
-        return spanner;
-    }
-    
-    
-    /**
-     * Kate
-     * @return A new Spanner with zero size
-     */
-    private Spanner zeroSizeSpanner() {
-    	Spanner spanner = new Spanner();
-    	spanner.setName("Kate");
-    	spanner.setSize(0);
-    	return spanner;
+        assertNotNull("Spanners not equal: expected is null", expected);
+        assertNotNull("Spanners not equal: actual is null", actual);
+
+        assertEquals("spanner id", expected.getId(), actual.getId());
+        assertEquals("spanner name", expected.getName(), actual.getName());
+        assertEquals("spanner owner", expected.getOwner(), actual.getOwner());
+        assertEquals("spanner size", expected.getSize(), actual.getSize());
     }
 
 
@@ -197,11 +230,12 @@ public class SpannersDAOTest {
      * @param name expected name
      * @param size expected size
      */
-    private void checkSpanner(Spanner spanner, int id, String name, int size) {
+    private void checkSpanner(Spanner spanner, int id, String name, int size, String owner) {
         assertNotNull(spanner);
         assertEquals(id, spanner.getId());
         assertEquals(name, spanner.getName());
         assertEquals(size, spanner.getSize());
+        assertEquals(owner, spanner.getOwner());
     }
 
 
