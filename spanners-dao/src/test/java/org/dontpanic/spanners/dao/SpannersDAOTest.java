@@ -18,6 +18,7 @@ import javax.sql.DataSource;
 
 import java.util.List;
 
+import static org.dontpanic.spanners.stubs.SpannerBuilder.*;
 import static org.junit.Assert.*;
 
 
@@ -73,7 +74,7 @@ public class SpannersDAOTest {
     public void testCreate() {
 
         // Create the new spanner
-        Spanner savedSpanner = new SpannerBuilder().createSpanner();
+        Spanner savedSpanner = aTestSpanner().build();
         int id = spannersDAO.create(savedSpanner);
 
         // Check it's there
@@ -90,9 +91,7 @@ public class SpannersDAOTest {
     public void testCreateDuplicate() {
 
         // Create a spanner with the same name as an existing one
-        Spanner evilHazell = new SpannerBuilder()
-                                    .setName("Hazell")
-                                    .createSpanner();
+        Spanner evilHazell = aTestSpanner().named("Hazell").build();
         try {
             spannersDAO.create(evilHazell); // throws DataIntegrityViolationException - hbm specifies that name must be unique
         } finally {
@@ -111,13 +110,14 @@ public class SpannersDAOTest {
     public void testZeroSizeSpanner() {
 
     	// Create a spanner with zero size
-    	Spanner zeroSizeSpanner = new SpannerBuilder()
-                                    .setSize(0)
-                                    .createSpanner();
+    	Spanner zeroSizeSpanner = aTestSpanner().withSize(0).build();
 		spannersDAO.create(zeroSizeSpanner);
     }
 
 
+    /**
+     *  Example of how much more verbose a test is without the SpannerBuidler
+     */
     @Test (expected = IllegalArgumentException.class)
     public void testZeroSizeSpannerWithoutBuilder() {
 
@@ -163,48 +163,6 @@ public class SpannersDAOTest {
         assertEquals(0, numberOfSpanners);
     }
 
-
-    private class SpannerBuilder {
-
-        public static final int DEFAULT_ID = 1;
-        public static final String DEFAULT_NAME = "Bertha";
-        public static final int DEFAULT_SIZE = 16;
-        public static final String DEFAULT_OWNER = "Mr Smith";
-
-        private int id = DEFAULT_ID;
-        private String name = DEFAULT_NAME;
-        private int size = DEFAULT_SIZE;
-        private String owner = DEFAULT_OWNER;
-
-        public SpannerBuilder setId(int id) {
-            this.id = id;
-            return this;
-        }
-
-        public SpannerBuilder setName(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public SpannerBuilder setSize(int size) {
-            this.size = size;
-            return this;
-        }
-
-        public SpannerBuilder setOwner(String owner) {
-            this.owner = owner;
-            return this;
-        }
-
-        public Spanner createSpanner() {
-            Spanner spanner = new Spanner();
-            spanner.setId(this.id);
-            spanner.setName(this.name);
-            spanner.setSize(this.size);
-            spanner.setOwner(this.owner);
-            return spanner;
-        }
-    }
 
     /**
      * Assert that two spanners are equal:
