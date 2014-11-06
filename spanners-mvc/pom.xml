@@ -186,7 +186,7 @@
             <!-- Make WEB-INF resources available to tests -->
             <testResource>
                 <directory>src/main/webapp/WEB-INF</directory>
-                <targetPath>/WEB-INF</targetPath>
+                <targetPath>WEB-INF</targetPath>
             </testResource>
         </testResources>
         <plugins> 
