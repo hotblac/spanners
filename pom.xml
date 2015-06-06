@@ -5,14 +5,12 @@
     <groupId>org.dontpanic</groupId>
     <artifactId>spanners-pom</artifactId>
     <name>Spanners demo applications</name>
-    <version>2.7-SNAPSHOT</version>
+    <version>3.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     
     <modules>
         <module>spanners-dao</module>
         <module>shared-web</module>
-        <module>spanners-ws</module>
-        <module>spanners-struts</module>
         <module>spanners-mvc</module>
   </modules>
 
