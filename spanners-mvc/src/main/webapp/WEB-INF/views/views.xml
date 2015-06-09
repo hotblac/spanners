@@ -3,6 +3,11 @@
 	"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
 	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
+	<definition name="signin" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/signin.jsp" />
+		<put-attribute name="header" value="" type="string" />
+		<put-attribute name="footer" value="" type="string" />
+	</definition>
     <definition name="modals/*" template="/WEB-INF/tiles/modal.jsp">
         <put-attribute name="body" value="/WEB-INF/modals/{1}.jsp"></put-attribute>
     </definition>

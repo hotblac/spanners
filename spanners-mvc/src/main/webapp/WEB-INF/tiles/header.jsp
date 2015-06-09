@@ -16,10 +16,10 @@
 				</ul>					
 				<ul class="nav pull-right">
 					<security:authorize access="!isAuthenticated()">
-						<li><a href='<s:url value="/displaySpanners"></s:url>'>Sign in</a></li>
+						<li><a href='<s:url value="/signin"></s:url>'>Sign in</a></li>
 					</security:authorize>
 					<security:authorize access="isAuthenticated()">
-						<li><a href='<s:url value="/saml/logout"></s:url>'>Logout (<security:authentication property="principal.username"/>)</a></li>
+						<li><a href='<s:url value="/logout"></s:url>'>Logout (<security:authentication property="principal.username"/>)</a></li>
 					</security:authorize>
 				</ul>
 			</div>

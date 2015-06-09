@@ -158,14 +158,6 @@
                 <artifactId>spring-security-web</artifactId>
                 <version>${spring-security.version}</version>
             </dependency>
-            
-            <!-- SAML -->
-            <dependency>
-              <groupId>org.springframework.security.extensions</groupId>
-              <artifactId>spring-security-saml2-core</artifactId>
-              <version>1.0.0.RC2</version>
-              <scope>compile</scope>
-            </dependency>
 
             <!-- Test -->
             <dependency>
