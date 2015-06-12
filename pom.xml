@@ -10,7 +10,6 @@
     
     <modules>
         <module>spanners-dao</module>
-        <module>shared-web</module>
         <module>spanners-mvc</module>
   </modules>
 

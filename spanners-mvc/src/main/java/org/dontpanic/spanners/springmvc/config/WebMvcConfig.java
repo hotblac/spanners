@@ -1,7 +1,6 @@
 package org.dontpanic.spanners.springmvc.config;
 
 import org.dontpanic.spanners.dao.SpannersDAO;
-import org.dontpanic.spanners.springmvc.filters.ShortUrlFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
@@ -13,7 +12,9 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import org.springframework.web.servlet.view.tiles3.*;
 
 @Configuration
-@ComponentScan(basePackages = { "org.dontpanic.spanners.springmvc.controllers","org.dontpanic.spanners.springmvc.signin" })
+@ComponentScan(basePackages = { "org.dontpanic.spanners.springmvc.controllers",
+								"org.dontpanic.spanners.springmvc.signin",
+							    "org.dontpanic.spanners.springmvc.error"})
 public class WebMvcConfig extends WebMvcConfigurationSupport {
 	
 	private static final String MESSAGE_SOURCE = "/WEB-INF/i18n/messages";
@@ -52,13 +53,6 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 		configurer.setDefinitions(new String[] {TILES, VIEWS});
 		return configurer;
 	}
-
-    @Bean(name="shortUrlFilter")
-    public ShortUrlFilter configureShortUrlFilter() {
-        ShortUrlFilter filter = new ShortUrlFilter();
-        filter.setSpannersDao(spannersDAO);
-        return filter;
-    }
 
 	@Override
 	public Validator getValidator() {
