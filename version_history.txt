@@ -40,3 +40,10 @@
 
 2.6
 - Added examples of deployment to Tomcat with Maven
+
+3.0
+- Baseline with latest dependency versions:
+- Java 8
+- Spring 4.1.6.RELEASE
+- Spring Security 4.0.1.RELEASE
+- Removed Tapestry 5, Spring-WS and SAML SSO components

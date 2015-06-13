@@ -1,12 +1,1 @@
-TODO for version 3.0
-- Upgrade to Java 1.8
-- Upgrade to Spring / Spring Security 4
-- Revert SAML SSO and reinstate simple login form
-
-Low priority issues
-- Move SpannerNotFound exception and logic from spanners-mvc to DAO
-- Handle exceptions in spanners-mvc - SpannerNotFound currently results in blank page.
-- Handle spring security exceptions in spanners-struts
-- Add admin user for spanners-mvc
-
 
