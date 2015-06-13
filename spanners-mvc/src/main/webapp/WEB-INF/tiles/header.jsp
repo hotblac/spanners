@@ -12,7 +12,7 @@
 			<a class="brand" href="#">Spanners</a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
-					<li class="active"><a href='<s:url value="/"></s:url>'>Home</a></li>
+					<li class="active"><a href='<s:url value="/displaySpanners"></s:url>'>Home</a></li>
 				</ul>					
 				<ul class="nav pull-right">
 					<security:authorize access="!isAuthenticated()">
