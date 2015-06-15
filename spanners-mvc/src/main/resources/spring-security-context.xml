@@ -17,6 +17,9 @@
         <!-- CSRF protection not yet supported in this app -->
         <csrf disabled="true"/>
 
+        <!-- Display the custom 403 error page instead of throwing an exception -->
+        <access-denied-handler error-page="/403" />
+
     </http>
 
     <authentication-manager>
@@ -39,7 +42,5 @@
     </beans:bean>
 
     <beans:bean id="spannerPermissionEvaluator" class="org.dontpanic.spanners.security.SpannerPermissionEvaluator"/>
-
-
 
 </beans:beans>
