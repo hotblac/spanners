@@ -12,6 +12,7 @@
         <intercept-url pattern="/signin" access="permitAll" />
         <intercept-url pattern="/signup" access="permitAll" />
         <intercept-url pattern="/default/**" access="permitAll" />
+        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/**" access="isAuthenticated()" />
 
         <!-- CSRF protection not yet supported in this app -->
@@ -25,9 +26,10 @@
     <authentication-manager>
         <authentication-provider>
             <user-service>
-                <user name="smith" password="password" authorities="ROLE_VIEWER" />
-                <user name="jones" password="password" authorities="ROLE_VIEWER" />
-                <user name="admin" password="password" authorities="ROLE_VIEWER, ROLE_EDITOR"/>
+                <user name="viewOnly" password="password" authorities="ROLE_VIEWER" />
+                <user name="smith" password="password" authorities="ROLE_VIEWER, ROLE_EDITOR" />
+                <user name="jones" password="password" authorities="ROLE_VIEWER, ROLE_EDITOR" />
+                <user name="admin" password="password" authorities="ROLE_EDITOR, ROLE_ADMIN"/>
             </user-service>
         </authentication-provider>
     </authentication-manager>
