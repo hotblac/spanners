@@ -2,7 +2,11 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
-<p>Hello <security:authentication property="principal.username" />! Welcome to the Spanners Spring MVC demo application!</p>
+<c:set var="username">
+    <security:authentication property="principal.username" />
+</c:set>
+
+<p>Hello <c:out value="${principal.username}" />! Welcome to the Spanners Spring MVC demo application!</p>
 
 <table class="table table-striped table-bordered table-condensed">
     <tr>
@@ -29,8 +33,16 @@
             <td><c:out value="${spanner.size}"/></td>
             <td><c:out value="${spanner.owner}"/></td>
             <td><a href="${detailSpannerUrl}">View</a></td>
-            <td><a href="${editSpannerUrl}">Edit</a></td>
-            <td><a href="${deleteSpannerUrl}">Delete</a></td>
+            <c:choose>
+                <c:when test="${spanner.owner eq username}">
+                    <td><a href="${editSpannerUrl}">Edit</a></td>
+                    <td><a href="${deleteSpannerUrl}">Delete</a></td>
+                </c:when>
+                <c:otherwise>
+                    <td>Edit</td>
+                    <td>Delete</td>
+                </c:otherwise>
+            </c:choose>
         </tr>
     </c:forEach>
 </table>
