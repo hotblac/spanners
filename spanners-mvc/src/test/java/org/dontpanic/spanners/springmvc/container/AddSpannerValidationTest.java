@@ -1,4 +1,4 @@
-package org.dontpanic.spanners.springmvc.validation;
+package org.dontpanic.spanners.springmvc.container;
 
 import org.dontpanic.spanners.springmvc.config.WebMvcConfig;
 import org.dontpanic.spanners.stubs.StubConfig;

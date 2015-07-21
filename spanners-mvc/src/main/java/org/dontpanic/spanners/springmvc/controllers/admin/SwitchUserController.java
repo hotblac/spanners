@@ -12,9 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class SwitchUserController {
 
+    public static final String CONTROLLER_URL = "/admin/switchUser";
     public static final String VIEW_SWITCH_USER = "admin/switchUser";
 
-    @RequestMapping(value = "/admin/switchUser", method = RequestMethod.GET)
+    @RequestMapping(value = CONTROLLER_URL, method = RequestMethod.GET)
     public ModelAndView displayPage() {
         return new ModelAndView(VIEW_SWITCH_USER);
     }

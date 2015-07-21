@@ -20,6 +20,7 @@ import java.util.List;
 @Controller
 public class DisplaySpannersController {
 
+    public static final String CONTROLLER_URL = "/displaySpanners";
     public static final String VIEW_DISPLAY_SPANNERS = "displaySpanners";
     public static final String MODEL_ATTRIBUTE_SPANNERS = "spanners";
 
@@ -28,7 +29,7 @@ public class DisplaySpannersController {
     /**
      * Display all spanners
      */
-    @RequestMapping(value = "/displaySpanners", method = RequestMethod.GET)
+    @RequestMapping(value = CONTROLLER_URL, method = RequestMethod.GET)
     public ModelAndView displaySpanners() {
 
         // Load the spanners from database

@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class SigninController {
 
-	@RequestMapping(value = "signin")
+	public static final String CONTROLLER_URL = "/signin";
+
+	@RequestMapping(value = CONTROLLER_URL)
 	public void signin() {}
 }
