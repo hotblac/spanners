@@ -4,8 +4,6 @@ import org.dbunit.DataSourceDatabaseTester;
 import org.dbunit.IDatabaseTester;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
-import org.dontpanic.spanners.dao.Spanner;
-import org.dontpanic.spanners.dao.SpannersDAO;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,8 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -35,6 +32,10 @@ import static com.googlecode.catchexception.CatchException.verifyException;
                 "classpath:spring-test-security.xml" // Enables security annotations
         })
 public class SpannersSecurityTest {
+
+    // Note that the WithMockUser annotation prepends 'ROLE_' to these role names
+    private static final String ROLE_VIEWER = "VIEWER";
+    private static final String ROLE_EDITOR = "EDITOR";
 
     @Qualifier("spannersDAO")
     @Autowired protected SpannersDAO spannersDAO; // Injected by springy magic
@@ -57,10 +58,8 @@ public class SpannersSecurityTest {
     }
 
     @Test
+    @WithMockUser(roles=ROLE_VIEWER)
     public void testViewerAccess() {
-
-        // Login as viewer
-        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("viewer", "password"));
 
         // Viewer should have access to get* methods - just call the method to check no exception is thrown
         spannersDAO.get(1);
@@ -74,10 +73,8 @@ public class SpannersSecurityTest {
     }
 
     @Test
+    @WithMockUser(roles=ROLE_EDITOR)
     public void testEditorAccess() {
-
-        // Login as editor
-        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("editor", "password"));
 
         // Editor should have access to create / update / delete - just call the method to check no exception is thrown
         Spanner spanner = newSpanner();
@@ -91,10 +88,8 @@ public class SpannersSecurityTest {
     }
 
     @Test
+    @WithMockUser(username = "smith", roles = ROLE_VIEWER)
     public void testOwnerAccess() {
-
-        // Login as owner of specific spanner - smith
-        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("smith", "password"));
 
         // Smith can create a spanner only if he's the owner
         Spanner newSpanner = newSpanner();
@@ -119,9 +114,6 @@ public class SpannersSecurityTest {
 
     @Test
     public void testNotLoggedIn() {
-
-        // No user logged in
-        SecurityContextHolder.getContext().setAuthentication(null);
 
         // If we're not logged in, we should not be able to access any method of SpannersDAO
         Spanner spanner = newSpanner();
