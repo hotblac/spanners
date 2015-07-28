@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.dontpanic.spanners.springmvc.controllers.admin.SwitchUserController.VIEW_SWITCH_USER;
+import static org.dontpanic.spanners.springmvc.controllers.admin.SwitchUserController.VIEW_USER_SWITCH_SUCCESS;
 import static org.dontpanic.spanners.springmvc.controllers.admin.SwitchUserController.MODEL_SWITCH_USER;
 import static org.junit.Assert.*;
 
@@ -31,4 +32,16 @@ public class SwitchUserControllerTest {
         assertNotNull("model", form);
     }
 
+
+    @Test
+    public void testSwitchUser() {
+
+        // Submit the form
+        SwitchUserForm form = new SwitchUserForm();
+        ModelAndView response = controller.switchUser(form);
+        assertNotNull("no response", response);
+
+        // Assert that we forward to the correct view
+        assertEquals("view", VIEW_USER_SWITCH_SUCCESS, response.getViewName());
+    }
 }

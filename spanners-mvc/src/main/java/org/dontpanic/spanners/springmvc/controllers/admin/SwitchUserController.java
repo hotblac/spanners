@@ -15,12 +15,18 @@ public class SwitchUserController {
 
     public static final String CONTROLLER_URL = "/admin/switchUser";
     public static final String VIEW_SWITCH_USER = "admin/switchUser";
+    public static final String VIEW_USER_SWITCH_SUCCESS = "redirect:/displaySpanners";
     public static final String MODEL_SWITCH_USER = "switchUserForm";
 
     @RequestMapping(value = CONTROLLER_URL, method = RequestMethod.GET)
     public ModelAndView displayPage() {
         SwitchUserForm form = new SwitchUserForm();
         return new ModelAndView(VIEW_SWITCH_USER, MODEL_SWITCH_USER, form);
+    }
+
+    @RequestMapping(value = CONTROLLER_URL, method = RequestMethod.POST)
+    public ModelAndView switchUser(SwitchUserForm form) {
+        return new ModelAndView(VIEW_USER_SWITCH_SUCCESS);
     }
 
 }
