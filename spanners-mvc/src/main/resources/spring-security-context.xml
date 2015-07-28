@@ -27,7 +27,7 @@
                 <user name="viewOnly" password="password" authorities="ROLE_VIEWER" />
                 <user name="smith" password="password" authorities="ROLE_VIEWER, ROLE_EDITOR" />
                 <user name="jones" password="password" authorities="ROLE_VIEWER, ROLE_EDITOR" />
-                <user name="admin" password="password" authorities="ROLE_EDITOR, ROLE_ADMIN"/>
+                <user name="admin" password="password" authorities="ROLE_VIEWER, ROLE_EDITOR, ROLE_ADMIN"/>
             </user-service>
         </authentication-provider>
     </authentication-manager>
