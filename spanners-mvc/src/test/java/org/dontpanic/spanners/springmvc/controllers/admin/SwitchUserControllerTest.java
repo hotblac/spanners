@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.dontpanic.spanners.springmvc.controllers.admin.SwitchUserController.VIEW_SWITCH_USER;
-import static org.dontpanic.spanners.springmvc.controllers.admin.SwitchUserController.VIEW_USER_SWITCH_SUCCESS;
+import static org.dontpanic.spanners.springmvc.controllers.admin.SwitchUserController.USER_SWITCH_FILTER;
 import static org.dontpanic.spanners.springmvc.controllers.admin.SwitchUserController.MODEL_SWITCH_USER;
 import static org.junit.Assert.*;
 
@@ -14,6 +14,8 @@ import static org.junit.Assert.*;
  * Created by Stevie on 21/07/2015.
  */
 public class SwitchUserControllerTest {
+
+    private static final String NEW_USER = "jones";
 
     private SwitchUserController controller = new SwitchUserController();
 
@@ -38,10 +40,12 @@ public class SwitchUserControllerTest {
 
         // Submit the form
         SwitchUserForm form = new SwitchUserForm();
-        ModelAndView response = controller.switchUser(form);
+        form.setUserName(NEW_USER);
+        String response = controller.switchUser(form);
         assertNotNull("no response", response);
 
-        // Assert that we forward to the correct view
-        assertEquals("view", VIEW_USER_SWITCH_SUCCESS, response.getViewName());
+        // Assert that we forward to the switch user filte with URL params
+        String expectedForward = USER_SWITCH_FILTER + "?username=" + NEW_USER;
+        assertEquals("response", expectedForward, response);
     }
 }

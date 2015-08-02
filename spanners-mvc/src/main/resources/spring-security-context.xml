@@ -7,6 +7,10 @@
     <http auto-config="true" disable-url-rewriting="true" use-expressions="true">
         <form-login login-page="/signin" authentication-failure-url="/signin?error=1" default-target-url="/displaySpanners"/>
         <logout logout-url="/logout" />
+
+        <!-- Enable user switching - admin users may view the site as another user -->
+        <custom-filter position="SWITCH_USER_FILTER" ref="switchUserProcessingFilter" />
+
         <intercept-url pattern="/" access="permitAll" />
         <intercept-url pattern="/resources/**" access="permitAll" />
         <intercept-url pattern="/signin" access="permitAll" />
@@ -23,7 +27,7 @@
 
     <authentication-manager>
         <authentication-provider>
-            <user-service>
+            <user-service id="userDetailsService">
                 <user name="viewOnly" password="password" authorities="ROLE_VIEWER" />
                 <user name="smith" password="password" authorities="ROLE_VIEWER, ROLE_EDITOR" />
                 <user name="jones" password="password" authorities="ROLE_VIEWER, ROLE_EDITOR" />
@@ -42,5 +46,11 @@
     </beans:bean>
 
     <beans:bean id="spannerPermissionEvaluator" class="org.dontpanic.spanners.security.SpannerPermissionEvaluator"/>
+
+    <beans:bean id="switchUserProcessingFilter" class="org.springframework.security.web.authentication.switchuser.SwitchUserFilter">
+        <beans:property name="userDetailsService" ref="userDetailsService"/>
+        <beans:property name="switchUserUrl" value="/admin/impersonate"/>
+        <beans:property name="targetUrl" value="/displaySpanners"/>
+    </beans:bean>
 
 </beans:beans>

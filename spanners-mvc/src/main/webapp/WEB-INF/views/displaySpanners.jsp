@@ -6,7 +6,7 @@
     <security:authentication property="principal.username" />
 </c:set>
 
-<p>Hello <c:out value="${principal.username}" />! Welcome to the Spanners Spring MVC demo application!</p>
+<p>Hello <c:out value="${username}" />! Welcome to the Spanners Spring MVC demo application!</p>
 
 <table class="table table-striped table-bordered table-condensed">
     <tr>
