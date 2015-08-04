@@ -1,10 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<form:form modelAttribute="switchUserForm" class="form">
-    <form:label path="userName">User name:</form:label>
-    <form:input path="userName" class="input-block-level"/>
-    <form:errors path="userName" element="p" class="text-error"/>
+<form method="GET" action="<c:url value="/admin/impersonate"/>" class="form">
+    <label for="usernameField">User name:</label>
+    <input type="text" name="username" id="usernameField" class="input-block-level"/>
     <a href="<c:url value="/displaySpanners"/>" class="btn btn-default">Cancel</a>
     <input type="submit" class="btn btn-primary" value="Switch User" />
-</form:form>
+</form>

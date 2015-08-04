@@ -1,1 +1,2 @@
-
+Remove redundant SwitchUserController - link direct to /admin/impersonate
+Fix permission checks for switched admin accounts (security context and header JSP)
