@@ -51,6 +51,7 @@
         <beans:property name="userDetailsService" ref="userDetailsService"/>
         <beans:property name="switchUserUrl" value="/admin/impersonate"/>
         <beans:property name="targetUrl" value="/displaySpanners"/>
+        <beans:property name="switchFailureUrl" value="/admin/switchUser"/>
     </beans:bean>
 
 </beans:beans>
