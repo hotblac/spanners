@@ -1,2 +1,1 @@
-Improve error message on switch user page on failure
 Fix permission checks for switched admin accounts (security context and header JSP)
