@@ -19,7 +19,7 @@
 						<li><a href='<s:url value="/signin"></s:url>'>Sign in</a></li>
 					</security:authorize>
 					<security:authorize access="isAuthenticated()">
-						<security:authorize access="hasRole('ROLE_ADMIN')">
+						<security:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_PREVIOUS_ADMINISTRATOR')">
 						<li><a href='<s:url value="/admin/switchUser"></s:url>'>Switch User</a></li>
 						</security:authorize>
 						<li><a href='<s:url value="/logout"></s:url>'>Logout (<security:authentication property="principal.username"/>)</a></li>
