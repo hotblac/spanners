@@ -47,3 +47,6 @@
 - Spring 4.1.6.RELEASE
 - Spring Security 4.0.1.RELEASE
 - Removed Tapestry 5, Spring-WS and SAML SSO components
+
+3.1
+- Added Switch User page, accessible to ADMIN users only
