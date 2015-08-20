@@ -39,6 +39,7 @@ public class UrlPermissionTest {
     private static final String ROLE_VIEWER = "VIEWER";
     private static final String ROLE_EDITOR = "EDITOR";
     private static final String ROLE_ADMIN = "ADMIN";
+    private static final String ROLE_PREVIOUS_ADMINISTRATOR = "PREVIOUS_ADMINISTRATOR";
 
     @Autowired protected WebApplicationContext wac;
     protected MockMvc mockMvc;
@@ -49,12 +50,20 @@ public class UrlPermissionTest {
         mockMvc = webAppContextSetup(wac).apply(springSecurity()).build();
     }
 
+
+    /**
+     * Verify that unauthenticated users can access sign in page
+     */
     @Test
     public void testSigninIsAvailableToAnonymous() throws Exception {
         mockMvc.perform(get(SigninController.CONTROLLER_URL))
                 .andExpect(status().isOk());
     }
 
+
+    /**
+     * Verify that VIEWERs can access display spanners page
+     */
     @Test
     @WithMockUser(roles=ROLE_VIEWER)
     public void testDisplaySpannersPageIsAvailableToLoggedInUser() throws Exception {
@@ -62,6 +71,10 @@ public class UrlPermissionTest {
                 .andExpect(status().isOk());
     }
 
+
+    /**
+     * Verify that unauthenticated users cannot access display spanners page
+     */
     @Test
     public void testDisplaySpannersPageIsNotAvailableToAnonymousUser() throws Exception {
         mockMvc.perform(get(DisplaySpannersController.CONTROLLER_URL))
@@ -69,6 +82,10 @@ public class UrlPermissionTest {
                 .andExpect(redirectedUrlPattern("**/signin")); // ... to login page
     }
 
+
+    /**
+     * Verify that ADMIN users can access the switch user page
+     */
     @Test
     @WithMockUser(roles=ROLE_ADMIN)
     public void testAdminPathIsAvailableToAdminRole() throws Exception {
@@ -76,6 +93,10 @@ public class UrlPermissionTest {
                 .andExpect(status().isOk());
     }
 
+
+    /**
+     * Verify that VIEWERs cannot access the switch user page
+     */
     @Test
     @WithMockUser(roles=ROLE_VIEWER)
     public void testAdminPathIsNotAvailableToViewer() throws Exception {
@@ -83,10 +104,27 @@ public class UrlPermissionTest {
                 .andExpect(status().isForbidden());
     }
 
+
+    /**
+     * Verify that EDITORs cannot access the switch user page
+     */
     @Test
     @WithMockUser(roles=ROLE_EDITOR)
     public void testAdminPathIsNotAvailableToEditor() throws Exception{
         mockMvc.perform(get(SwitchUserController.CONTROLLER_URL))
                 .andExpect(status().isForbidden());
+    }
+
+
+    /**
+     * Verify that an ADMIN user can still access the switch user page
+     * even after they've switched to a non-admin (VIEWER) user
+     */
+    @Test
+    @WithMockUser(roles={ROLE_PREVIOUS_ADMINISTRATOR, // User logged in as ADMIN...
+                         ROLE_EDITOR}) //...but is currently viewing as an EDITOR
+    public void testAdminPathIsAvailableToAdminUserSwitchedToViewer() throws Exception {
+        mockMvc.perform(get(SwitchUserController.CONTROLLER_URL))
+                .andExpect(status().isOk());
     }
 }
