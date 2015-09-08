@@ -5,7 +5,7 @@
     <groupId>org.dontpanic</groupId>
     <artifactId>spanners</artifactId>
     <name>Spanners demo applications</name>
-    <version>3.1-SNAPSHOT</version>
+    <version>3.1</version>
     <packaging>pom</packaging>
     
     <modules>
@@ -23,7 +23,7 @@
     <scm>
         <connection>scm:git:https://github.com/hotblac/spanners.git</connection>
         <developerConnection>scm:git:https://github.com/hotblac/spanners.git</developerConnection>
-      <tag>HEAD</tag>
+      <tag>spanners-3.1</tag>
   </scm>
 
     <distributionManagement>
