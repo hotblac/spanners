@@ -27,16 +27,10 @@
   </scm>
 
     <distributionManagement>
-        <repository>
-            <id>fakerepo</id>
-            <name>Local file system</name>
-            <url>file:///c:/svnFakeRepo/repo</url>
-        </repository>
-        <snapshotRepository>
-            <id>fakesnapshotrepo</id>
-            <name>Local file system</name>
-            <url>file:///c:/svnFakeRepo/snapshots</url>
-        </snapshotRepository>
+		<repository>
+		  <id>disasterarea-ftp</id>
+		  <url>ftp://user20247.vs.easily.co.uk/website/maven</url>
+		</repository>
     </distributionManagement>
     
     <dependencyManagement>
@@ -195,6 +189,15 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+		
+		<extensions>
+		<!-- Enabling the use of FTP -->
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+				<version>2.9</version>
+			</extension>
+		</extensions>
     </build>
 
     <profiles>
