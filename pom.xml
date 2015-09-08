@@ -190,6 +190,25 @@
             </plugins>
         </pluginManagement>
 		
+		<plugins>
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.4.1</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.scm</groupId>
+						<artifactId>maven-scm-api</artifactId>
+						<version>1.8.1</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.maven.scm</groupId>
+						<artifactId>maven-scm-provider-gitexe</artifactId>
+						<version>1.8.1</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+		
 		<extensions>
 		<!-- Enabling the use of FTP -->
 			<extension>
