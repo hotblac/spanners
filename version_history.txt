@@ -50,3 +50,8 @@
 
 3.1
 - Added Switch User page, accessible to ADMIN users only
+
+3.2
+- Change to top level project name - changed from spanners-pom to spanners
+- Updated settings to allow deploy releases to disasterarea.co.uk
+- No functional changes to application
