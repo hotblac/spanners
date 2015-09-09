@@ -11,13 +11,14 @@
     <modules>
         <module>spanners-dao</module>
         <module>spanners-mvc</module>
-  </modules>
+    </modules>
 
     <properties>
         <java-version>1.8</java-version>
         <spring.version>4.1.6.RELEASE</spring.version>
         <spring-security.version>4.0.1.RELEASE</spring-security.version>
         <tomcat.deploy.url>http://localhost:8080/manager/text</tomcat.deploy.url>
+        <buildDate>${maven.build.timestamp}</buildDate>
     </properties>
 
     <scm>
@@ -177,6 +178,12 @@
                     </configuration>
                 </plugin>
 
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.6</version>
+                </plugin>
+
                 <!-- Deploy wars to Tomcat 7 with mvn tomcat7:deploy or tomcat7:redeploy -->
                 <plugin>
                     <groupId>org.apache.tomcat.maven</groupId>
@@ -208,7 +215,7 @@
 				</dependencies>
 			</plugin>
 		</plugins>
-		
+
 		<extensions>
 		<!-- Enabling the use of FTP -->
 			<extension>

@@ -10,8 +10,6 @@ This demo contains:
 Building the demo
 The whole demo can be built using Maven 3:
 mvn clean install
-Note that the MySQL database is required at build time to support integration tests. See spanners-struts/src/test/resources/tomcat/context.xml for connection details.
-I run maven with increased memory options: MAVEN_OPTS=-Xms256m -Xmx1024m -XX:MaxPermSize=256m
 
 Installing the database
 The DAO layer requires a MySQL database. Run the 'create database.sql' to create the schema and an empty table.
