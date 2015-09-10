@@ -253,6 +253,21 @@
                 </plugins>
             </build>
         </profile>
+	<profile>
+            <id>dockerbuild</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.tomcat.maven</groupId>
+                        <artifactId>tomcat7-maven-plugin</artifactId>
+		                <configuration>
+		                    <server>docker-webserver</server>
+		                    <url>http://docker-webserver:8080/manager/text</url>
+		                </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
 </project>
