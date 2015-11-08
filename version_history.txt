@@ -55,3 +55,7 @@
 - Change to top level project name - changed from spanners-pom to spanners
 - Updated settings to allow deploy releases to disasterarea.co.uk
 - No functional changes to application
+
+3.3
+- Updated readme.txt build and run instructions to recommend running in Docker containers
+- New release to demo dynamic autobuild tags in Docker Hub

@@ -6,14 +6,24 @@ This application demonstrates various features and techniques described in Stuar
 This demo contains:
     - Spring MVC web application
     - DAO component
-    
-Building the demo
-The whole demo can be built using Maven 3:
-mvn clean install
-Note that the MySQL database is required at build time to support integration tests. See spanners-struts/src/test/resources/tomcat/context.xml for connection details.
-I run maven with increased memory options: MAVEN_OPTS=-Xms256m -Xmx1024m -XX:MaxPermSize=256m
+	
+Running the latest build in Docker Containers
+	The latest version of the application can be started in Docker containers (with Docker Compose) by following instructions in this post:
+	http://www.disasterarea.co.uk/blog/docker-part-4-composing-an-environment-stack/
+	1. Download the latest Docker Compose file https://raw.githubusercontent.com/hotblac/spanners-docker/master/docker-compose.yml
+	2. In the download directory, run sudo docker-compose up -d
+	3. The application will download and start and can be accessed at http://localhost:8080/spanners-mvc/ (login as jones / password)
 
-Installing the database
+	It is recommended that the application is run from these Docker containers. See below if you wish to manually set up a database and webserver.
+    	
+Building the demo
+	The whole demo can be built and redeployed to the Docker container using Maven 3:
+	mvn clean install tomcat7:redeploy
+
+
+THE FOLLOWING APPLIES ONLY IF YOU WANT TO DEPLOY TO A LOCAL WEBSERVER / DATABASE INSTEAD OF THE SUPPLIED DOCKER CONTAINERS
+
+Installing the database 
 The DAO layer requires a MySQL database. Run the 'create database.sql' to create the schema and an empty table.
 
 Configuring Tomcat
