@@ -14,6 +14,7 @@
         <intercept-url pattern="/" access="permitAll" />
         <intercept-url pattern="/resources/**" access="permitAll" />
         <intercept-url pattern="/signin" access="permitAll" />
+        <intercept-url pattern="/signup" access="permitAll" />
         <intercept-url pattern="/version.txt" access="permitAll" />
         <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_PREVIOUS_ADMINISTRATOR')" />
         <intercept-url pattern="/**" access="isAuthenticated()" />
@@ -27,15 +28,14 @@
     </http>
 
     <authentication-manager>
-        <authentication-provider>
-            <user-service id="userDetailsService">
-                <user name="viewOnly" password="password" authorities="ROLE_VIEWER" />
-                <user name="smith" password="password" authorities="ROLE_VIEWER, ROLE_EDITOR" />
-                <user name="jones" password="password" authorities="ROLE_VIEWER, ROLE_EDITOR" />
-                <user name="admin" password="password" authorities="ROLE_VIEWER, ROLE_EDITOR, ROLE_ADMIN"/>
-            </user-service>
-        </authentication-provider>
+        <authentication-provider user-service-ref="userDetailsManager"/>
     </authentication-manager>
+
+    <!-- UserDetailsManager acts as a UserDetailsService for the authentication provider
+         and also allows CRUD operations on users and groups. Backed by JDBC - the spanners database. -->
+    <beans:bean id="userDetailsManager" class="org.springframework.security.provisioning.JdbcUserDetailsManager">
+        <beans:property name="dataSource" ref="spannersDS"/>
+    </beans:bean>
 
     <!-- Enable security annotations on methods -->
     <global-method-security pre-post-annotations="enabled">
@@ -49,7 +49,7 @@
     <beans:bean id="spannerPermissionEvaluator" class="org.dontpanic.spanners.security.SpannerPermissionEvaluator"/>
 
     <beans:bean id="switchUserProcessingFilter" class="org.springframework.security.web.authentication.switchuser.SwitchUserFilter">
-        <beans:property name="userDetailsService" ref="userDetailsService"/>
+        <beans:property name="userDetailsService" ref="userDetailsManager"/>
         <beans:property name="switchUserUrl" value="/admin/impersonate"/>
         <beans:property name="targetUrl" value="/displaySpanners"/>
         <beans:property name="switchFailureUrl" value="/admin/switchUser"/>

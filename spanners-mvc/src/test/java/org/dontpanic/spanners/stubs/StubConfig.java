@@ -4,6 +4,8 @@ import org.dontpanic.spanners.dao.SpannersDAO;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.sql.DataSource;
+
 import static org.mockito.Mockito.mock;
 
 /**
@@ -17,5 +19,10 @@ public class StubConfig {
     @Bean
     public SpannersDAO configureSpannersDao() {
          return mock(SpannersDAO.class);
+    }
+
+    @Bean(name = "spannersDS")
+    public DataSource stubDataSource() {
+        return mock(DataSource.class);
     }
 }
