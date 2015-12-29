@@ -13,4 +13,21 @@ CREATE TABLE `spanner` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
 
+/*
+ * Spring Security users / authorities schema.
+ * Adapted from https://docs.spring.io/spring-security/site/docs/4.0.1.RELEASE/reference/html/appendix-schema.html
+ */
+create table users (
+    username varchar(50) not null primary key,
+    password varchar(50) not null,
+    enabled boolean not null
+) engine = InnoDb DEFAULT CHARSET=latin1$$
+
+create table authorities (
+    username varchar(50) not null,
+    authority varchar(50) not null,
+    foreign key (username) references users (username),
+    unique index authorities_idx_1 (username, authority)
+) engine = InnoDb DEFAULT CHARSET=latin1$$
+
 GRANT ALL PRIVILEGES ON spanners.* TO "spanners"@"localhost" IDENTIFIED BY "password";
