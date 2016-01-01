@@ -24,6 +24,7 @@ import java.util.List;
 @Controller
 public class SignupController {
 
+    public static final String CONTROLLER_URL = "/signup";
 	public static final String VIEW_SUCCESS = "redirect:/";
     protected static final String[] DEFAULT_ROLES = {"ROLE_VIEWER", "ROLE_EDITOR"};
 
@@ -33,12 +34,12 @@ public class SignupController {
     @Autowired
     private UserDetailsManager userDetailsManager;
 	
-	@RequestMapping(value = "signup")
+	@RequestMapping(value = CONTROLLER_URL)
 	public SignupForm displayPage() {
 		return new SignupForm();
 	}
 	
-	@RequestMapping(value = "signup", method = RequestMethod.POST)
+	@RequestMapping(value = CONTROLLER_URL, method = RequestMethod.POST)
 	public String signup(@Valid @ModelAttribute SignupForm signupForm, Errors errors) {
 		if (errors.hasErrors()) {
 			return null;

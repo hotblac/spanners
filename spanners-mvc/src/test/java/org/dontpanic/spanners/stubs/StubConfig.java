@@ -18,7 +18,7 @@ import static org.mockito.Mockito.mock;
 public class StubConfig {
 
     @Bean
-    public SpannersDAO configureSpannersDao() {
+    public SpannersDAO stubSpannersDao() {
          return mock(SpannersDAO.class);
     }
 
