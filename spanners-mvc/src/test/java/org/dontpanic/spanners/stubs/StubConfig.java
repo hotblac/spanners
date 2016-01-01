@@ -3,6 +3,8 @@ package org.dontpanic.spanners.stubs;
 import org.dontpanic.spanners.dao.SpannersDAO;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 
 import javax.sql.DataSource;
@@ -28,5 +30,12 @@ public class StubConfig {
     }
 
     @Bean
-    public UserDetailsManager stubUserDetailsManager() {return mock(UserDetailsManager.class);}
+    public UserDetailsManager stubUserDetailsManager() {
+        return mock(UserDetailsManager.class);
+    }
+
+    @Bean
+    public PasswordEncoder stubPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }

@@ -28,7 +28,9 @@
     </http>
 
     <authentication-manager>
-        <authentication-provider user-service-ref="userDetailsManager"/>
+        <authentication-provider user-service-ref="userDetailsManager">
+            <password-encoder ref="passwordEncoder"/>
+        </authentication-provider>
     </authentication-manager>
 
     <!-- UserDetailsManager acts as a UserDetailsService for the authentication provider
@@ -36,6 +38,8 @@
     <beans:bean id="userDetailsManager" class="org.springframework.security.provisioning.JdbcUserDetailsManager">
         <beans:property name="dataSource" ref="spannersDS"/>
     </beans:bean>
+
+    <beans:bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
     <!-- Enable security annotations on methods -->
     <global-method-security pre-post-annotations="enabled">
