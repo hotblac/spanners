@@ -1,2 +1,0 @@
-Create user admin page
-Add admin user option to sign up page

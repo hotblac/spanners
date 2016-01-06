@@ -12,7 +12,7 @@ Running the latest build in Docker Containers
 	http://www.disasterarea.co.uk/blog/docker-part-4-composing-an-environment-stack/
 	1. Download the latest Docker Compose file https://raw.githubusercontent.com/hotblac/spanners-docker/master/docker-compose.yml
 	2. In the download directory, run sudo docker-compose up -d
-	3. The application will download and start and can be accessed at http://localhost:8080/spanners-mvc/ (login as jones / password)
+	3. The application will download and start and can be accessed at http://localhost:8080/spanners-mvc/ (click Sign Up to create a user account, then sign in)
 
 	It is recommended that the application is run from these Docker containers. See below if you wish to manually set up a database and webserver.
     	
@@ -24,7 +24,7 @@ Building the demo
 THE FOLLOWING APPLIES ONLY IF YOU WANT TO DEPLOY TO A LOCAL WEBSERVER / DATABASE INSTEAD OF THE SUPPLIED DOCKER CONTAINERS
 
 Installing the database 
-The DAO layer requires a MySQL database. Run the 'create database.sql' to create the schema and an empty table.
+The DAO layer requires a MySQL database. Run the 'create database.sql' to create the schema and empty tables.
 
 Configuring Tomcat
 The application has been tested against Tomcat 7. The context.xml must be configured to make the database available to the application using JNDI:

@@ -59,3 +59,6 @@
 3.3
 - Updated readme.txt build and run instructions to recommend running in Docker containers
 - New release to demo dynamic autobuild tags in Docker Hub
+
+3.4
+- Database backed user store with hashed passwords
