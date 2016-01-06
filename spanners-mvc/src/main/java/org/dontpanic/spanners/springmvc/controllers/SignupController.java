@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -26,7 +26,6 @@ public class SignupController {
 
     public static final String CONTROLLER_URL = "/signup";
 	public static final String VIEW_SUCCESS = "redirect:/";
-    protected static final String[] DEFAULT_ROLES = {"ROLE_VIEWER", "ROLE_EDITOR"};
 
     /**
      * UserDetailsManager provided by Spring Security allows CRUD operations on user accounts
@@ -51,21 +50,18 @@ public class SignupController {
         // Password should be stored hashed, not in plaintext
         String hashedPassword = passwordEncoder.encode(signupForm.getPassword());
 
+        // Roles for new user
+        Collection<? extends GrantedAuthority> roles = Arrays.asList(
+                new SimpleGrantedAuthority("ROLE_VIEWER"),
+                new SimpleGrantedAuthority("ROLE_EDITOR")
+        );
+
         // Create the account
-		UserDetails userDetails = new User(signupForm.getName(), hashedPassword, grantedAuthorities(DEFAULT_ROLES));
+		UserDetails userDetails = new User(signupForm.getName(), hashedPassword, roles);
         userDetailsManager.createUser(userDetails);
 
 		return VIEW_SUCCESS;
 	}
 
-
-    private static Collection<? extends GrantedAuthority> grantedAuthorities(String[] roleNames) {
-        Collection<GrantedAuthority> gas = new ArrayList<>();
-        for (String roleName : roleNames) {
-            GrantedAuthority ga = new SimpleGrantedAuthority(roleName);
-            gas.add(ga);
-        }
-        return gas;
-    }
 
 }
