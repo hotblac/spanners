@@ -8,6 +8,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -64,7 +65,7 @@ public class SignupControllerTest {
         controller.signup(form, noErrors);
 
         // Verify that the account was created for user
-        verify(userDetailsManager).createUser(argThat(hasProperty("username", equalTo(NAME))));
+        verify(userDetailsManager).createUser(argThat(hasUserDetailsProperty("username", equalTo(NAME))));
     }
 
 
@@ -80,7 +81,7 @@ public class SignupControllerTest {
         controller.signup(form, noErrors);
 
         // Verify that the hashed password was passed to the userDetailsManager
-        verify(userDetailsManager).createUser(argThat(hasProperty("password", equalTo(HASHED_PASSWORD))));
+        verify(userDetailsManager).createUser(argThat(hasUserDetailsProperty("password", equalTo(HASHED_PASSWORD))));
     }
 
 
@@ -112,5 +113,9 @@ public class SignupControllerTest {
         form.setName(name);
         form.setPassword(password);
         return form;
+    }
+
+    private static org.hamcrest.Matcher<UserDetails> hasUserDetailsProperty(String propertyName, org.hamcrest.Matcher<?> valueMatcher) {
+        return org.hamcrest.beans.HasPropertyWithValue.hasProperty(propertyName, valueMatcher);
     }
 }
