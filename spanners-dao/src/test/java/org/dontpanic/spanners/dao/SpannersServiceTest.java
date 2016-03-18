@@ -23,17 +23,17 @@ import static org.junit.Assert.*;
 
 
 /**
- * Test functionality of SpannersDAO.
+ * Test functionality of SpannersService.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
                 "classpath:spring-hibernate.xml", // Containing Hibernate session bean, transaction config and DAOs
                 "classpath:spring-test-dataSources.xml" // Containing HyperSQL datasource and test Hibernate properties
         })
-public class SpannersDAOTest {
+public class SpannersServiceTest {
 
-    @Qualifier("spannersDAO")
-    @Autowired protected SpannersDAO spannersDAO; // Injected by springy magic
+    @Qualifier("spannersService")
+    @Autowired protected SpannersService spannersService; // Injected by springy magic
     @Autowired protected DataSource ds; // Injected by springy magic
     protected IDatabaseTester dbTester;
 
@@ -56,13 +56,13 @@ public class SpannersDAOTest {
 
     @Test
     public void testGet() {
-        Spanner hazell = spannersDAO.get(1);
+        Spanner hazell = spannersService.get(1);
         checkSpanner(hazell, 1, "Hazell", 12, "smith");
     }
 
     @Test
     public void testGetAll() {
-        List<Spanner> spanners = spannersDAO.getAll();
+        List<Spanner> spanners = spannersService.getAll();
         assertNotNull(spanners);
         assertEquals(2, spanners.size());
         checkSpanner(spanners.get(0), 1, "Hazell", 12, "smith");
@@ -75,14 +75,14 @@ public class SpannersDAOTest {
 
         // Create the new spanner
         Spanner savedSpanner = aTestSpanner().build();
-        int id = spannersDAO.create(savedSpanner);
+        int id = spannersService.create(savedSpanner);
 
         // Check it's there
-        Spanner loadedSpanner = spannersDAO.get(id);
+        Spanner loadedSpanner = spannersService.get(id);
         assertSpannerEquals(savedSpanner, loadedSpanner);
 
         // Check original data is still intact
-        Spanner hazell = spannersDAO.get(1);
+        Spanner hazell = spannersService.get(1);
         checkSpanner(hazell, 1, "Hazell", 12, "smith");
     }
 
@@ -93,17 +93,17 @@ public class SpannersDAOTest {
         // Create a spanner with the same name as an existing one
         Spanner evilHazell = aTestSpanner().named("Hazell").build();
         try {
-            spannersDAO.create(evilHazell); // throws DataIntegrityViolationException - hbm specifies that name must be unique
+            spannersService.create(evilHazell); // throws DataIntegrityViolationException - hbm specifies that name must be unique
         } finally {
              // Check real Hazell has not been violated!
-            Spanner realHazell = spannersDAO.get(1); // Hazell
+            Spanner realHazell = spannersService.get(1); // Hazell
             checkSpanner(realHazell, 1, "Hazell", 12, "smith");
         }
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void testNullSpanner() {
-    	spannersDAO.create(null);
+    	spannersService.create(null);
     }
 
     @Test (expected = IllegalArgumentException.class)
@@ -111,7 +111,7 @@ public class SpannersDAOTest {
 
     	// Create a spanner with zero size
     	Spanner zeroSizeSpanner = aTestSpanner().withSize(0).build();
-		spannersDAO.create(zeroSizeSpanner);
+		spannersService.create(zeroSizeSpanner);
     }
 
 
@@ -127,19 +127,19 @@ public class SpannersDAOTest {
         spanner.setOwner("Mr Smith"); // Again, we're not testing this, but every spanner should have an owner
         spanner.setSize(0); // This is the important bit! The important attribute of this spanner is that its size is zero!
 
-		spannersDAO.create(spanner);
+		spannersService.create(spanner);
     }
 
 
     @Test
     public void testUpdate() {
-        Spanner hazell = spannersDAO.get(1);
+        Spanner hazell = spannersService.get(1);
         hazell.setName("Bertha");
         hazell.setSize(10);
-        spannersDAO.update(hazell);
+        spannersService.update(hazell);
 
         // Check it's updated
-        Spanner updated = spannersDAO.get(1);
+        Spanner updated = spannersService.get(1);
         assertEquals(hazell.getId(), updated.getId());
         assertEquals(hazell.getName(), updated.getName());
         assertEquals(hazell.getSize(), updated.getSize());
@@ -149,14 +149,14 @@ public class SpannersDAOTest {
     @Test
     public void testDelete() {
 
-        List<Spanner> spanners = spannersDAO.getAll();
+        List<Spanner> spanners = spannersService.getAll();
         int numberOfSpanners = spanners.size();
         assertTrue(numberOfSpanners > 0);
         for (Spanner spanner : spanners) {
-            spannersDAO.delete(spanner);
+            spannersService.delete(spanner);
             numberOfSpanners--;
 
-            spanners = spannersDAO.getAll();
+            spanners = spannersService.getAll();
             assertEquals(numberOfSpanners, spanners.size());
             assertNotPresent(spanner, spanners);
         }

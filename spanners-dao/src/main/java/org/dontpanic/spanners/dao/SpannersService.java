@@ -9,7 +9,7 @@ import java.util.List;
  */
 // Secure all methods with most restrictive rule and secure methods with specific rules.
 @PreAuthorize("hasRole('ROLE_EXCLUDE_ALL')")
-public interface SpannersDAO {
+public interface SpannersService {
 
     @PreAuthorize("hasRole('ROLE_VIEWER')")
     public Spanner get(int id);

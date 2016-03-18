@@ -1,6 +1,6 @@
 package org.dontpanic.spanners.springmvc.config;
 
-import org.dontpanic.spanners.dao.SpannersDAO;
+import org.dontpanic.spanners.dao.SpannersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
@@ -24,7 +24,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 	private static final String RESOURCES_HANDLER = "/resources/";
 	private static final String RESOURCES_LOCATION = RESOURCES_HANDLER + "**";
 
-    @Autowired SpannersDAO spannersDAO;
+    @Autowired
+	SpannersService spannersService;
 
 	@Override
 	public RequestMappingHandlerMapping requestMappingHandlerMapping() {

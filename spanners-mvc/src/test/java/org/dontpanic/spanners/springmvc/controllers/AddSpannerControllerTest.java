@@ -1,7 +1,7 @@
 package org.dontpanic.spanners.springmvc.controllers;
 
 import org.dontpanic.spanners.dao.Spanner;
-import org.dontpanic.spanners.dao.SpannersDAO;
+import org.dontpanic.spanners.dao.SpannersService;
 import org.dontpanic.spanners.springmvc.forms.SpannerForm;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,7 +30,7 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class AddSpannerControllerTest {
 
-    @Mock private SpannersDAO spannersDAO;
+    @Mock private SpannersService spannersService;
     @InjectMocks private AddSpannerController controller = new AddSpannerController();
 
 
@@ -64,7 +64,7 @@ public class AddSpannerControllerTest {
 
         // Verify that spanner was created
         ArgumentCaptor<Spanner> spannerArgumentCaptor = ArgumentCaptor.forClass(Spanner.class);
-        verify(spannersDAO).create(spannerArgumentCaptor.capture());
+        verify(spannersService).create(spannerArgumentCaptor.capture());
 
         // Verify that spanner has has name and size set from the form submission
         Spanner createdSpanner = spannerArgumentCaptor.getValue();
@@ -100,7 +100,7 @@ public class AddSpannerControllerTest {
         assertNotNull("no response", response);
 
         // Assert that spanner was NOT updated
-        verify(spannersDAO, never()).update(any(Spanner.class));
+        verify(spannersService, never()).update(any(Spanner.class));
 
         // Assert that we go to validation fail view
         assertEquals("view", VIEW_VALIDATION_FAIL, response.getViewName());

@@ -1,6 +1,6 @@
 package org.dontpanic.spanners.stubs;
 
-import org.dontpanic.spanners.dao.SpannersDAO;
+import org.dontpanic.spanners.dao.SpannersService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,8 +20,8 @@ import static org.mockito.Mockito.mock;
 public class StubConfig {
 
     @Bean
-    public SpannersDAO stubSpannersDao() {
-         return mock(SpannersDAO.class);
+    public SpannersService stubSpannersDao() {
+         return mock(SpannersService.class);
     }
 
     @Bean(name = "spannersDS")

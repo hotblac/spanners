@@ -4,7 +4,7 @@ import static org.dontpanic.spanners.springmvc.controllers.DetailSpannerControll
 import static org.dontpanic.spanners.stubs.SpannersStubs.*;
 
 import org.dontpanic.spanners.dao.Spanner;
-import org.dontpanic.spanners.dao.SpannersDAO;
+import org.dontpanic.spanners.dao.SpannersService;
 import org.dontpanic.spanners.springmvc.exception.SpannerNotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,14 +24,14 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class DetailSpannerControllerTest {
 
-    @Mock private SpannersDAO spannersDAO;
+    @Mock private SpannersService spannersService;
     @InjectMocks private DetailSpannerController controller = new DetailSpannerController();
 
     @Test
     public void testDisplayPage() throws Exception {
 
         // Stub behaviours - dao returns spanner detail
-        when(spannersDAO.get(SPANNER_ID)).thenReturn(SPANNER);
+        when(spannersService.get(SPANNER_ID)).thenReturn(SPANNER);
 
         // Request the page for the given spanner id
         ModelAndView response = controller.displayDetail(SPANNER_ID);
@@ -50,7 +50,7 @@ public class DetailSpannerControllerTest {
     public void testSpannerNotFound() throws Exception {
 
         // Stub behaviours = spanner not found
-        when(spannersDAO.get(SPANNER_ID)).thenReturn(null);
+        when(spannersService.get(SPANNER_ID)).thenReturn(null);
 
         // Request the page for the given spanner id - this should generate exception
         try {

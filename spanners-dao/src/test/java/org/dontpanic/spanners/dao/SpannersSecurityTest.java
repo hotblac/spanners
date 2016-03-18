@@ -22,8 +22,8 @@ import static com.googlecode.catchexception.CatchException.verifyException;
 
 
 /**
- * Test access control of SpannersDAO.
- * This tests that only authorized users may access SpannersDAO methods.
+ * Test access control of SpannersService.
+ * This tests that only authorized users may access SpannersService methods.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -37,8 +37,8 @@ public class SpannersSecurityTest {
     private static final String ROLE_VIEWER = "VIEWER";
     private static final String ROLE_EDITOR = "EDITOR";
 
-    @Qualifier("spannersDAO")
-    @Autowired protected SpannersDAO spannersDAO; // Injected by springy magic
+    @Qualifier("spannersService")
+    @Autowired protected SpannersService spannersService; // Injected by springy magic
     @Autowired protected DataSource ds; // Injected by springy magic
     protected IDatabaseTester dbTester;
 
@@ -62,14 +62,14 @@ public class SpannersSecurityTest {
     public void testViewerAccess() {
 
         // Viewer should have access to get* methods - just call the method to check no exception is thrown
-        spannersDAO.get(1);
-        spannersDAO.getAll();
+        spannersService.get(1);
+        spannersService.getAll();
 
         // Viewer should not have access to create / update / delete
         Spanner spanner = newSpanner();
-        verifyException(spannersDAO, AccessDeniedException.class).create(spanner);
-        verifyException(spannersDAO, AccessDeniedException.class).update(spanner);
-        verifyException(spannersDAO, AccessDeniedException.class).delete(spanner);
+        verifyException(spannersService, AccessDeniedException.class).create(spanner);
+        verifyException(spannersService, AccessDeniedException.class).update(spanner);
+        verifyException(spannersService, AccessDeniedException.class).delete(spanner);
     }
 
     @Test
@@ -78,13 +78,13 @@ public class SpannersSecurityTest {
 
         // Editor should have access to create / update / delete - just call the method to check no exception is thrown
         Spanner spanner = newSpanner();
-        spannersDAO.create(spanner);
-        spannersDAO.update(spanner);
-        spannersDAO.delete(spanner);
+        spannersService.create(spanner);
+        spannersService.update(spanner);
+        spannersService.delete(spanner);
 
         // Editor should not have access to get* methods (seems daft but them's the rules...)
-        verifyException(spannersDAO, AccessDeniedException.class).get(1);
-        verifyException(spannersDAO, AccessDeniedException.class).getAll();
+        verifyException(spannersService, AccessDeniedException.class).get(1);
+        verifyException(spannersService, AccessDeniedException.class).getAll();
     }
 
     @Test
@@ -94,34 +94,34 @@ public class SpannersSecurityTest {
         // Smith can create a spanner only if he's the owner
         Spanner newSpanner = newSpanner();
         newSpanner.setOwner("smith");
-        spannersDAO.create(newSpanner);
+        spannersService.create(newSpanner);
 
         // Smith should be able to update / delete spanner 1
-        Spanner spanner1 = spannersDAO.get(1);
-        spannersDAO.update(spanner1);
-        spannersDAO.delete(spanner1);
+        Spanner spanner1 = spannersService.get(1);
+        spannersService.update(spanner1);
+        spannersService.delete(spanner1);
 
         // Smith should not be able to create a spanner for another user
         newSpanner = newSpanner();
         newSpanner.setOwner("jones");
-        verifyException(spannersDAO, AccessDeniedException.class).create(newSpanner);
+        verifyException(spannersService, AccessDeniedException.class).create(newSpanner);
 
         // Smith should not be able to update / delete spanner 2
-        Spanner spanner2 = spannersDAO.get(2);
-        verifyException(spannersDAO, AccessDeniedException.class).update(spanner2);
-        verifyException(spannersDAO, AccessDeniedException.class).delete(spanner2);
+        Spanner spanner2 = spannersService.get(2);
+        verifyException(spannersService, AccessDeniedException.class).update(spanner2);
+        verifyException(spannersService, AccessDeniedException.class).delete(spanner2);
     }
 
     @Test
     public void testNotLoggedIn() {
 
-        // If we're not logged in, we should not be able to access any method of SpannersDAO
+        // If we're not logged in, we should not be able to access any method of SpannersService
         Spanner spanner = newSpanner();
-        verifyException(spannersDAO, AuthenticationCredentialsNotFoundException.class).get(1);
-        verifyException(spannersDAO, AuthenticationCredentialsNotFoundException.class).getAll();
-        verifyException(spannersDAO, AuthenticationCredentialsNotFoundException.class).create(spanner);
-        verifyException(spannersDAO, AuthenticationCredentialsNotFoundException.class).update(spanner);
-        verifyException(spannersDAO, AuthenticationCredentialsNotFoundException.class).delete(spanner);
+        verifyException(spannersService, AuthenticationCredentialsNotFoundException.class).get(1);
+        verifyException(spannersService, AuthenticationCredentialsNotFoundException.class).getAll();
+        verifyException(spannersService, AuthenticationCredentialsNotFoundException.class).create(spanner);
+        verifyException(spannersService, AuthenticationCredentialsNotFoundException.class).update(spanner);
+        verifyException(spannersService, AuthenticationCredentialsNotFoundException.class).delete(spanner);
     }
 
 
