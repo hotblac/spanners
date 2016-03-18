@@ -181,7 +181,7 @@
                 <targetPath>WEB-INF</targetPath>
             </testResource>
         </testResources>
-        <plugins> 
+        <plugins>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
