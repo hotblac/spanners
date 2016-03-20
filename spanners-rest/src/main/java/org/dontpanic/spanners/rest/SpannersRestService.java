@@ -13,16 +13,19 @@ import java.util.List;
  * Created by stevie on 18/03/16.
  */
 @RestController
-@RequestMapping("/spanners")
+@RequestMapping(SpannersRestService.SERVICE_ROOT)
 public class SpannersRestService {
 
-    @RequestMapping(params = "id", method = GET)
-    public String getSpanner(@RequestParam int id) {
-        return "TODO";
-    }
+    public static final String SERVICE_ROOT = "/spanners";
+    public static final String PARAM_ID = "id";
 
     @RequestMapping(method = GET)
     public List<String> getAll() {
         return Arrays.asList("TODO");
+    }
+
+    @RequestMapping(params = PARAM_ID, method = GET)
+    public String getSpanner(@RequestParam int id) {
+        return "TODO";
     }
 }
