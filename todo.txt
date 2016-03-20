@@ -1,5 +1,4 @@
 Create spanners-rest
 	Use Spring boot
-	Package as war
 	Stub only
 Wire spanners-rest to spanners-dao
