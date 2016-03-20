@@ -46,6 +46,6 @@ public class SpannersRestServiceTest {
     public void testGetById() throws Exception {
         mockMvc.perform(get(SERVICE_ROOT).param(PARAM_ID, "1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$g", is("TODO")));
+                .andExpect(jsonPath("$", is("TODO")));
     }
 }
