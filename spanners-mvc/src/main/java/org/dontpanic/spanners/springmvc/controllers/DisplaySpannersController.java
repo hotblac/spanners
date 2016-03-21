@@ -1,7 +1,7 @@
 package org.dontpanic.spanners.springmvc.controllers;
 
 import org.dontpanic.spanners.dao.Spanner;
-import org.dontpanic.spanners.dao.SpannersService;
+import org.dontpanic.spanners.dao.SpannersDao;
 import org.dontpanic.spanners.springmvc.exception.SpannerNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ public class DisplaySpannersController {
     public static final String VIEW_DISPLAY_SPANNERS = "displaySpanners";
     public static final String MODEL_ATTRIBUTE_SPANNERS = "spanners";
 
-    @Autowired private SpannersService spannersService;
+    @Autowired private SpannersDao spannersDao;
 
     /**
      * Display all spanners
@@ -33,7 +33,7 @@ public class DisplaySpannersController {
     public ModelAndView displaySpanners() {
 
         // Load the spanners from database
-        List<Spanner> spanners = spannersService.getAll();
+        List<Spanner> spanners = spannersDao.getAll();
 
         return new ModelAndView(VIEW_DISPLAY_SPANNERS, MODEL_ATTRIBUTE_SPANNERS, spanners);
     }
@@ -46,12 +46,12 @@ public class DisplaySpannersController {
     public ModelAndView deleteSpanner(@RequestParam int id) throws SpannerNotFoundException {
 
         // Fetch the spanner to be deleted
-        Spanner spanner = spannersService.get(id);
+        Spanner spanner = spannersDao.get(id);
         if (spanner == null) {
             // No spanner exists for given id. We can't display the page.
             throw new SpannerNotFoundException(id);
         }
-        spannersService.delete(spanner);
+        spannersDao.delete(spanner);
 
         return displaySpanners();
     }

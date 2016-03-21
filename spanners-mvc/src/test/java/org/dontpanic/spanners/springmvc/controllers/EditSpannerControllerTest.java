@@ -5,7 +5,7 @@ import static org.dontpanic.spanners.stubs.SpannersStubs.*;
 import static org.dontpanic.spanners.springmvc.controllers.EditSpannerController.*;
 
 import org.dontpanic.spanners.dao.Spanner;
-import org.dontpanic.spanners.dao.SpannersService;
+import org.dontpanic.spanners.dao.SpannersDao;
 import org.dontpanic.spanners.springmvc.exception.SpannerNotFoundException;
 import org.dontpanic.spanners.springmvc.forms.SpannerForm;
 import org.junit.Test;
@@ -35,14 +35,14 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class EditSpannerControllerTest {
 
-    @Mock private SpannersService spannersService;
+    @Mock private SpannersDao spannersDao;
     @InjectMocks private EditSpannerController controller = new EditSpannerController();
 
     @Test
     public void testDisplayPage() throws Exception {
 
         // Stub behaviours - dao returns spanner detail
-        when(spannersService.get(SPANNER_ID)).thenReturn(SPANNER);
+        when(spannersDao.get(SPANNER_ID)).thenReturn(SPANNER);
 
         ModelAndView response = controller.displayPage(SPANNER_ID);
         assertNotNull("no response", response);
@@ -60,7 +60,7 @@ public class EditSpannerControllerTest {
     public void testSpannerNotFound() {
 
         // Stub behaviours = spanner not found
-        when(spannersService.get(SPANNER_ID)).thenReturn(null);
+        when(spannersDao.get(SPANNER_ID)).thenReturn(null);
 
         // Request the page for the given spanner id - this should generate exception
         try {
@@ -76,7 +76,7 @@ public class EditSpannerControllerTest {
     public void testUpdateSpanner() {
 
         // Stub behaviours - dao returns spanner detail
-        when(spannersService.get(SPANNER_ID)).thenReturn(SPANNER);
+        when(spannersDao.get(SPANNER_ID)).thenReturn(SPANNER);
 
         // Submit the form
         SpannerForm formData = stubSpannerForm(99);
@@ -89,7 +89,7 @@ public class EditSpannerControllerTest {
 
         // Verify that spanner was updated
         ArgumentCaptor<Spanner> spannerArgumentCaptor = ArgumentCaptor.forClass(Spanner.class);
-        verify(spannersService).update(spannerArgumentCaptor.capture());
+        verify(spannersDao).update(spannerArgumentCaptor.capture());
         Spanner updatedSpanner = spannerArgumentCaptor.getValue();
         assertSpannerEquals(formData, updatedSpanner);
     }
@@ -107,7 +107,7 @@ public class EditSpannerControllerTest {
         assertNotNull("no response", response);
 
         // Assert that spanner was NOT updated
-        verify(spannersService, never()).update(any(Spanner.class));
+        verify(spannersDao, never()).update(any(Spanner.class));
 
         // Assert that we go to validation fail view
         assertEquals("view", VIEW_VALIDATION_ERRORS, response.getViewName());

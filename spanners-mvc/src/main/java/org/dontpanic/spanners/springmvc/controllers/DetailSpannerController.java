@@ -1,7 +1,7 @@
 package org.dontpanic.spanners.springmvc.controllers;
 
 import org.dontpanic.spanners.dao.Spanner;
-import org.dontpanic.spanners.dao.SpannersService;
+import org.dontpanic.spanners.dao.SpannersDao;
 import org.dontpanic.spanners.springmvc.exception.SpannerNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,13 +21,13 @@ public class DetailSpannerController {
     public static final String VIEW_DETAIL_SPANNER = "detailSpanner";
     public static final String MODEL_SPANNER = "spanner";
 
-    @Autowired private SpannersService spannersService;
+    @Autowired private SpannersDao spannersDao;
 
     @RequestMapping(value = "/detailSpanner", method = RequestMethod.GET)
     public ModelAndView displayDetail(@RequestParam int id) throws SpannerNotFoundException {
 
         // Fetch the spanner
-        Spanner spanner = spannersService.get(id);
+        Spanner spanner = spannersDao.get(id);
         if (spanner == null) {
             // No spanner exists for given id. We can't display the page.
             throw new SpannerNotFoundException(id);

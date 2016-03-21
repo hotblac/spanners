@@ -1,7 +1,7 @@
 package org.dontpanic.spanners.springmvc.controllers;
 
 import org.dontpanic.spanners.dao.Spanner;
-import org.dontpanic.spanners.dao.SpannersService;
+import org.dontpanic.spanners.dao.SpannersDao;
 import org.dontpanic.spanners.springmvc.exception.SpannerNotFoundException;
 import org.dontpanic.spanners.springmvc.forms.SpannerForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class EditSpannerController {
 
     public static final String MODEL_SPANNER = "spanner";
 
-    @Autowired private SpannersService spannersService;
+    @Autowired private SpannersDao spannersDao;
 
 
     /**
@@ -39,7 +39,7 @@ public class EditSpannerController {
     public ModelAndView displayPage(@RequestParam int id) throws SpannerNotFoundException {
 
         // Fetch the spanner
-        Spanner spanner = spannersService.get(id);
+        Spanner spanner = spannersDao.get(id);
         if (spanner == null) {
             // No spanner exists for given id. We can't display the page.
             throw new SpannerNotFoundException(id);
@@ -61,13 +61,13 @@ public class EditSpannerController {
         }
 
         // Retrieve the existing spanner
-        Spanner spanner = spannersService.get(formData.getId());
+        Spanner spanner = spannersDao.get(formData.getId());
 
         // Update with given form data
         spanner.setName(formData.getName());
         spanner.setSize(formData.getSize());
 
-        spannersService.update(spanner);
+        spannersDao.update(spanner);
         return new ModelAndView(VIEW_UPDATE_SUCCESS);
     }
 

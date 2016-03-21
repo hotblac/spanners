@@ -1,7 +1,7 @@
 package org.dontpanic.spanners.springmvc.controllers;
 
 import org.dontpanic.spanners.dao.Spanner;
-import org.dontpanic.spanners.dao.SpannersService;
+import org.dontpanic.spanners.dao.SpannersDao;
 import org.dontpanic.spanners.springmvc.forms.SpannerForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +29,7 @@ public class AddSpannerController {
 
     public static final String MODEL_SPANNER = "spanner";
 
-    @Autowired private SpannersService spannersService;
+    @Autowired private SpannersDao spannersDao;
 
     /**
      * Display that add spanner page
@@ -62,7 +62,7 @@ public class AddSpannerController {
         spanner.setSize(formData.getSize());
 
         // Save new spanner to database
-        spannersService.create(spanner);
+        spannersDao.create(spanner);
 
         return new ModelAndView(VIEW_SUCCESS);
     }

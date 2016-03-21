@@ -10,11 +10,8 @@ import java.util.List;
 
 import static org.hibernate.criterion.Restrictions.eq;
 
-/**
- * A Rest service for CRUD operations on Spanners using Hibernate
- */
 @Transactional
-public class SpannersHibernateRestService implements SpannersService {
+public class SpannersDaoHibernate implements SpannersDao {
 
     private SessionFactory sessionFactory;
 

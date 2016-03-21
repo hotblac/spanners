@@ -8,7 +8,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.dontpanic.spanners.dao.Spanner;
-import org.dontpanic.spanners.dao.SpannersService;
+import org.dontpanic.spanners.dao.SpannersDao;
 import org.dontpanic.spanners.springmvc.exception.SpannerNotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +27,7 @@ import java.util.List;
 @RunWith(MockitoJUnitRunner.class)
 public class DisplaySpannersControllerTest {
 
-    @Mock private SpannersService spannersService;
+    @Mock private SpannersDao spannersDao;
     @InjectMocks private DisplaySpannersController controller = new DisplaySpannersController();
 
     /**
@@ -37,7 +37,7 @@ public class DisplaySpannersControllerTest {
     public void testDisplaySpanners() {
 
         // Stub behaviours - list of spanners
-        when(spannersService.getAll()).thenReturn(SPANNERS);
+        when(spannersDao.getAll()).thenReturn(SPANNERS);
 
         // Call the controller
         ModelAndView response = controller.displaySpanners();
@@ -62,14 +62,14 @@ public class DisplaySpannersControllerTest {
     public void testDeleteSpanner() throws Exception {
 
         // Stub behaviours - spanner exists to be deleted
-        when(spannersService.get(SPANNER_ID)).thenReturn(SPANNER);
+        when(spannersDao.get(SPANNER_ID)).thenReturn(SPANNER);
 
         // Request a spanner is deleted
         ModelAndView response = controller.deleteSpanner(SPANNER_ID);
         assertNotNull(response);
 
         // Verify that spanner was deleted
-        verify(spannersService).delete(SPANNER);
+        verify(spannersDao).delete(SPANNER);
 
         // Assert spanners list page is shown after deletion
         assertEquals("view name", VIEW_DISPLAY_SPANNERS, response.getViewName());
@@ -83,7 +83,7 @@ public class DisplaySpannersControllerTest {
     public void testDeleteSpannerNotFound() throws Exception  {
 
         // Stub behaviours - spanner to be deleted does not exist
-        when(spannersService.get(SPANNER_ID)).thenReturn(null);
+        when(spannersDao.get(SPANNER_ID)).thenReturn(null);
 
         // Request a spanner is deleted
         try {
