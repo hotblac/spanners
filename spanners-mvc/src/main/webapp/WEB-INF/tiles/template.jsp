@@ -11,6 +11,7 @@
 	<title>Spanners MVC</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet" media="screen" />
+	<link href="<c:url value="/resources/css/bootstrap-msg.min.css" />" rel="stylesheet" media="screen" />
 	<link href="<c:url value="/resources/css/core.css" />" rel="stylesheet" media="screen" />
 	
 	<tilesx:useAttribute id="styles" name="styles" classname="java.util.List" ignore="true" />
@@ -52,5 +53,6 @@
 	
 	<script src="<c:url value="/resources/js/jquery-1.10.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+    <script src="<c:url value="/resources/js/bootstrap-msg.min.js" />"></script>
 </body>
 </html>

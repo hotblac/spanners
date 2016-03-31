@@ -6,11 +6,6 @@
     <security:authentication property="principal.username" />
 </c:set>
 
-<div id="updateAlert" class="alert alert-info alert-dismissible fade" role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  A spanner has been updated. Please refresh the page to see changes.
-</div>
-
 <p>Hello <c:out value="${username}" />! Welcome to the Spanners Spring MVC demo application!</p>
 
 <table class="table table-striped table-bordered table-condensed">
@@ -58,10 +53,6 @@
     var myWebSocket = new WebSocket("ws://localhost:9090");
 
     myWebSocket.onmessage = function(evt) {
-        $('#updateAlert').addClass('in');
+        Msg.info("A spanner has been updated. Please refresh the page to see changes.");
     };
-
-    $('.close').click(function () {
-      $(this).parent().removeClass('in');
-    });
 </script>

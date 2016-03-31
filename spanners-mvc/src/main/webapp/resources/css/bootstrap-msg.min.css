@@ -1,0 +1,8 @@
+/*!*
+ * Bootstrap Message (bootstrap.msg) plugin v0.3
+ * Copyright (c) 2014 Duc Doan Hoang Minh
+ *
+ * @license https://github.com/bobkhin/bootstrap.msg/blob/master/LICENSE
+ *
+ * Date: Wed, May 14th, 2014 (GTM+7)
+ */#msg{position:fixed;opacity:0;filter:alpha(opacity=0);width:400px;top:-300px;left:50%;margin-left:-200px;-webkit-transition:opacity .3s linear,top .3s ease-out,bottom .3s ease-out,margin-top .3s ease-out;-moz-transition:opacity .3s linear,top .3s ease-out,bottom .3s ease-out,margin-top .3s ease-out;-o-transition:opacity .3s linear,top .3s ease-out,bottom .3s ease-out,margin-top .3s ease-out;transition:opacity .3s linear,top .3s ease-out,bottom .3s ease-out,margin-top .3s ease-out;z-index:100000000000}#msg i{font-size:20px;vertical-align:middle}#msg span{font-size:15px}#msg.showed{opacity:1;filter:alpha(opacity=100);top:50px}@media (min-width:1200px){#msg{width:600px;margin-left:-300px}}@media (max-width:479px){#msg{width:300px;margin-left:-150px}}
