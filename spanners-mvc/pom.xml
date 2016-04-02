@@ -47,6 +47,11 @@
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.dontpanic</groupId>
+            <artifactId>spanners-events</artifactId>
+            <type>jar</type>
+        </dependency>
  
         <!-- Spring -->
         <dependency>

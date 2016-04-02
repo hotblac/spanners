@@ -6,6 +6,7 @@ import static org.dontpanic.spanners.springmvc.controllers.EditSpannerController
 
 import org.dontpanic.spanners.dao.Spanner;
 import org.dontpanic.spanners.dao.SpannersDAO;
+import org.dontpanic.spanners.events.SpannerEvent;
 import org.dontpanic.spanners.springmvc.exception.SpannerNotFoundException;
 import org.dontpanic.spanners.springmvc.forms.SpannerForm;
 import org.junit.Test;
@@ -14,10 +15,14 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -36,6 +41,7 @@ import static org.mockito.Mockito.when;
 public class EditSpannerControllerTest {
 
     @Mock private SpannersDAO spannersDAO;
+    @Mock private ApplicationEventPublisher eventPublisher;
     @InjectMocks private EditSpannerController controller = new EditSpannerController();
 
     @Test
@@ -73,19 +79,27 @@ public class EditSpannerControllerTest {
 
 
     @Test
-    public void testUpdateSpanner() {
+    public void testUpdateSpannerResponse() {
 
         // Stub behaviours - dao returns spanner detail
         when(spannersDAO.get(SPANNER_ID)).thenReturn(SPANNER);
 
-        // Submit the form
-        SpannerForm formData = stubSpannerForm(99);
-        BindingResult noErrors = new BeanPropertyBindingResult(formData, MODEL_SPANNER);
-        ModelAndView response = controller.updateSpanner(formData, noErrors);
+        ModelAndView response = formSubmission().submit();
         assertNotNull("no response", response);
 
         // Assert that we forward to correct view
         assertEquals("view", VIEW_UPDATE_SUCCESS, response.getViewName());
+    }
+
+
+    @Test
+    public void testSpannerUpdated() {
+
+        // Stub behaviours - dao returns spanner detail
+        when(spannersDAO.get(SPANNER_ID)).thenReturn(SPANNER);
+
+        SpannerForm formData = stubSpannerForm(99);
+        formSubmission().withFormData(formData).submit();
 
         // Verify that spanner was updated
         ArgumentCaptor<Spanner> spannerArgumentCaptor = ArgumentCaptor.forClass(Spanner.class);
@@ -96,14 +110,24 @@ public class EditSpannerControllerTest {
 
 
     @Test
+    public void testTriggerEventOnSpannerUpdate() {
+
+        // Stub behaviours - dao returns spanner detail
+        when(spannersDAO.get(SPANNER_ID)).thenReturn(SPANNER);
+
+        formSubmission().submit();
+
+        // Verify that event was triggered
+        verify(eventPublisher).publishEvent(any(SpannerEvent.class));
+    }
+
+
+    @Test
     public void testValidationFail() {
 
-        // Submit the form
-        SpannerForm formData = stubSpannerForm(99);
-        BindingResult validationFail = new BeanPropertyBindingResult(formData, MODEL_SPANNER);
-        validationFail.addError(new ObjectError("size", "TOO_BIG"));
-
-        ModelAndView response = controller.updateSpanner(formData, validationFail);
+        ModelAndView response = formSubmission()
+                                    .withError(new ObjectError("size", "TOO_BIG"))
+                                    .submit();
         assertNotNull("no response", response);
 
         // Assert that spanner was NOT updated
@@ -111,5 +135,41 @@ public class EditSpannerControllerTest {
 
         // Assert that we go to validation fail view
         assertEquals("view", VIEW_VALIDATION_ERRORS, response.getViewName());
+    }
+
+
+    private FormBuilder formSubmission() {
+        return new FormBuilder();
+    }
+
+
+    private class FormBuilder {
+
+        private SpannerForm formData = stubSpannerForm(99);
+        private List<ObjectError> errors = new ArrayList<>();
+
+        public FormBuilder withFormData(SpannerForm form) {
+            this.formData = form;
+            return this;
+        }
+
+        public FormBuilder withError(ObjectError error) {
+            errors.add(error);
+            return this;
+        }
+
+        public ModelAndView submit() {
+            BindingResult bindingResult = new BeanPropertyBindingResult(formData, MODEL_SPANNER);
+            errors.forEach(bindingResult::addError);
+            return controller.updateSpanner(formData, bindingResult);
+        }
+    }
+
+    public static SpannerForm stubSpannerForm(int id) {
+        SpannerForm formData = new SpannerForm();
+        formData.setId(id);
+        formData.setName("Spanner number " + id);
+        formData.setSize(10 + id);
+        return formData;
     }
 }

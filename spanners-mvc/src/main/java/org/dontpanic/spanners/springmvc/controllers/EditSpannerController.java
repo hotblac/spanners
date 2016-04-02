@@ -2,9 +2,12 @@ package org.dontpanic.spanners.springmvc.controllers;
 
 import org.dontpanic.spanners.dao.Spanner;
 import org.dontpanic.spanners.dao.SpannersDAO;
+import org.dontpanic.spanners.events.SpannerEvent;
 import org.dontpanic.spanners.springmvc.exception.SpannerNotFoundException;
 import org.dontpanic.spanners.springmvc.forms.SpannerForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,7 +24,7 @@ import javax.validation.Valid;
  * Date: 19/10/13
  */
 @Controller
-public class EditSpannerController {
+public class EditSpannerController implements ApplicationEventPublisherAware {
 
     public static final String VIEW_EDIT_SPANNER = "/editSpanner";
     public static final String VIEW_UPDATE_SUCCESS = "redirect:/displaySpanners";
@@ -30,7 +33,13 @@ public class EditSpannerController {
     public static final String MODEL_SPANNER = "spanner";
 
     @Autowired private SpannersDAO spannersDAO;
+    private ApplicationEventPublisher eventPublisher;
 
+
+    @Override
+    public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+        this.eventPublisher = applicationEventPublisher;
+    }
 
     /**
      * Display the edit spanner page
@@ -67,7 +76,12 @@ public class EditSpannerController {
         spanner.setName(formData.getName());
         spanner.setSize(formData.getSize());
 
+        // Save to database
         spannersDAO.update(spanner);
+
+        // Notify listeners
+        eventPublisher.publishEvent(new SpannerEvent(spanner));
+
         return new ModelAndView(VIEW_UPDATE_SUCCESS);
     }
 

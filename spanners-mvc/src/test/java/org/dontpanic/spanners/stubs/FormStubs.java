@@ -13,14 +13,6 @@ import static org.junit.Assert.assertNotNull;
  */
 public class FormStubs {
 
-    public static SpannerForm stubSpannerForm(int id) {
-        SpannerForm formData = new SpannerForm();
-        formData.setId(id);
-        formData.setName("Spanner number " + id);
-        formData.setSize(10 + id);
-        return formData;
-    }
-
     /**
      * Assert that spanner form matches given spanner
      * Both expected and actual spanner objects are non-null.
