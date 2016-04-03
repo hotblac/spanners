@@ -18,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
+import static org.dontpanic.spanners.events.SpannerEvent.EventType;
+
 /**
  * Controller for changing properties of an existing spanner
  * User: Stevie
@@ -81,7 +83,7 @@ public class EditSpannerController implements ApplicationEventPublisherAware {
         spannersDAO.update(spanner);
 
         // Notify listeners
-        eventPublisher.publishEvent(new SpannerEvent(spanner));
+        eventPublisher.publishEvent(new SpannerEvent(this, spanner.getId(), SpannerEvent.EventType.UPDATE));
 
         return new ModelAndView(VIEW_UPDATE_SUCCESS);
     }
