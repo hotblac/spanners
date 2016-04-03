@@ -1,6 +1,7 @@
 package org.dontpanic.spanners.stubs;
 
 import org.dontpanic.spanners.dao.SpannersDAO;
+import org.dontpanic.spanners.events.NotifyUserEventListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -37,5 +38,10 @@ public class StubConfig {
     @Bean
     public PasswordEncoder stubPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public NotifyUserEventListener stubEventListener() {
+        return mock(NotifyUserEventListener.class);
     }
 }

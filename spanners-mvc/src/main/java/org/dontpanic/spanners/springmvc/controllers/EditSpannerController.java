@@ -31,6 +31,7 @@ public class EditSpannerController implements ApplicationEventPublisherAware {
     public static final String VIEW_VALIDATION_ERRORS = "/editSpanner";
 
     public static final String MODEL_SPANNER = "spanner";
+    public static final String CONTROLLER_URL = "/editSpanner";
 
     @Autowired private SpannersDAO spannersDAO;
     private ApplicationEventPublisher eventPublisher;
@@ -44,7 +45,7 @@ public class EditSpannerController implements ApplicationEventPublisherAware {
     /**
      * Display the edit spanner page
      */
-    @RequestMapping(value = "/editSpanner", method = RequestMethod.GET)
+    @RequestMapping(value = CONTROLLER_URL, method = RequestMethod.GET)
     public ModelAndView displayPage(@RequestParam int id) throws SpannerNotFoundException {
 
         // Fetch the spanner
@@ -62,7 +63,7 @@ public class EditSpannerController implements ApplicationEventPublisherAware {
     /**
      * Accept form submission from edit spanner page
      */
-    @RequestMapping(value = "/editSpanner", method = RequestMethod.POST)
+    @RequestMapping(value = CONTROLLER_URL, method = RequestMethod.POST)
     public ModelAndView updateSpanner(@Valid @ModelAttribute(MODEL_SPANNER) SpannerForm formData, BindingResult validationResult) {
 
         if (validationResult.hasErrors()) {

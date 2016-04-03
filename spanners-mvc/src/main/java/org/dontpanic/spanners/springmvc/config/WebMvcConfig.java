@@ -1,6 +1,7 @@
 package org.dontpanic.spanners.springmvc.config;
 
 import org.dontpanic.spanners.dao.SpannersDAO;
+import org.dontpanic.spanners.events.NotifyUserEventListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
@@ -52,6 +53,12 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 		TilesConfigurer configurer = new TilesConfigurer();
 		configurer.setDefinitions(new String[] {TILES, VIEWS});
 		return configurer;
+	}
+
+	@Bean
+	public NotifyUserEventListener configureNotifyUserEventListener() {
+		NotifyUserEventListener listener = new NotifyUserEventListener();
+		return listener;
 	}
 
 	@Override
