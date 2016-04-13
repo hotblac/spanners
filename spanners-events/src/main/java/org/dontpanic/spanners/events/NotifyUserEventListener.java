@@ -3,6 +3,7 @@ package org.dontpanic.spanners.events;
 import org.springframework.context.ApplicationListener;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -27,6 +28,11 @@ public class NotifyUserEventListener implements ApplicationListener<SpannerEvent
     @Override
     public void onApplicationEvent(SpannerEvent spannerEvent) {
         logger.info("Event: notification of " + spannerEvent);
-        restTemplate.postForObject(notificationServiceUrl, Integer.toString(spannerEvent.getSpannerId()), String.class);
+        try {
+            restTemplate.postForObject(notificationServiceUrl, Integer.toString(spannerEvent.getSpannerId()), String.class);
+        } catch (Exception e) {
+            // Do not rethrow errors. Continue from failed notifications
+            logger.log(Level.WARNING, "Failed notification", e);
+        }
     }
 }
