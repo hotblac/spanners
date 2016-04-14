@@ -8,7 +8,6 @@ import org.springframework.context.annotation.*;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.view.tiles3.*;
@@ -54,14 +53,6 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 		TilesConfigurer configurer = new TilesConfigurer();
 		configurer.setDefinitions(new String[] {TILES, VIEWS});
 		return configurer;
-	}
-
-	@Bean
-	public NotifyUserEventListener configureNotifyUserEventListener() {
-		NotifyUserEventListener listener = new NotifyUserEventListener();
-		listener.setNotificationServiceUrl("http://localhost:8081/notify/spanner/42/update");
-		listener.setRestTemplate(new RestTemplate());
-		return listener;
 	}
 
 	@Override
