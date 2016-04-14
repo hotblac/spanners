@@ -50,7 +50,8 @@
 <a class="btn btn-primary" href="<c:url value="/addSpanner"/>">Create new spanner</a>
 
 <script type="text/javascript">
-    var myWebSocket = new WebSocket("ws://localhost:9090");
+    <s:eval expression="@appProperties.getProperty('push.notifier.url')" var="pushNotifierUrl" />
+    var myWebSocket = new WebSocket("${pushNotifierUrl}");
 
     myWebSocket.onmessage = function(evt) {
         Msg.info("A spanner has been updated. Please refresh the page to see changes.");
