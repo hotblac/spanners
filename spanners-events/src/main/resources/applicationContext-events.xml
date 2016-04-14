@@ -6,7 +6,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 
     <bean id="notifyUserEventListener" class="org.dontpanic.spanners.events.NotifyUserEventListener"
-        p:notificationServiceUrl="http://localhost:8081/notify/spanner/42/update"
+        p:notificationServiceUrl="${push.service.url}"
         p:restTemplate-ref="restTemplate"/>
 
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
