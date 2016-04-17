@@ -1,0 +1,13 @@
+Node.js
+Add notification detail to JSON content of REST call
+Show notification detail on web page
+Fix hard coded spanner id in REST calls (currently all notifications are for id 42)
+Wire up delete and add services
+
+Elastic search
+Create elastic search docker container
+Add docker container to docker-compose definition
+Create index for spanner events (vewi / add / update / delete)
+Create index for user events (view / add / update / delete)
+Create search for spanner events
+Create search for user events
