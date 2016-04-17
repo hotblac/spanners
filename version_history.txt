@@ -62,3 +62,6 @@
 
 3.4
 - Database backed user store with hashed passwords
+
+3.5
+- Added Node.js server for WebSocket push notifications on spanner updates
