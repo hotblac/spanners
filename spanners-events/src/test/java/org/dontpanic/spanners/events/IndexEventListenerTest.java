@@ -11,9 +11,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static com.jayway.jsonpath.matchers.JsonPathMatchers.*;
 import static org.dontpanic.spanners.events.IndexEventListener.*;
-import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 
 /**
@@ -53,12 +54,12 @@ public class IndexEventListenerTest {
         eventListener.onApplicationEvent(event);
 
         // Verify that document contains required fields
-        String doc = requestBuilder.request().toString();
-        assertThat(doc, containsString("\"eventType\":\"UPDATE\""));
-        assertThat(doc, containsString("\"spannerId\":42"));
-        assertThat(doc, containsString("\"username\":\"***SL USERNAME\""));
-
+        String docJson = requestBuilder.request().source().toUtf8();
+        assertThat(docJson, hasJsonPath("$.eventType", equalTo("UPDATE")));
+        assertThat(docJson, hasJsonPath("$.spannerId", equalTo(42)));
+        assertThat(docJson, hasJsonPath("$.username", equalTo("***SL USERNAME")));
     }
+
 
     private class StubIndexRequestBuilder extends IndexRequestBuilder {
         public StubIndexRequestBuilder(Client client) {
