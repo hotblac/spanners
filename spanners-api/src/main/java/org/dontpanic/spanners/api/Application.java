@@ -1,4 +1,4 @@
-package org.dontpanic.spanners.api.boot;
+package org.dontpanic.spanners.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
