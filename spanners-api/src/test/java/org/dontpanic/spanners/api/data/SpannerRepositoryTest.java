@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static org.dontpanic.spanners.api.stubs.SpannerBuilder.aTestSpanner;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
 /**
  * Created by stevie on 04/06/16.
@@ -50,22 +49,5 @@ public class SpannerRepositoryTest {
         assertEquals("spanner owner", expected.getOwner(), actual.getOwner());
         assertEquals("spanner size", expected.getSize(), actual.getSize());
     }
-
-
-    /**
-     * Check that given spanner has expected properties
-     * @param spanner to be checked
-     * @param id expected id
-     * @param name expected name
-     * @param size expected size
-     */
-    private void checkSpanner(Spanner spanner, Long id, String name, int size, String owner) {
-        assertNotNull(spanner);
-        assertEquals(id, spanner.getId());
-        assertEquals(name, spanner.getName());
-        assertEquals(size, spanner.getSize());
-        assertEquals(owner, spanner.getOwner());
-    }
-
 
 }
