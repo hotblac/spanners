@@ -10,7 +10,7 @@
     
     <modules>
         <module>spanners-dao</module>
-        <module>spanners-mvc</module>
+        <module>spanners-mvc3</module>
         <module>spanners-events</module>
         <module>spanners-api</module>
     </modules>
