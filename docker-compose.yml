@@ -1,0 +1,16 @@
+database:
+  environment:
+    MYSQL_ROOT_PASSWORD: my-secret-pw
+  # Expose port 3306 to host. Not for the application but
+  # handy to inspect the database from the host machine.
+  ports:
+    - "3306:3306"
+  image: hotblac/spanners-database:3.5
+  restart: always
+api:
+  image: hotblac/spanners-api:latest
+  links:
+    - database:spanners-database
+  ports:
+    - "8090:8080"
+  restart: always
