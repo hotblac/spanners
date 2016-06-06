@@ -13,6 +13,7 @@
         <module>spanners-mvc3</module>
         <module>spanners-events</module>
         <module>spanners-api</module>
+        <module>spanners-mvc</module>
     </modules>
 
     <properties>
