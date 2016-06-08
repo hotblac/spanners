@@ -7,7 +7,4 @@
 		<put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
 	</definition>
-	<definition name="error" template="/WEB-INF/tiles/error.jsp">
-			<put-attribute name="body" value="/WEB-INF/tiles/error.jsp"/>
-	</definition>
 </tiles-definitions>
