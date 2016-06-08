@@ -16,7 +16,7 @@
 				</ul>					
 				<ul class="nav pull-right">
 					<security:authorize access="!isAuthenticated()">
-						<li><a href='<s:url value="/signin"></s:url>'>Sign in</a></li>
+						<li><a href='<s:url value="/login"></s:url>'>Sign in</a></li>
 					</security:authorize>
 					<security:authorize access="isAuthenticated()">
 						<security:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_PREVIOUS_ADMINISTRATOR')">

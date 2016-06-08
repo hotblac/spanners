@@ -27,7 +27,7 @@
 </head>
 <body>
 	
-	<%-- ***SL Header removed for now as security not available <tiles:insertAttribute name="header"  defaultValue="" /> --%>
+	<tiles:insertAttribute name="header"  defaultValue="" />
 	<!-- Page content -->
 	<div class="container">
         <% /* Show a message. See support.web package */ %>
