@@ -1,0 +1,43 @@
+{
+  "_embedded" : {
+    "spanners" : [ {
+      "name" : "Belinda",
+      "size" : 10,
+      "owner" : "jones",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8090/spanners/1"
+        },
+        "spanner" : {
+          "href" : "http://localhost:8090/spanners/1"
+        }
+      }
+    }, {
+      "name" : "Susan",
+      "size" : 18,
+      "owner" : "smith",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8090/spanners/2"
+        },
+        "spanner" : {
+          "href" : "http://localhost:8090/spanners/2"
+        }
+      }
+    } ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8090/spanners"
+    },
+    "profile" : {
+      "href" : "http://localhost:8090/profile/spanners"
+    }
+  },
+  "page" : {
+    "size" : 20,
+    "totalElements" : 2,
+    "totalPages" : 1,
+    "number" : 0
+  }
+}

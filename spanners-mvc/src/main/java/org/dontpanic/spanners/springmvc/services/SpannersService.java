@@ -3,12 +3,14 @@ package org.dontpanic.spanners.springmvc.services;
 import org.dontpanic.spanners.springmvc.domain.Spanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.hateoas.PagedResources;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Client of the Spanners-API REST service
@@ -28,10 +30,12 @@ public class SpannersService {
                 serviceUrl : "http://" + serviceUrl;
     }
 
-    public List<Spanner> findAll() {
-        ResponseEntity<Spanner[]> response = restTemplate.getForEntity(serviceUrl, Spanner[].class);
-        Spanner[] spanners = response.getBody();
-        return Arrays.asList(spanners);
+    public Collection<Spanner> findAll() {
+        ResponseEntity<PagedResources<Spanner>> response = restTemplate.exchange(serviceUrl, HttpMethod.GET, null,
+                                                            new ParameterizedTypeReference<PagedResources<Spanner>>(){});
+        PagedResources<Spanner> pages = response.getBody();
+        return pages.getContent();
+
     }
 
     public Spanner findOne(Long id) {

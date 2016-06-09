@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Controller for page that displays all spanners
@@ -33,7 +33,7 @@ public class DisplaySpannersController {
     public ModelAndView displaySpanners() {
 
         // Load the spanners from database
-        List<Spanner> spanners = spannersService.findAll();
+        Collection<Spanner> spanners = spannersService.findAll();
 
         return new ModelAndView(VIEW_DISPLAY_SPANNERS, MODEL_ATTRIBUTE_SPANNERS, spanners);
     }
