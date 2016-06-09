@@ -1,25 +1,27 @@
 package org.dontpanic.spanners.springmvc.services;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.dontpanic.spanners.springmvc.config.ServiceConfig;
 import org.dontpanic.spanners.springmvc.domain.Spanner;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.hateoas.hal.Jackson2HalModule;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.Collection;
 
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.*;
-import static org.springframework.http.HttpMethod.*;
+import static org.junit.Assert.assertThat;
+import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -28,18 +30,24 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
  * Test for Spanners REST service client
  * Created by stevie on 09/06/16.
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {ServiceConfig.class})
 public class SpannersServiceTest {
 
     private static final String SERVICE_URL = "http://example.com/";
     private static final MediaType APPLICATION_HAL_JSON = MediaType.valueOf("application/hal+json;charset=UTF-8");
 
-    private RestTemplate restTemplate = restTemplate();
-    private MockRestServiceServer server = MockRestServiceServer.createServer(restTemplate);
-    private SpannersService service = new SpannersService(SERVICE_URL);
+    @Autowired
+    private RestTemplate restTemplate;
+    private MockRestServiceServer server;
+    private SpannersService service;
 
     @Before
     public void configureService() {
+        server = MockRestServiceServer.createServer(restTemplate);
+        service = new SpannersService(SERVICE_URL);
         ReflectionTestUtils.setField(service, "restTemplate", restTemplate);
+
     }
 
     @Test
@@ -54,14 +62,4 @@ public class SpannersServiceTest {
         assertThat(spanners, hasSize(2));
     }
 
-    private RestTemplate restTemplate() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        mapper.registerModule(new Jackson2HalModule());
-
-        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        converter.setSupportedMediaTypes(MediaType.parseMediaTypes("application/hal+json"));
-        converter.setObjectMapper(mapper);
-        return new RestTemplate(Arrays.asList(converter));
-    }
 }
