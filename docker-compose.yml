@@ -11,6 +11,15 @@ api:
   image: hotblac/spanners-api:latest
   links:
     - database:spanners-database
+  # Expose service to host. Not for the application but
+  # handy to call the API direct from the host machine.
   ports:
     - "8090:8080"
   restart: always
+#mvc:
+#  image: hotblac/spanners-mvc:latest
+#  links:
+#    - api:spanners-api
+#  ports:
+#    - "8080:8080"
+#  restart: always

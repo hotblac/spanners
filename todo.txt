@@ -1,3 +1,10 @@
+Create Docker image for new spanners-mvc
+Update README.md
+Update README.txt
+Put error behind sign up link
+Wire up validation and tests
+Rebuild docker image on release
 Create user microservice
 Remove redundant SpannerForm and use annotated Spanner domain object instead
 Use HATEOAS links to navigate instead of using spanner ids in URLs. Once this is done, disable exposure of ids in spanners-api
+Set up Eureka for service discovery
