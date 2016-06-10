@@ -1,3 +1,0 @@
-Spanners MVC
-Version: ${project.version}
-Built at: ${buildDate}

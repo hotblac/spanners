@@ -1,5 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<dataset>
-    <spanner id="1" name="Hazell" size="12" owner="smith"/>
-    <spanner id="2" name="Kitty" size="18" owner="jones"/>
-</dataset>

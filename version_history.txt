@@ -62,3 +62,12 @@
 
 3.4
 - Database backed user store with hashed passwords
+
+3.5
+- Added node.js / Websocket based push notifications
+
+4.0
+- Migrate to Spring boot 1.3.5.RELEASE
+- Moved to microservice architecture
+- Replaced spanners-dao jar with spanners-api RESTful service
+- Removed spanners-events and spanners-notifier
