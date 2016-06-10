@@ -30,6 +30,7 @@ public class SpannersService {
                 serviceUrl : "http://" + serviceUrl;
     }
 
+
     public Collection<Spanner> findAll() {
         ResponseEntity<PagedResources<Spanner>> response = restTemplate.exchange(serviceUrl, HttpMethod.GET, null,
                                                             new ParameterizedTypeReference<PagedResources<Spanner>>(){});
@@ -38,14 +39,14 @@ public class SpannersService {
 
     }
 
-    public Spanner findOne(Long id) {
 
-        Spanner response = restTemplate.getForObject(serviceUrl + "/{0}", Spanner.class, id);
-        return response;
+    public Spanner findOne(Long id) {
+        return restTemplate.getForObject(serviceUrl + "/{0}", Spanner.class, id);
     }
 
+
     public void delete(Spanner spanner) {
-        assert false: "Method not implemented";
+        restTemplate.delete(serviceUrl + "/{0}", spanner.getId());
     }
 }
 

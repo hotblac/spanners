@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -19,11 +20,14 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Collection;
 
 import static org.dontpanic.spanners.springmvc.stubs.SpannerAssert.assertSpanner;
+import static org.dontpanic.spanners.springmvc.stubs.SpannerBuilder.aSpanner;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
+import static org.springframework.http.HttpMethod.DELETE;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 /**
@@ -69,6 +73,18 @@ public class SpannersServiceTest {
 
         Spanner spanner = service.findOne(1l);
         assertSpanner("Belinda", 10, "jones", spanner);
+    }
+
+    @Test
+    public void testDelete() throws Exception {
+        server.expect(requestTo(SERVICE_URL + "/1")).andExpect(method(DELETE))
+                .andRespond(withStatus(HttpStatus.NO_CONTENT));
+
+        Spanner susan = aSpanner().withId(1l).named("Susan").build();
+        service.delete(susan);
+
+        // Check that the server received the message
+        server.verify();
     }
 
     private ResponseCreator withHalJsonResponse(String fileName) {
