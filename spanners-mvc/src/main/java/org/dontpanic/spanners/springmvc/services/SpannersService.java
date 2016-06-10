@@ -48,6 +48,16 @@ public class SpannersService {
     public void delete(Spanner spanner) {
         restTemplate.delete(serviceUrl + "/{0}", spanner.getId());
     }
+
+
+    public void create(Spanner spanner) {
+        assert false: "Method not implemented";
+    }
+
+
+    public void update(Spanner spanner) {
+        assert false: "Method not implemented";
+    }
 }
 
 
