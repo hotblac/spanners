@@ -39,8 +39,9 @@ public class SpannersService {
     }
 
     public Spanner findOne(Long id) {
-        assert false: "Method not implemented";
-        return null;
+
+        Spanner response = restTemplate.getForObject(serviceUrl + "/{0}", Spanner.class, id);
+        return response;
     }
 
     public void delete(Spanner spanner) {

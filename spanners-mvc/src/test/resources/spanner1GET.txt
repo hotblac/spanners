@@ -1,0 +1,13 @@
+{
+  "name" : "Belinda",
+  "size" : 10,
+  "owner" : "jones",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8090/spanners/1"
+    },
+    "spanner" : {
+      "href" : "http://localhost:8090/spanners/1"
+    }
+  }
+}
