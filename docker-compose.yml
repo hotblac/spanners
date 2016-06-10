@@ -16,10 +16,10 @@ api:
   ports:
     - "8090:8080"
   restart: always
-#mvc:
-#  image: hotblac/spanners-mvc:latest
-#  links:
-#    - api:spanners-api
-#  ports:
-#    - "8080:8080"
-#  restart: always
+mvc:
+  image: hotblac/spanners-mvc:latest
+  links:
+    - api:spanners-api
+  ports:
+    - "8080:8080"
+  restart: always
