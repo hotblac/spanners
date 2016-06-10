@@ -23,8 +23,7 @@ import static org.dontpanic.spanners.springmvc.stubs.SpannerAssert.assertSpanner
 import static org.dontpanic.spanners.springmvc.stubs.SpannerBuilder.aSpanner;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
-import static org.springframework.http.HttpMethod.DELETE;
-import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.*;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
@@ -82,6 +81,30 @@ public class SpannersServiceTest {
 
         Spanner susan = aSpanner().withId(1l).named("Susan").build();
         service.delete(susan);
+
+        // Check that the server received the message
+        server.verify();
+    }
+
+    @Test
+    public void testCreate() throws Exception {
+        server.expect(requestTo(SERVICE_URL)).andExpect(method(POST))
+                .andRespond(withStatus(HttpStatus.CREATED));
+
+        Spanner newSpanner = aSpanner().withId(null).build();
+        service.create(newSpanner);
+
+        // Check that the server received the message
+        server.verify();
+    }
+
+    @Test
+    public void testUpdate() throws Exception {
+        server.expect(requestTo(SERVICE_URL + "/1")).andExpect(method(PUT))
+                .andRespond(withStatus(HttpStatus.OK));
+
+        Spanner update = aSpanner().withId(1l).build();
+        service.update(update);
 
         // Check that the server received the message
         server.verify();

@@ -22,17 +22,19 @@ public class SpannersService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private String serviceUrl;
+    private String resourceUrl;
+    private String itemUrl;
 
     @Autowired
-    public SpannersService(@Value("${app.service.url.spanners}") String serviceUrl) {
-        this.serviceUrl = serviceUrl.startsWith("http") ?
-                serviceUrl : "http://" + serviceUrl;
+    public SpannersService(@Value("${app.service.url.spanners}") String resourceUrl) {
+        this.resourceUrl = resourceUrl.startsWith("http") ?
+                resourceUrl : "http://" + resourceUrl;
+        this.itemUrl = this.resourceUrl + "/{0}";
     }
 
 
     public Collection<Spanner> findAll() {
-        ResponseEntity<PagedResources<Spanner>> response = restTemplate.exchange(serviceUrl, HttpMethod.GET, null,
+        ResponseEntity<PagedResources<Spanner>> response = restTemplate.exchange(resourceUrl, HttpMethod.GET, null,
                                                             new ParameterizedTypeReference<PagedResources<Spanner>>(){});
         PagedResources<Spanner> pages = response.getBody();
         return pages.getContent();
@@ -41,22 +43,22 @@ public class SpannersService {
 
 
     public Spanner findOne(Long id) {
-        return restTemplate.getForObject(serviceUrl + "/{0}", Spanner.class, id);
+        return restTemplate.getForObject(itemUrl, Spanner.class, id);
     }
 
 
     public void delete(Spanner spanner) {
-        restTemplate.delete(serviceUrl + "/{0}", spanner.getId());
+        restTemplate.delete(itemUrl, spanner.getId());
     }
 
 
     public void create(Spanner spanner) {
-        assert false: "Method not implemented";
+        restTemplate.postForObject(resourceUrl, spanner, Spanner.class);
     }
 
 
     public void update(Spanner spanner) {
-        assert false: "Method not implemented";
+        restTemplate.put(itemUrl, spanner, spanner.getId());
     }
 }
 
