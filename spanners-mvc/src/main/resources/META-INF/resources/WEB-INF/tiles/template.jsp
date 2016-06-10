@@ -10,13 +10,13 @@
 <head>
 	<title>Spanners MVC</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet" media="screen" />
-	<link href="<c:url value="/resources/css/bootstrap-msg.min.css" />" rel="stylesheet" media="screen" />
-	<link href="<c:url value="/resources/css/core.css" />" rel="stylesheet" media="screen" />
+	<link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet" media="screen" />
+	<link href="<c:url value="/css/bootstrap-msg.min.css" />" rel="stylesheet" media="screen" />
+	<link href="<c:url value="/css/core.css" />" rel="stylesheet" media="screen" />
 	
 	<tilesx:useAttribute id="styles" name="styles" classname="java.util.List" ignore="true" />
 	<c:forEach var="cssName" items="${styles}">
-		<link type="text/css" href="<c:url value="/resources/css/${cssName}"/>" rel="stylesheet" media="screen" />
+		<link type="text/css" href="<c:url value="/css/${cssName}"/>" rel="stylesheet" media="screen" />
 	</c:forEach>
 	
 	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -35,8 +35,8 @@
 	<!-- End of page content -->
 	<tiles:insertAttribute name="footer"  defaultValue="" />
 	
-	<script src="<c:url value="/resources/js/jquery-1.10.2.min.js" />"></script>
-    <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
-    <script src="<c:url value="/resources/js/bootstrap-msg.min.js" />"></script>
+	<script src="<c:url value="/js/jquery-1.10.2.min.js" />"></script>
+    <script src="<c:url value="/js/bootstrap.min.js" />"></script>
+    <script src="<c:url value="/js/bootstrap-msg.min.js" />"></script>
 </body>
 </html>

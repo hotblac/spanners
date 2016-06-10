@@ -15,7 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String[] PERMIT_ALL_URLS = {"/", "/resources/**", "/signup", "/version.txt"};
+    private static final String[] PERMIT_ALL_URLS = {"/", "/css/**", "/img/**", "/js/**", "/signup", "/version.txt"};
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
