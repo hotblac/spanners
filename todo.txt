@@ -1,8 +1,8 @@
-Create Docker image for new spanners-mvc
+Push Docker image for new components
+Move database docker image into source directory
 Update README.md
 Update README.txt
-Put error behind sign up link
-Use custom application.properties for docker
+Wire up version.txt
 Wire up validation and tests
 Rebuild docker image on release
 Create user microservice
