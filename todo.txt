@@ -2,6 +2,7 @@ Create Docker image for new spanners-mvc
 Update README.md
 Update README.txt
 Put error behind sign up link
+Use custom application.properties for docker
 Wire up validation and tests
 Rebuild docker image on release
 Create user microservice
