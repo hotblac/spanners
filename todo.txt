@@ -1,7 +1,7 @@
-Push Docker image for new components
 Move database docker image into source directory
 Wire up version.txt
 Wire up validation and tests
+Remove version number from jars so that Dockerfile is always correct
 Rebuild docker image on release
 Create user microservice
 Remove redundant SpannerForm and use annotated Spanner domain object instead
