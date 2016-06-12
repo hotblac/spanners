@@ -10,13 +10,15 @@ Demonstration code for concepts covered in Don't Panic - Stuart 'Stevie' Leitch'
 Examples include:
 
 - Java / Spring based web application development in Spring MVC
+- RESTful API with Spring Data REST
+= Spring Boot
 - Maven
 - Web Application Security
 - Unit / integration testing
-- Hibernate
 
 Technologies covered in previous versions:
 - Struts
 - Hibernate 5
 - SOAP / Spring-WS
 - SAML federated sign in
+- Node.js and Websocket push notification

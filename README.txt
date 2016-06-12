@@ -5,14 +5,14 @@ This application demonstrates various features and techniques described in Stuar
    
 This demo contains:
     - Spring MVC web application
-    - DAO component
+    - Spring Data REST API
 	
 Running the latest build in Docker Containers
 	The latest version of the application can be started in Docker containers (with Docker Compose) by following instructions in this post:
 	http://www.disasterarea.co.uk/blog/docker-part-4-composing-an-environment-stack/
 	1. Download the latest Docker Compose file https://raw.githubusercontent.com/hotblac/spanners-docker/master/docker-compose.yml
-	2. In the download directory, run sudo docker-compose up -d
-	3. The application will download and start and can be accessed at http://localhost:8080/spanners-mvc/ (click Sign Up to create a user account, then sign in)
+	2. In the download directory, run docker-compose up -d
+	3. The application will download and start and can be accessed at http://localhost:8080/spanners-mvc/ (sign in as smith / password)
 
 	It is recommended that the application is run from these Docker containers. See below if you wish to manually set up a database and webserver.
     	

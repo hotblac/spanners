@@ -1,7 +1,5 @@
 Push Docker image for new components
 Move database docker image into source directory
-Update README.md
-Update README.txt
 Wire up version.txt
 Wire up validation and tests
 Rebuild docker image on release
