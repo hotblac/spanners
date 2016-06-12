@@ -8,7 +8,7 @@ database:
   image: hotblac/spanners-database:3.5
   restart: always
 api:
-  image: hotblac/spanners-api:latest
+  image: hotblac/spanners-api:4.0
   links:
     - database:spanners-database
   # Expose service to host. Not for the application but
@@ -17,7 +17,7 @@ api:
     - "8090:8080"
   restart: always
 mvc:
-  image: hotblac/spanners-mvc:latest
+  image: hotblac/spanners-mvc:4.0
   links:
     - api:spanners-api
   ports:
