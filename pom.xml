@@ -19,11 +19,15 @@
         <module>spanners-mvc</module>
     </modules>
 
+	<properties>
+		<docker.image.prefix>hotblac</docker.image.prefix>
+	</properties>
+
     <scm>
         <connection>scm:git:https://github.com/hotblac/spanners.git</connection>
         <developerConnection>scm:git:https://github.com/hotblac/spanners.git</developerConnection>
       <tag>HEAD</tag>
-  </scm>
+	</scm>
 
     <distributionManagement>
 		<repository>
@@ -51,6 +55,16 @@
 				</dependencies>
 			</plugin>
 		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>com.spotify</groupId>
+					<artifactId>docker-maven-plugin</artifactId>
+					<version>0.4.10</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 
 		<extensions>
 		<!-- Enabling the use of FTP -->
