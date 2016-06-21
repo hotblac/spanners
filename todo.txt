@@ -1,3 +1,4 @@
+Use EXTENDS keyword to remove duplication in 2 docker-compose files
 Move database docker image into source directory
 Wire up version.txt
 Wire up validation and tests
