@@ -64,12 +64,21 @@
 					<version>0.4.10</version>
 					<configuration>
 						<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-						<dockerDirectory>${project.basedir}/docker</dockerDirectory>
+						<baseImage>java:openjdk-8-jdk-alpine</baseImage>
+						<entryPoint>["java","-Djava.security.egd=file:/dev/./urandom","-jar","/${project.build.finalName}.jar"]</entryPoint>
 						<resources>
+							<!-- copy the service's jar file from target into the root directory of the image -->
 							<resource>
 								<targetPath>/</targetPath>
 								<directory>${project.build.directory}</directory>
 								<include>${project.build.finalName}.jar</include>
+							</resource>
+							<!-- Copy contents of project's docker directory, if it exists.
+							     Used to pull in docker build specific application.properties settings -->
+							<resource>
+								<targetPath>/</targetPath>
+								<directory>${project.basedir}/docker</directory>
+								<include>*</include>
 							</resource>
 						</resources>
 					</configuration>

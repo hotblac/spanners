@@ -1,0 +1,1 @@
+Empty docker directory to keep docker-maven-plugin happy when it attempts to copy resources.

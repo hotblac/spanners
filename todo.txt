@@ -2,8 +2,7 @@ Use EXTENDS keyword to remove duplication in 2 docker-compose files
 Move database docker image into source directory
 Wire up version.txt
 Wire up validation and tests
-Remove version number from jars so that Dockerfile is always correct
-Rebuild docker image on release
+Push docker image on release
 Create user microservice
 Remove redundant SpannerForm and use annotated Spanner domain object instead
 Use HATEOAS links to navigate instead of using spanner ids in URLs. Once this is done, disable exposure of ids in spanners-api
