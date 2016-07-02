@@ -8,7 +8,7 @@ database:
   # handy to inspect the database from the host machine.
   ports:
     - "3306:3306"
-  image: hotblac/spanners-database:3.5
+  image: hotblac/spanners-database:latest
   restart: always
 api:
   image: hotblac/spanners-api:latest

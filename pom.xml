@@ -17,7 +17,8 @@
     <modules>
         <module>spanners-api</module>
         <module>spanners-mvc</module>
-    </modules>
+		<module>spanners-database</module>
+	</modules>
 
 	<properties>
 		<docker.image.prefix>hotblac</docker.image.prefix>
