@@ -72,6 +72,7 @@
 							<imageTag>${project.version}</imageTag>
 							<imageTag>latest</imageTag>
 						</imageTags>
+						<serverId>docker-hub</serverId>
 						<resources>
 							<!-- copy the service's jar file from target into the root directory of the image -->
 							<resource>
@@ -98,7 +99,7 @@
 						</execution>
 						<execution>
 							<id>tag-image-version</id>
-							<phase>package</phase>
+							<phase>deploy</phase>
 							<goals>
 								<goal>tag</goal>
 							</goals>
@@ -106,13 +107,11 @@
 								<image>${docker.image.prefix}/${project.artifactId}</image>
 								<newName>${docker.repository}/${docker.image.prefix}/${project.artifactId}:${project.version}</newName>
 								<pushImage>true</pushImage>
-								<serverId>docker-hub</serverId>
-								<registryUrl>https://index.docker.io/v1/</registryUrl>
 							</configuration>
 						</execution>
 						<execution>
 							<id>tag-image-latest</id>
-							<phase>package</phase>
+							<phase>deploy</phase>
 							<goals>
 								<goal>tag</goal>
 							</goals>
@@ -120,24 +119,8 @@
 								<image>${docker.image.prefix}/${project.artifactId}</image>
 								<newName>${docker.repository}/${docker.image.prefix}/${project.artifactId}:latest</newName>
 								<pushImage>true</pushImage>
-								<serverId>docker-hub</serverId>
-								<registryUrl>https://index.docker.io/v1/</registryUrl>
 							</configuration>
 						</execution>
-						<!--
-						<execution>
-							<id>push-image</id>
-							<phase>package</phase>
-							<goals>
-								<goal>push</goal>
-							</goals>
-							<configuration>
-								<imageName>${docker.repository}/${docker.image.prefix}/${project.artifactId}:${project.version}</imageName>
-								<serverId>docker-hub</serverId>
-								<registryUrl>https://index.docker.io/v1/</registryUrl>
-							</configuration>
-						</execution>
-						-->
 					</executions>
 				</plugin>
 			</plugins>
