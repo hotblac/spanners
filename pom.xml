@@ -21,6 +21,9 @@
 	</modules>
 
 	<properties>
+		<!-- Set docker.skip to true to disable Docker.
+			 Useful to build apps on systems where Docker is not installed. -->
+		<docker.skip>false</docker.skip>
 		<docker.repository>docker.io</docker.repository>
 		<docker.image.prefix>hotblac</docker.image.prefix>
 	</properties>
@@ -73,6 +76,7 @@
 							<imageTag>latest</imageTag>
 						</imageTags>
 						<serverId>docker-hub</serverId>
+						<skipDockerBuild>${docker.skip}</skipDockerBuild>
 						<resources>
 							<!-- copy the service's jar file from target into the root directory of the image -->
 							<resource>
