@@ -1,5 +1,3 @@
-Use EXTENDS keyword to remove duplication in 2 docker-compose files
-Check what happens when we build on systems without docker - make it an optional profile?
 Wire up version.txt
 Wire up validation and tests
 Push docker image on release

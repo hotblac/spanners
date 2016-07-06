@@ -70,7 +70,7 @@
 					<configuration>
 						<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
 						<baseImage>java:openjdk-8-jdk-alpine</baseImage>
-						<entryPoint>["java","-Djava.security.egd=file:/dev/./urandom","-jar","/${project.build.finalName}.jar"]</entryPoint>
+						<entryPoint>["java","-jar","/${project.build.finalName}.jar"]</entryPoint>
 						<imageTags>
 							<imageTag>${project.version}</imageTag>
 							<imageTag>latest</imageTag>
