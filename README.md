@@ -11,7 +11,7 @@ Examples include:
 
 - Java / Spring based web application development in Spring MVC
 - RESTful API with Spring Data REST
-= Spring Boot
+- Spring Boot
 - Maven
 - Web Application Security
 - Unit / integration testing

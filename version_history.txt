@@ -71,3 +71,6 @@
 - Moved to microservice architecture
 - Replaced spanners-dao jar with spanners-api RESTful service
 - Removed spanners-events and spanners-notifier
+
+4.1
+- Build docker images on application build. Tag and push on deploy / release
