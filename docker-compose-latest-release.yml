@@ -8,10 +8,10 @@ database:
   # handy to inspect the database from the host machine.
   ports:
     - "3306:3306"
-  image: hotblac/spanners-database:3.5
+  image: hotblac/spanners-database:4.1
   restart: always
 api:
-  image: hotblac/spanners-api:4.0
+  image: hotblac/spanners-api:4.1
   links:
     - database:spanners-database
   # Expose service to host. Not for the application but
@@ -20,7 +20,7 @@ api:
     - "8090:8080"
   restart: always
 mvc:
-  image: hotblac/spanners-mvc:4.0
+  image: hotblac/spanners-mvc:4.1
   links:
     - api:spanners-api
   ports:
