@@ -1,4 +1,3 @@
-Wire up version.txt
 Wire up validation and tests
 Create user microservice
 Remove redundant SpannerForm and use annotated Spanner domain object instead
