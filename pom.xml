@@ -71,10 +71,6 @@
 						<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
 						<baseImage>java:openjdk-8-jdk-alpine</baseImage>
 						<entryPoint>["java","-jar","/${project.build.finalName}.jar"]</entryPoint>
-						<imageTags>
-							<imageTag>${project.version}</imageTag>
-							<imageTag>latest</imageTag>
-						</imageTags>
 						<serverId>docker-hub</serverId>
 						<skipDockerBuild>${docker.skip}</skipDockerBuild>
 						<resources>
