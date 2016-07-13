@@ -18,6 +18,7 @@
         <module>spanners-api</module>
         <module>spanners-mvc</module>
 		<module>spanners-database</module>
+		<module>spanners-users</module>
 	</modules>
 
 	<properties>
