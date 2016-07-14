@@ -1,0 +1,12 @@
+{
+  "password": "password123",
+  "enabled": true,
+  "_links": {
+    "self": {
+      "href": "http://localhost:8091/users/jbloggs"
+    },
+    "user": {
+      "href": "http://localhost:8091/users/jbloggs"
+    }
+  }
+}
