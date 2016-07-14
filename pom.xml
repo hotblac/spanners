@@ -19,7 +19,6 @@
         <module>spanners-mvc</module>
 		<module>spanners-database</module>
 		<module>spanners-users</module>
-		<module>rest-security</module>
 	</modules>
 
 	<properties>

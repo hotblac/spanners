@@ -1,5 +1,6 @@
-package org.dontpanic.security;
+package org.dontpanic.spanners.springmvc.services;
 
+import org.dontpanic.spanners.springmvc.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +21,7 @@ public class RestUserDetailsService implements UserDetailsService {
     private String itemUrl;
 
     @Autowired
-    public RestUserDetailsService(@Value("${app.service.url.spanners}") String resourceUrl) {
+    public RestUserDetailsService(@Value("${app.service.url.users}") String resourceUrl) {
         this.resourceUrl = resourceUrl.startsWith("http") ?
                 resourceUrl : "http://" + resourceUrl;
         this.itemUrl = this.resourceUrl + "/{0}";

@@ -1,4 +1,4 @@
-package org.dontpanic.security;
+package org.dontpanic.spanners.springmvc.services;
 
 import org.junit.Before;
 import org.junit.Test;

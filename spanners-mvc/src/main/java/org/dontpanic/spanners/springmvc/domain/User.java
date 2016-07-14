@@ -1,4 +1,4 @@
-package org.dontpanic.security;
+package org.dontpanic.spanners.springmvc.domain;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
