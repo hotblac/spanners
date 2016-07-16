@@ -11,6 +11,10 @@
     <form:input path="size" class="input-block-level"/>
     <form:errors path="size" element="p" class="text-error"/>
 
+    <c:if test="${spanner.id != null}" >
+        <form:hidden path="id" value="${spanner.id}" />
+    </c:if>
+
     <a href="<c:url value="/displaySpanners"/>" class="btn btn-default">Cancel</a>
     <input type="submit" class="btn btn-primary" value="Save changes" />
 </form:form>
