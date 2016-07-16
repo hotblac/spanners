@@ -4,7 +4,6 @@ import org.dontpanic.spanners.springmvc.domain.Spanner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -36,8 +35,6 @@ public class SpannersServiceTest {
 
     private static final MediaType APPLICATION_HAL_JSON = MediaType.valueOf("application/hal+json;charset=UTF-8");
 
-    @Value("${app.service.url.spanners}")
-    private String serviceUrl;
     @Autowired
     private MockRestServiceServer server;
     @Autowired
@@ -46,7 +43,7 @@ public class SpannersServiceTest {
     @Test
     public void testFindAll() throws Exception {
 
-        server.expect(requestTo(serviceUrl)).andExpect(method(GET))
+        server.expect(requestTo("/")).andExpect(method(GET))
                 .andRespond(withHalJsonResponse("/spannersGET.txt"));
 
         Collection<Spanner> spanners = service.findAll();
@@ -57,7 +54,7 @@ public class SpannersServiceTest {
     @Test
     public void testFindOne() throws Exception {
 
-        server.expect(requestTo(serviceUrl + "/1")).andExpect(method(GET))
+        server.expect(requestTo("/1")).andExpect(method(GET))
                 .andRespond(withHalJsonResponse("/spanner1GET.txt"));
 
         Spanner spanner = service.findOne(1l);
@@ -66,7 +63,7 @@ public class SpannersServiceTest {
 
     @Test
     public void testDelete() throws Exception {
-        server.expect(requestTo(serviceUrl + "/1")).andExpect(method(DELETE))
+        server.expect(requestTo("/1")).andExpect(method(DELETE))
                 .andRespond(withStatus(HttpStatus.NO_CONTENT));
 
         Spanner susan = aSpanner().withId(1l).named("Susan").build();
@@ -78,7 +75,7 @@ public class SpannersServiceTest {
 
     @Test
     public void testCreate() throws Exception {
-        server.expect(requestTo(serviceUrl)).andExpect(method(POST))
+        server.expect(requestTo("/")).andExpect(method(POST))
                 .andRespond(withStatus(HttpStatus.CREATED));
 
         Spanner newSpanner = aSpanner().withId(null).build();
@@ -90,7 +87,7 @@ public class SpannersServiceTest {
 
     @Test
     public void testUpdate() throws Exception {
-        server.expect(requestTo(serviceUrl + "/1")).andExpect(method(PUT))
+        server.expect(requestTo("/1")).andExpect(method(PUT))
                 .andRespond(withStatus(HttpStatus.OK));
 
         Spanner update = aSpanner().withId(1l).build();

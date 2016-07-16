@@ -27,16 +27,11 @@ public class SpannersService {
 
     private RestTemplate restTemplate;
 
-    private String resourceUrl;
-    private String itemUrl;
-
     @Autowired
-    public SpannersService(RestTemplateBuilder builder, @Value("${app.service.url.spanners}") String resourceUrl) {
-        this.resourceUrl = resourceUrl.startsWith("http") ?
-                resourceUrl : "http://" + resourceUrl;
-        this.itemUrl = this.resourceUrl + "/{0}";
+    public SpannersService(RestTemplateBuilder builder, @Value("${app.service.url.spanners}") String rootUri) {
 
-        restTemplate = builder.messageConverters(halAwareMessageConverter()).build();
+        restTemplate = builder.messageConverters(halAwareMessageConverter())
+                              .rootUri(rootUri).build();
     }
 
 
@@ -50,7 +45,7 @@ public class SpannersService {
 
 
     public Collection<Spanner> findAll() {
-        ResponseEntity<PagedResources<Spanner>> response = restTemplate.exchange(resourceUrl, HttpMethod.GET, null,
+        ResponseEntity<PagedResources<Spanner>> response = restTemplate.exchange("/", HttpMethod.GET, null,
                                                             new ParameterizedTypeReference<PagedResources<Spanner>>(){});
         PagedResources<Spanner> pages = response.getBody();
         return pages.getContent();
@@ -59,22 +54,22 @@ public class SpannersService {
 
 
     public Spanner findOne(Long id) {
-        return restTemplate.getForObject(itemUrl, Spanner.class, id);
+        return restTemplate.getForObject("/{0}", Spanner.class, id);
     }
 
 
     public void delete(Spanner spanner) {
-        restTemplate.delete(itemUrl, spanner.getId());
+        restTemplate.delete("/{0}", spanner.getId());
     }
 
 
     public void create(Spanner spanner) {
-        restTemplate.postForObject(resourceUrl, spanner, Spanner.class);
+        restTemplate.postForObject("/", spanner, Spanner.class);
     }
 
 
     public void update(Spanner spanner) {
-        restTemplate.put(itemUrl, spanner, spanner.getId());
+        restTemplate.put("/{0}", spanner, spanner.getId());
     }
 }
 
