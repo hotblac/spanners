@@ -57,7 +57,7 @@ public class SpannersServiceTest {
         server.expect(requestTo("/1")).andExpect(method(GET))
                 .andRespond(withHalJsonResponse("/spanner1GET.txt"));
 
-        Spanner spanner = service.findOne(1l);
+        Spanner spanner = service.findOne(1L);
         assertSpanner("Belinda", 10, "jones", spanner);
     }
 
@@ -66,7 +66,7 @@ public class SpannersServiceTest {
         server.expect(requestTo("/1")).andExpect(method(DELETE))
                 .andRespond(withStatus(HttpStatus.NO_CONTENT));
 
-        Spanner susan = aSpanner().withId(1l).named("Susan").build();
+        Spanner susan = aSpanner().withId(1L).named("Susan").build();
         service.delete(susan);
 
         // Check that the server received the message
@@ -90,7 +90,7 @@ public class SpannersServiceTest {
         server.expect(requestTo("/1")).andExpect(method(PUT))
                 .andRespond(withStatus(HttpStatus.OK));
 
-        Spanner update = aSpanner().withId(1l).build();
+        Spanner update = aSpanner().withId(1L).build();
         service.update(update);
 
         // Check that the server received the message

@@ -3,7 +3,6 @@ package org.dontpanic.spanners.springmvc.services;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.dontpanic.spanners.springmvc.domain.Spanner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
@@ -27,9 +26,7 @@ public class SpannersService {
 
     private RestTemplate restTemplate;
 
-    @Autowired
     public SpannersService(RestTemplateBuilder builder, @Value("${app.service.url.spanners}") String rootUri) {
-
         restTemplate = builder.messageConverters(halAwareMessageConverter())
                               .rootUri(rootUri).build();
     }
