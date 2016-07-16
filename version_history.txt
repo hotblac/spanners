@@ -74,3 +74,6 @@
 
 4.1
 - Build docker images on application build. Tag and push on deploy / release
+
+4.2
+- Spring Boot 1.4.0.RC1
