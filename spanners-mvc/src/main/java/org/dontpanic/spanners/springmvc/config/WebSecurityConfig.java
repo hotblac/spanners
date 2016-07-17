@@ -1,5 +1,6 @@
 package org.dontpanic.spanners.springmvc.config;
 
+import org.dontpanic.spanners.springmvc.services.RestUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,6 +17,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] PERMIT_ALL_URLS = {"/", "/css/**", "/img/**", "/js/**", "/signup", "/version.txt"};
+
+    @Autowired
+    private RestUserDetailsService userDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -36,11 +40,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable();
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-            .inMemoryAuthentication()
-                .withUser("smith").password("password").roles("USER").and()
-                .withUser("jones").password("password").roles("USER");
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService);
     }
+
 }
