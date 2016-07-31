@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.0.RC1</version>
+		<version>1.4.0.RELEASE</version>
 	</parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -41,31 +41,6 @@
 		  <url>ftp://user20247.vs.easily.co.uk/website/maven</url>
 		</repository>
     </distributionManagement>
-
-	<repositories>
-		<!-- Required for Spring Boot release candidates.
-		     Can be removed when we move to GA release of Spring boot -->
-		<repository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/libs-milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<!-- Required for Spring Boot release candidates.
-     Can be removed when we move to GA release of Spring boot -->
-		<pluginRepository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/libs-milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
 
     <build>
 		<plugins>
