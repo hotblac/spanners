@@ -1,4 +1,3 @@
-Implement UserDetailsManager for account maintenance
 Reinstate password encoder
 
 Wire up validation and tests
