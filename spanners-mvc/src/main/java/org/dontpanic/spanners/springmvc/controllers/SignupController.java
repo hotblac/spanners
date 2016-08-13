@@ -4,6 +4,7 @@ import org.dontpanic.spanners.springmvc.domain.User;
 import org.dontpanic.spanners.springmvc.forms.SignupForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -30,6 +31,8 @@ public class SignupController {
      */
     @Autowired private UserDetailsManager userDetailsManager;
 
+    @Autowired private PasswordEncoder passwordEncoder;
+
 	@RequestMapping(value = CONTROLLER_URL)
 	public SignupForm displayPage() {
 		return new SignupForm();
@@ -41,8 +44,11 @@ public class SignupController {
             return null;
         }
 
+        // Hash the password
+        String hashedPassword = passwordEncoder.encode(signupForm.getPassword());
+
         // Create the account
-        UserDetails userDetails = new User(signupForm.getName(), signupForm.getPassword(), ENABLED);
+        UserDetails userDetails = new User(signupForm.getName(), hashedPassword, ENABLED);
         userDetailsManager.createUser(userDetails);
 
         return VIEW_SUCCESS;
