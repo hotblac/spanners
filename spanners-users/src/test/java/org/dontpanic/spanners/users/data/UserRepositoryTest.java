@@ -1,11 +1,10 @@
 package org.dontpanic.spanners.users.data;
 
-import org.dontpanic.spanners.users.Application;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.*;
 
@@ -13,8 +12,8 @@ import static org.junit.Assert.*;
  * Spring framework tests on the user repository.
  * Created by stevie on 13/07/16.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
+@RunWith(SpringRunner.class)
+@SpringBootApplication
 public class UserRepositoryTest {
 
     private static final String USERNAME = "jbloggs";
