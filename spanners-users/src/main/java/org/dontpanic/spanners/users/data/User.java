@@ -4,8 +4,7 @@ package org.dontpanic.spanners.users.data;
  * Created by stevie on 13/07/16.
  */
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class User {

@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import static org.dontpanic.spanners.api.stubs.SpannerBuilder.aTestSpanner;
 import static org.hamcrest.Matchers.isEmptyString;
@@ -46,7 +45,6 @@ public class RestApiTest {
 
         // Test: retrieve all spanners from repository
         mockMvc.perform(get("/spanners"))
-                .andDo(MockMvcResultHandlers.print())
                 .andExpect(jsonPath("$._embedded.spanners[0].id", not(isEmptyString())));
     }
 }
