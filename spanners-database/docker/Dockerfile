@@ -10,7 +10,4 @@ ENV MYSQL_DATABASE=spanners
 ENV MYSQL_USER=spanners
 ENV MYSQL_PASSWORD=password
 
-
-
-
-
+CMD ["mysqld","--skip-performance-schema"]

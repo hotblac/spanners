@@ -71,7 +71,7 @@
 					<configuration>
 						<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
 						<baseImage>java:openjdk-8-jdk-alpine</baseImage>
-						<entryPoint>["java","-jar","/${project.build.finalName}.jar"]</entryPoint>
+						<entryPoint>["java","-Djava.security.egd=file:/dev/./urandom","-jar","/${project.build.finalName}.jar"]</entryPoint>
 						<serverId>docker-hub</serverId>
 						<skipDockerBuild>${docker.skip}</skipDockerBuild>
 						<resources>
