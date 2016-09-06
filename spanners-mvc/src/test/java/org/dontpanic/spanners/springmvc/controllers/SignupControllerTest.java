@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.validation.DirectFieldBindingResult;
 import org.springframework.validation.Errors;
@@ -13,6 +14,7 @@ import org.springframework.validation.Errors;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 /**
@@ -24,8 +26,10 @@ public class SignupControllerTest {
 
     private static final String NAME = "smith";
     private static final String PASSWORD = "password";
+    private static final String HASHED_PASSWORD = "XXXhashedpasswordXXX";
 
     @Mock private UserDetailsManager userDetailsManager;
+    @Mock private PasswordEncoder passwordEncoder;
     @InjectMocks private SignupController controller = new SignupController();
 
     @Test
@@ -51,6 +55,25 @@ public class SignupControllerTest {
 
         // Verify that the account was created for user
         verify(userDetailsManager).createUser(argThat(hasProperty("username", equalTo(NAME))));
+    }
+
+
+
+    /**
+     * Verify that hashed password is saved to userDetailsManager
+     */
+    @Test
+    public void testPasswordHash() {
+
+        given(passwordEncoder.encode(PASSWORD)).willReturn(HASHED_PASSWORD);
+
+        SignupForm form = populateForm(NAME, PASSWORD);
+        Errors noErrors = new DirectFieldBindingResult(form, "form");
+
+        controller.signup(form, noErrors);
+
+        // Verify that the hashed password was passed to the userDetailsManager
+        verify(userDetailsManager).createUser(argThat(hasProperty("password", equalTo(HASHED_PASSWORD))));
     }
 
 
