@@ -77,3 +77,8 @@
 
 4.2
 - Spring Boot 1.4.0.RC1
+
+4.3
+- Spring Boot 1.4.0.RELEASE
+- Add spanners-users service
+- Disable mysql performance schema to reduce memory requirement
