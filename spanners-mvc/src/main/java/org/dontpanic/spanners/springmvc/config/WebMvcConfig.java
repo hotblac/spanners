@@ -1,5 +1,6 @@
 package org.dontpanic.spanners.springmvc.config;
 
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +9,7 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 @Configuration
+@EnableDiscoveryClient
 public class WebMvcConfig {
 
 	private static final String MESSAGE_SOURCE = "/WEB-INF/i18n/messages";

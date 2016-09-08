@@ -3,7 +3,7 @@
 #
 discovery:
   ports:
-    - "8761:8080"
+    - "8761:8761"
   image: hotblac/disco:latest
   restart: always
 database:
@@ -36,6 +36,7 @@ users:
 mvc:
   image: hotblac/spanners-mvc:latest
   links:
+    - discovery:discovery
     - api:spanners-api
     - users:spanners-users
   ports:
