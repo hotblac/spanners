@@ -1,6 +1,11 @@
 #
 # Docker compose file for the latest container builds
 #
+discovery:
+  ports:
+    - "8761:8080"
+  image: hotblac/disco:latest
+  restart: always
 database:
   environment:
     MYSQL_ROOT_PASSWORD: my-secret-pw
