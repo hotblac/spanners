@@ -1,46 +1,50 @@
 #
 # Docker compose file for the latest container builds
 #
-discovery:
-  ports:
-    - "8761:8761"
-  image: hotblac/disco:latest
-  restart: always
-database:
-  environment:
-    MYSQL_ROOT_PASSWORD: my-secret-pw
-  # Expose port 3306 to host. Not for the application but
-  # handy to inspect the database from the host machine.
-  ports:
-    - "3306:3306"
-  image: hotblac/spanners-database:latest
-  restart: always
-api:
-  image: hotblac/spanners-api:latest
-  links:
-    - discovery:discovery
-    - database:spanners-database
-  # Expose service to host. Not for the application but
-  # handy to call the API direct from the host machine.
-  ports:
-    - "8090:8080"
-  restart: always
-users:
-  image: hotblac/spanners-users:latest
-  links:
-    - discovery:discovery
-    - database:spanners-database
-  # Expose service to host. Not for the application but
-  # handy to call the API direct from the host machine.
-  ports:
-    - "8091:8080"
-  restart: always
-mvc:
-  image: hotblac/spanners-mvc:latest
-  links:
-    - discovery:discovery
-    - api:spanners-api
-    - users:spanners-users
-  ports:
-    - "8080:8080"
-  restart: always
+version: '2'
+
+services:
+
+  discovery:
+    ports:
+      - "8761:8761"
+    image: hotblac/disco:latest
+    restart: always
+
+  database:
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+    # Expose port 3306 to host. Not for the application but
+    # handy to inspect the database from the host machine.
+    ports:
+      - "3306:3306"
+    image: hotblac/spanners-database:latest
+    restart: always
+
+  api:
+    image: hotblac/spanners-api:latest
+    links:
+      - discovery:discovery
+      - database:spanners-database
+    # Expose service to host. Not for the application but
+    # handy to call the API direct from the host machine.
+    ports:
+      - "8090:8080"
+    restart: always
+
+  users:
+    image: hotblac/spanners-users:latest
+    links:
+      - discovery:discovery
+      - database:spanners-database
+    # Expose service to host. Not for the application but
+    # handy to call the API direct from the host machine.
+    ports:
+      - "8091:8080"
+    restart: always
+
+  mvc:
+    image: hotblac/spanners-mvc:latest
+    ports:
+      - "8080:8080"
+    restart: always
