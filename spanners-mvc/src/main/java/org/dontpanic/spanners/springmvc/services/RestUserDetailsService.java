@@ -10,7 +10,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,11 +29,9 @@ public class RestUserDetailsService implements UserDetailsManager {
     private RestTemplate restTemplate;
 
     public RestUserDetailsService(RestTemplateBuilder builder,
-                                  ClientHttpRequestFactory requestFactory,
                                   @Value("${app.service.url.users}") String rootUri) {
 
-        restTemplate = builder.requestFactory(requestFactory)
-                                .messageConverters(halAwareMessageConverter())
+        restTemplate = builder.messageConverters(halAwareMessageConverter())
                                 .rootUri(rootUri).build();
     }
 
@@ -73,7 +70,7 @@ public class RestUserDetailsService implements UserDetailsManager {
         user.setUsername(username);
         user.setPassword(password);
 
-        HttpEntity<User> requestEntity = new HttpEntity<User>(user);
+        HttpEntity<User> requestEntity = new HttpEntity<>(user);
 
         restTemplate.exchange("/{0}", HttpMethod.PATCH, requestEntity, Void.class, username);
     }
