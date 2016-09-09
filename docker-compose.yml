@@ -6,6 +6,8 @@ version: '2'
 services:
 
   discovery:
+      # Expose port 8671 to host. Not for the application but
+      # handy to view the Eureka info page from the host machine.
     ports:
       - "8761:8761"
     image: hotblac/disco:latest
