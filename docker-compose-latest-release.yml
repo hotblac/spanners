@@ -1,38 +1,52 @@
 #
 # Docker compose for the last release of Spanners
 #
-database:
-  environment:
-    MYSQL_ROOT_PASSWORD: my-secret-pw
-  # Expose port 3306 to host. Not for the application but
-  # handy to inspect the database from the host machine.
-  ports:
-    - "3306:3306"
-  image: hotblac/spanners-database:4.3
-  restart: always
-api:
-  image: hotblac/spanners-api:4.3
-  links:
-    - database:spanners-database
-  # Expose service to host. Not for the application but
-  # handy to call the API direct from the host machine.
-  ports:
-    - "8090:8080"
-  restart: always
-users:
-  image: hotblac/spanners-users:4.3
-  links:
-    - database:spanners-database
-  # Expose service to host. Not for the application but
-  # handy to call the API direct from the host machine.
-  ports:
-    - "8091:8080"
-  restart: always
-mvc:
-  image: hotblac/spanners-mvc:4.3
-  links:
-    - api:spanners-api
-    - users:spanners-users
-  ports:
-    - "8080:8080"
-  restart: always
+version: '2'
+
+services:
+
+  discovery:
+      # Expose port 8671 to host. Not for the application but
+      # handy to view the Eureka info page from the host machine.
+    ports:
+      - "8761:8761"
+    image: hotblac/disco:4.4
+    restart: always
+
+  database:
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+    # Expose port 3306 to host. Not for the application but
+    # handy to inspect the database from the host machine.
+    ports:
+      - "3306:3306"
+    image: hotblac/spanners-database:4.4
+    restart: always
+
+  api:
+    image: hotblac/spanners-api:4.4
+    links:
+      - discovery:discovery
+      - database:spanners-database
+    # Expose service to host. Not for the application but
+    # handy to call the API direct from the host machine.
+    ports:
+      - "8090:8080"
+    restart: always
+
+  users:
+    image: hotblac/spanners-users:4.4
+    links:
+      - discovery:discovery
+      - database:spanners-database
+    # Expose service to host. Not for the application but
+    # handy to call the API direct from the host machine.
+    ports:
+      - "8091:8080"
+    restart: always
+
+  mvc:
+    image: hotblac/spanners-mvc:latest
+    ports:
+      - "8080:8080"
+    restart: always

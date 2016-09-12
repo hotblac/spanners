@@ -7,13 +7,15 @@ This demo contains:
     - Spring MVC web application
     - Spring Data REST API
 	- Spanners Users REST microservice
+	- MySQL database
+	- Eureka discovery server
 	
 Running the latest build in Docker Containers
 	The latest version of the application can be started in Docker containers (with Docker Compose) by following instructions in this post:
 	http://www.disasterarea.co.uk/blog/docker-part-4-composing-an-environment-stack/
 	1. Download the latest Docker Compose file https://raw.githubusercontent.com/hotblac/spanners-docker/master/docker-compose.yml
 	2. In the download directory, run docker-compose up -d
-	3. The application will download and start and can be accessed at http://localhost:8080/spanners-mvc/ (sign in as smith / password)
+	3. The application will download and start and can be accessed at http://localhost:8080/spanners-mvc/ (Click sign up to create a new account)
 
 	It is recommended that the application is run from these Docker containers. See below if you wish to manually set up a database and webserver.
     	

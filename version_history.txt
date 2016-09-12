@@ -82,3 +82,6 @@
 - Spring Boot 1.4.0.RELEASE
 - Add spanners-users service
 - Disable mysql performance schema to reduce memory requirement
+
+4.4
+- Add Eureka discovery server

@@ -1,5 +1,4 @@
 Wire up validation and tests
 Remove redundant SpannerForm and use annotated Spanner domain object instead
 Use HATEOAS links to navigate instead of using spanner ids in URLs. Once this is done, disable exposure of ids in spanners-api
-Set up Eureka for service discovery
 Angular
