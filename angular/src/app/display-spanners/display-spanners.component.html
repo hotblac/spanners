@@ -1,3 +1,14 @@
-<p>
-  display-spanners works!
-</p>
+<p>Welcome to the Spanners Angular 2 application!</p>
+<table>
+  <thead>
+    <tr>Name</tr>
+    <tr>Size</tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let spanner of spanners">
+      <td>{{spanner.name}}</td>
+      <td>{{spanner.size}}</td>
+    </tr>
+  </tbody>
+
+</table>
