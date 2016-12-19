@@ -6,18 +6,24 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { DisplaySpannersComponent } from './display-spanners/display-spanners.component';
 import {Routes, RouterModule} from "@angular/router";
+import { SplashComponent } from './splash/splash.component';
 
 const appRoutes: Routes = [
   {
     path: 'display-spanners',
     component: DisplaySpannersComponent
+  },
+  {
+    path: '',
+    component: SplashComponent
   }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    DisplaySpannersComponent
+    DisplaySpannersComponent,
+    SplashComponent
   ],
   imports: [
     BrowserModule,

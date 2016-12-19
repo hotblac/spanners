@@ -1,8 +1,26 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" routerLink="">Spanners</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active">
+              <a routerLink="/display-spanners" routerLinkActive="active">Display Spanners</a>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Login / Logout</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+  </nav>
 
-<nav>
-  <a routerLink="/display-spanners" routerLinkActive="active">Display Spanners</a>
-</nav>
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
+</div>
