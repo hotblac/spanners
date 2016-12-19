@@ -4,10 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { DisplaySpannersComponent } from './display-spanners/display-spanners.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DisplaySpannersComponent
   ],
   imports: [
     BrowserModule,
