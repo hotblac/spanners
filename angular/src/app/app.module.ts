@@ -5,6 +5,14 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { DisplaySpannersComponent } from './display-spanners/display-spanners.component';
+import {Routes, RouterModule} from "@angular/router";
+
+const appRoutes: Routes = [
+  {
+    path: 'display-spanners',
+    component: DisplaySpannersComponent
+  }
+];
 
 @NgModule({
   declarations: [
@@ -14,7 +22,8 @@ import { DisplaySpannersComponent } from './display-spanners/display-spanners.co
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
