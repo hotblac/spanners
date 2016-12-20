@@ -8,7 +8,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let spanner of spanners">
+      <tr *ngFor="let spanner of spanners" (click)="onSelect(spanner)">
         <td>{{spanner.name}}</td>
         <td>{{spanner.size}}</td>
       </tr>
