@@ -8,11 +8,16 @@ import { AppComponent } from './app.component';
 import { DisplaySpannersComponent } from './display-spanners/display-spanners.component';
 import {Routes, RouterModule} from "@angular/router";
 import { SplashComponent } from './splash/splash.component';
+import { DetailSpannerComponent } from './detail-spanner/detail-spanner.component';
 
 const appRoutes: Routes = [
   {
     path: 'display-spanners',
     component: DisplaySpannersComponent
+  },
+  {
+    path: 'detail-spanner',
+    component: DetailSpannerComponent
   },
   {
     path: '',
@@ -25,7 +30,8 @@ const appRoutes: Routes = [
     AppComponent,
     CollapseDirective,
     DisplaySpannersComponent,
-    SplashComponent
+    SplashComponent,
+    DetailSpannerComponent
   ],
   imports: [
     BrowserModule,
