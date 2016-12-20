@@ -2,17 +2,17 @@ import {Spanner} from "./spanner";
 
 export const SPANNERS: Spanner[] = [
   {
-    id: 1,
+    id: 0,
     name: 'Bertha',
     size: 12
   },
   {
-    id: 2,
+    id: 1,
     name: 'Keeley',
     size: 14
   },
   {
-    id: 3,
+    id: 2,
     name: 'Georgie',
     size: 15
   }

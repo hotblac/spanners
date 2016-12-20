@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Spanner} from "../spanner";
 import {SPANNERS} from "../mock-spanners";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-detail-spanner',
@@ -9,11 +10,14 @@ import {SPANNERS} from "../mock-spanners";
 })
 export class DetailSpannerComponent implements OnInit {
 
-  spanner: Spanner = SPANNERS[0];
+  id: number;
+  spanner: Spanner;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.id = this.route.snapshot.params['id'];
+    this.spanner = SPANNERS[this.id];
   }
 
 }

@@ -16,7 +16,7 @@ const appRoutes: Routes = [
     component: DisplaySpannersComponent
   },
   {
-    path: 'detail-spanner',
+    path: 'detail-spanner/:id',
     component: DetailSpannerComponent
   },
   {
