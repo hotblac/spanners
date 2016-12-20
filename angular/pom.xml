@@ -13,6 +13,32 @@
 
   <build>
     <plugins>
+      <!-- Build the angular app using the Angular-cli-->
+      <!-- Note that this will fail if the angular-cli executable (ng) is not installed on build machine -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.5.0</version>
+        <configuration>
+          <executable>ng</executable>
+          <arguments>
+            <argument>build</argument>
+            <argument>-prod</argument>
+            <argument>--aot</argument>
+          </arguments>
+        </configuration>
+        <executions>
+          <execution>
+            <id>ng-build</id>
+            <phase>package</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Create docker image containing the angular app -->
       <plugin>
         <groupId>com.spotify</groupId>
         <artifactId>docker-maven-plugin</artifactId>
