@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { CollapseDirective } from 'ng2-bootstrap';
+import { CollapseModule } from 'ng2-bootstrap';
 
 import { AppComponent } from './app.component';
 import { DisplaySpannersComponent } from './display-spanners/display-spanners.component';
@@ -28,7 +28,6 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    CollapseDirective,
     DisplaySpannersComponent,
     SplashComponent,
     DetailSpannerComponent
@@ -37,6 +36,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
+    CollapseModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],
