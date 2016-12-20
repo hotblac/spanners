@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Spanner} from "../spanner";
+import {SPANNERS} from "../mock-spanners";
 
 @Component({
   selector: 'app-display-spanners',
@@ -8,23 +9,7 @@ import {Spanner} from "../spanner";
 })
 export class DisplaySpannersComponent implements OnInit {
 
-  spanners: Spanner[] = [
-    {
-      id: 1,
-      name: 'Bertha',
-      size: 12
-    },
-    {
-      id: 2,
-      name: 'Keeley',
-      size: 14
-    },
-    {
-      id: 3,
-      name: 'Georgie',
-      size: 15
-    }
-  ];
+  spanners: Spanner[] = SPANNERS;
 
   constructor() { }
 
