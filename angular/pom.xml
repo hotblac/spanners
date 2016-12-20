@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>spanners</artifactId>
+    <groupId>org.dontpanic</groupId>
+    <version>4.5-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>angular</artifactId>
+  <packaging>pom</packaging>
+  <name>Spanners angular app</name>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <configuration>
+          <imageName>${docker.image.prefix}/spanners-angular</imageName>
+          <baseImage>nginx:1.10.2-alpine</baseImage>
+          <entryPoint>["nginx", "-g", "daemon off;"]</entryPoint>
+          <resources>
+            <resource>
+              <targetPath>/usr/share/nginx/html</targetPath>
+              <directory>${project.basedir}/dist</directory>
+              <include>*</include>
+            </resource>
+          </resources>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

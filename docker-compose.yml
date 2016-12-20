@@ -50,3 +50,9 @@ services:
     ports:
       - "8080:8080"
     restart: always
+
+  angular:
+    image: hotblac/spanners-angular:latest
+    ports:
+      - "8081:80"
+    restart: always

@@ -20,6 +20,7 @@
 		<module>spanners-database</module>
 		<module>spanners-users</module>
 		<module>disco</module>
+		<module>angular</module>
 	</modules>
 
 	<properties>
