@@ -6,3 +6,9 @@ jdk:
 sudo: required
 services:
   - docker
+
+# Current node and Angular-CLI required for Angular build
+before_install:
+- nvm install --lts=boron
+- npm install -g angular-cli
+- npm install --prefix angular
