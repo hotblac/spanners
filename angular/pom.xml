@@ -26,6 +26,7 @@
             <argument>-prod</argument>
             <argument>--aot</argument>
           </arguments>
+          <skip>${docker.skip}</skip>
         </configuration>
         <executions>
           <execution>
