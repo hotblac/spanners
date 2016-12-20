@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Spanner} from "../spanner";
 import {SPANNERS} from "../mock-spanners";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-display-spanners',
@@ -12,13 +11,9 @@ export class DisplaySpannersComponent implements OnInit {
 
   spanners: Spanner[] = SPANNERS;
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  onSelect(spanner: Spanner) {
-    this.router.navigate(['/detail-spanner', spanner.id]);
   }
 
 }

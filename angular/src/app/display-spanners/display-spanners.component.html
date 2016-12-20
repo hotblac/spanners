@@ -8,9 +8,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let spanner of spanners" (click)="onSelect(spanner)">
+      <tr *ngFor="let spanner of spanners">
         <td>{{spanner.name}}</td>
-        <td>{{spanner.size}}</td>
+        <td>
+          {{spanner.size}}
+          <a routerLink="/detail-spanner/{{spanner.id}}">
+            <span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span>
+          </a>
+        </td>
       </tr>
     </tbody>
   </table>
