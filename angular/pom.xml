@@ -22,6 +22,7 @@
           <filesets>
             <fileset>
               <directory>${project.basedir}/dist</directory>
+              <directory>${project.basedir}/node_modules</directory>
             </fileset>
           </filesets>
         </configuration>
@@ -34,12 +35,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>1.5.0</version>
         <configuration>
-          <executable>ng</executable>
-          <arguments>
-            <argument>build</argument>
-            <argument>-prod</argument>
-            <argument>--aot</argument>
-          </arguments>
+          <executable>./build.sh</executable>
           <skip>${docker.skip}</skip>
         </configuration>
         <executions>
