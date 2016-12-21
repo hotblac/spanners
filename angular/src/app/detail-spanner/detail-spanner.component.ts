@@ -10,14 +10,15 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class DetailSpannerComponent implements OnInit {
 
-  id: number;
   spanner: Spanner;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
-    this.spanner = SPANNERS[this.id];
+    this.route.params.subscribe(params => {
+      const id : number = +params['id'];
+      this.spanner = SPANNERS[id];
+    });
   }
 
 }
