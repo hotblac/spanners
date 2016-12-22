@@ -5,19 +5,29 @@ import { DebugElement } from '@angular/core';
 
 import { DisplaySpannersComponent } from './display-spanners.component';
 import {RouterTestingModule} from "@angular/router/testing";
-import {SPANNERS} from "../mock-spanners";
+import {SpannersService} from "../spanners.service";
+import {Spanner} from "../spanner";
 
 describe('DisplaySpannersComponent', () => {
   let component: DisplaySpannersComponent;
   let fixture: ComponentFixture<DisplaySpannersComponent>;
   let compiledPage: DebugElement;
 
-  const expectedSpanners = SPANNERS;
+  const expectedSpanners: Spanner[] = [
+    {id: 0, name: 'Bertha', size: 12},
+    {id: 1, name: 'Keeley', size: 14},
+    {id: 2, name: 'Georgie', size: 15}
+  ];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ DisplaySpannersComponent ],
       imports: [RouterTestingModule],
+      providers: [
+        {provide: SpannersService, useValue: {
+          getSpanners(): Spanner[] {return expectedSpanners;}
+        }}
+      ]
     })
     .compileComponents();
   }));
