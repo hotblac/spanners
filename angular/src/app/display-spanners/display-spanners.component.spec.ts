@@ -7,6 +7,7 @@ import { DisplaySpannersComponent } from './display-spanners.component';
 import {RouterTestingModule} from "@angular/router/testing";
 import {SpannersService} from "../spanners.service";
 import {Spanner} from "../spanner";
+import {Observable} from "rxjs";
 
 describe('DisplaySpannersComponent', () => {
   let component: DisplaySpannersComponent;
@@ -25,7 +26,7 @@ describe('DisplaySpannersComponent', () => {
       imports: [RouterTestingModule],
       providers: [
         {provide: SpannersService, useValue: {
-          getSpanners(): Spanner[] {return expectedSpanners;}
+          getSpanners(): Observable<Spanner[]> {return Observable.of(expectedSpanners);}
         }}
       ]
     })
