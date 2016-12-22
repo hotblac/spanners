@@ -28,4 +28,8 @@ export class SpannersService {
     return this.SPANNERS;
   }
 
+  getSpanner(id: number): Spanner {
+    return this.SPANNERS[id];
+  }
+
 }
