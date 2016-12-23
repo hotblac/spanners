@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -24,6 +25,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration
 @AutoConfigureMockMvc
 public class RestApiTest {
+
+    private static final String ALLOWED_ORIGIN = "example.com";
 
     @Autowired
     private MockMvc mockMvc;
@@ -46,5 +49,14 @@ public class RestApiTest {
         // Test: retrieve all spanners from repository
         mockMvc.perform(get("/spanners"))
                 .andExpect(jsonPath("$._embedded.spanners[0].id", not(isEmptyString())));
+    }
+
+
+    @Test
+    public void testCorsAllowedFromAllowedOrigin() throws Exception {
+        mockMvc.perform(get("/spanners")
+                        .header(HttpHeaders.ORIGIN, ALLOWED_ORIGIN))
+                .andExpect(header().string(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, ALLOWED_ORIGIN))
+                .andExpect(status().isOk());
     }
 }
