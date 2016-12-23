@@ -14,7 +14,9 @@ export class DisplaySpannersComponent implements OnInit {
   constructor(private spannersService: SpannersService) { }
 
   ngOnInit() {
-    this.spannersService.getSpanners().subscribe(spanners => this.spanners = spanners);
+    this.spannersService.getSpanners().subscribe(
+      spanners => this.spanners = spanners
+    );
   }
 
 }

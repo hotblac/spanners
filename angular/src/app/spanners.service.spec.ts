@@ -58,9 +58,8 @@ describe('SpannersService', () => {
   }
 
   const expectedSpanners: Spanner[] = [
-    {id: 0, name: 'Bertha', size: 12},
-    {id: 1, name: 'Keeley', size: 14},
-    {id: 2, name: 'Georgie', size: 15}
+    {id: 1, name: 'Keeley', size: 12},
+    {id: 2, name: 'Bertha', size: 14}
   ];
 
   beforeEach(() => {
@@ -88,6 +87,7 @@ describe('SpannersService', () => {
 
   it('should fetch all spanners from http', inject([SpannersService], (service: SpannersService) => {
 
+    // Mock backend will return mock getSpanners response
     mockBackend.connections.subscribe(
       (connection: MockConnection) => {
         connection.mockRespond(new Response(
@@ -98,13 +98,16 @@ describe('SpannersService', () => {
       }
     );
 
-    // TODO expect(service.getSpanners()).toBe(expectedSpanners);
-  }));
-
-  it('should return all spanners', inject([SpannersService], (service: SpannersService) => {
-    service.getSpanners().subscribe((spanners: Spanner[]) => {
-      expect(spanners).toBe(service.SPANNERS);
-    });
+    service.getSpanners().subscribe(
+      response => {
+        // Check response length and content against expected results
+        expect(response.length).toBe(expectedSpanners.length);
+        for (let el in response) {
+          expect(response[el].id).toBe(expectedSpanners[el].id);
+          expect(response[el].name).toBe(expectedSpanners[el].name)
+        }
+      }
+    );
   }));
 
   it('should return a spanner by id', inject([SpannersService], (service: SpannersService) => {

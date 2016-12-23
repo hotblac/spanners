@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Spanner} from "./spanner";
-import {Http} from "@angular/http";
+import {Http, Response} from "@angular/http";
 import {Observable} from "rxjs";
 
 @Injectable()
@@ -29,7 +29,8 @@ export class SpannersService {
   constructor(private http: Http) { }
 
   getSpanners(): Observable<Spanner[]> {
-    return Observable.of(this.SPANNERS);
+    return this.http.get(this.restEndpoint)
+      .map((response: Response) => <Spanner[]> response.json()._embedded.spanners);
   }
 
   getSpanner(id: number): Spanner {
