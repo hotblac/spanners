@@ -33,8 +33,8 @@ export class SpannersService {
       .map((response: Response) => <Spanner[]> response.json()._embedded.spanners);
   }
 
-  getSpanner(id: number): Spanner {
-    return this.SPANNERS[id];
+  getSpanner(id: number): Observable<Spanner> {
+    return Observable.of(this.SPANNERS[id]);
   }
 
 }

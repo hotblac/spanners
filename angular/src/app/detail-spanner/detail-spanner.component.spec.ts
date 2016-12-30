@@ -27,7 +27,7 @@ describe('DetailSpannerComponent', () => {
           'params': Observable.from([{ 'id': expectedSpannerId }])
         }},
         {provide: SpannersService, useValue: {
-          getSpanner(expectedSpannerId): Spanner {return expectedSpanner;}
+          getSpanner(expectedSpannerId): Observable<Spanner> {return Observable.of(expectedSpanner);}
         }}
       ]
     })

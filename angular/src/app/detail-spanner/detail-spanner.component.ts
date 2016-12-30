@@ -18,7 +18,9 @@ export class DetailSpannerComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       const id : number = +params['id'];
-      this.spanner = this.spannersService.getSpanner(id);
+      this.spannersService.getSpanner(id).subscribe(
+        spanner => this.spanner = spanner
+      );
     });
   }
 

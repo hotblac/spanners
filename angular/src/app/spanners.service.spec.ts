@@ -55,7 +55,22 @@ describe('SpannersService', () => {
       "totalPages" : 1,
       "number" : 0
     }
-  }
+  };
+
+  const getSpannerResponse = {
+    "id": 1,
+    "name": "Georgie",
+    "size": 15,
+    "owner": "smith",
+    "_links": {
+      "self": {
+        "href": "http://localhost:8090/spanners/1"
+      },
+      "spanner": {
+        "href": "http://localhost:8090/spanners/1"
+      }
+    }
+  };
 
   const expectedSpanners: Spanner[] = [
     {id: 1, name: 'Keeley', size: 12},
@@ -110,7 +125,30 @@ describe('SpannersService', () => {
     );
   }));
 
+  it('should fetch a single spanner from http', inject([SpannersService], (service: SpannersService) => {
+
+    // Mock backend will return mock getSpanner response
+    mockBackend.connections.subscribe(
+      (connection: MockConnection) => {
+        connection.mockRespond(new Response(
+          new ResponseOptions({
+            body: getSpannerResponse
+          })
+        ));
+      }
+    );
+
+    // TODO
+
+  }));
+
   it('should return a spanner by id', inject([SpannersService], (service: SpannersService) => {
-    expect(service.getSpanner(spannerId)).toBe(service.SPANNERS[spannerId]);
+    service.getSpanner(spannerId).subscribe(
+      response => {
+        expect(response.id).toBe(service.SPANNERS[spannerId].id);
+        expect(response.name).toBe(service.SPANNERS[spannerId].name);
+        expect(response.size).toBe(service.SPANNERS[spannerId].size);
+      }
+    );
   }));
 });
