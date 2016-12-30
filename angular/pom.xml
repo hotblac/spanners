@@ -63,6 +63,11 @@
               <directory>${project.basedir}/dist</directory>
               <include>*</include>
             </resource>
+            <resource>
+              <targetPath>/etc/nginx/conf.d/</targetPath>
+              <directory>${project.basedir}/docker</directory>
+              <include>*.conf</include>
+            </resource>
           </resources>
         </configuration>
       </plugin>
