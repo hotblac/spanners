@@ -114,8 +114,10 @@ describe('SpannersService', () => {
       }
     );
 
+    let serviceResponded: boolean = false;
     service.getSpanners().subscribe(
       response => {
+        serviceResponded = true;
         // Check response length and content against expected results
         expect(response.length).toBe(expectedSpanners.length);
         for (let el in response) {
@@ -125,6 +127,7 @@ describe('SpannersService', () => {
         }
       }
     );
+    expect(serviceResponded).toBeTruthy("No response from service.getSpanners()");
   }));
 
   it('should fetch a single spanner from http', inject([SpannersService], (service: SpannersService) => {
@@ -140,23 +143,17 @@ describe('SpannersService', () => {
       }
     );
 
+    let serviceResponded: boolean = false;
     service.getSpanner(spannerId).subscribe(
       response => {
+        serviceResponded = true;
         expect(response.id).toBe(expectedSpanner.id);
         expect(response.name).toBe(expectedSpanner.name);
         expect(response.size).toBe(expectedSpanner.size);
       }
     );
+    expect(serviceResponded).toBeTruthy("No response from service.getSpanner(spannerId)");
 
   }));
 
-  it('should return a spanner by id', inject([SpannersService], (service: SpannersService) => {
-    service.getSpanner(spannerId).subscribe(
-      response => {
-        expect(response.id).toBe(service.SPANNERS[spannerId].id);
-        expect(response.name).toBe(service.SPANNERS[spannerId].name);
-        expect(response.size).toBe(service.SPANNERS[spannerId].size);
-      }
-    );
-  }));
 });

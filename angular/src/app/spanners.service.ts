@@ -8,24 +8,6 @@ export class SpannersService {
 
   restEndpoint = 'http://localhost:8090/spanners';
 
-  SPANNERS: Spanner[] = [
-    {
-      id: 0,
-      name: 'BerthaXX',
-      size: 192
-    },
-    {
-      id: 1,
-      name: 'KeeleXy',
-      size: 194
-    },
-    {
-      id: 2,
-      name: 'GeoXXXrgie',
-      size: 195
-    }
-  ];
-
   constructor(private http: Http) { }
 
   getSpanners(): Observable<Spanner[]> {
@@ -35,14 +17,7 @@ export class SpannersService {
 
   getSpanner(id: number): Observable<Spanner> {
     return this.http.get(this.restEndpoint + '/' + id)
-      .map((response: Response) => <Spanner> response.json())
-      .do(data => console.log('getSpanner: ' +  JSON.stringify(data)))
-      .catch(this.handleError);
-  }
-
-  private handleError(error: Response) {
-    console.error(error);
-    return Observable.throw(error.json().error || 'Server error');
+      .map((response: Response) => <Spanner> response.json());
   }
 
 }
