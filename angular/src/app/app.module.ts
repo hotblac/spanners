@@ -9,6 +9,7 @@ import { DisplaySpannersComponent } from './display-spanners/display-spanners.co
 import {Routes, RouterModule} from "@angular/router";
 import { SplashComponent } from './splash/splash.component';
 import { DetailSpannerComponent } from './detail-spanner/detail-spanner.component';
+import {SpannersService} from "./spanners.service";
 
 const appRoutes: Routes = [
   {
@@ -39,7 +40,7 @@ const appRoutes: Routes = [
     CollapseModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [SpannersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

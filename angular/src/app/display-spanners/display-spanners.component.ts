@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Spanner} from "../spanner";
-import {SPANNERS} from "../mock-spanners";
+import {SpannersService} from "../spanners.service";
 
 @Component({
   selector: 'app-display-spanners',
@@ -9,11 +9,14 @@ import {SPANNERS} from "../mock-spanners";
 })
 export class DisplaySpannersComponent implements OnInit {
 
-  spanners: Spanner[] = SPANNERS;
+  spanners: Spanner[];
 
-  constructor() { }
+  constructor(private spannersService: SpannersService) { }
 
   ngOnInit() {
+    this.spannersService.getSpanners().subscribe(
+      spanners => this.spanners = spanners
+    );
   }
 
 }
