@@ -58,10 +58,10 @@ describe('SpannersService', () => {
   };
 
   const getSpannerResponse = {
-    "id": 1,
-    "name": "Georgie",
-    "size": 15,
-    "owner": "smith",
+    "id" : 1,
+    "name" : "Keeley",
+    "size" : 12,
+    "owner" : "smith",
     "_links": {
       "self": {
         "href": "http://localhost:8090/spanners/1"
@@ -76,6 +76,7 @@ describe('SpannersService', () => {
     {id: 1, name: 'Keeley', size: 12},
     {id: 2, name: 'Bertha', size: 14}
   ];
+  const expectedSpanner: Spanner = expectedSpanners[0];
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -119,7 +120,8 @@ describe('SpannersService', () => {
         expect(response.length).toBe(expectedSpanners.length);
         for (let el in response) {
           expect(response[el].id).toBe(expectedSpanners[el].id);
-          expect(response[el].name).toBe(expectedSpanners[el].name)
+          expect(response[el].name).toBe(expectedSpanners[el].name);
+          expect(response[el].size).toBe(expectedSpanners[el].size);
         }
       }
     );
@@ -138,7 +140,13 @@ describe('SpannersService', () => {
       }
     );
 
-    // TODO
+    service.getSpanner(spannerId).subscribe(
+      response => {
+        expect(response.id).toBe(expectedSpanner.id);
+        expect(response.name).toBe(expectedSpanner.name);
+        expect(response.size).toBe(expectedSpanner.size);
+      }
+    );
 
   }));
 

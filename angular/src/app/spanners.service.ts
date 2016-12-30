@@ -34,7 +34,15 @@ export class SpannersService {
   }
 
   getSpanner(id: number): Observable<Spanner> {
-    return Observable.of(this.SPANNERS[id]);
+    return this.http.get(this.restEndpoint + '/' + id)
+      .map((response: Response) => <Spanner> response.json())
+      .do(data => console.log('getSpanner: ' +  JSON.stringify(data)))
+      .catch(this.handleError);
+  }
+
+  private handleError(error: Response) {
+    console.error(error);
+    return Observable.throw(error.json().error || 'Server error');
   }
 
 }
