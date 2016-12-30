@@ -6,7 +6,7 @@ import {Observable} from "rxjs";
 @Injectable()
 export class SpannersService {
 
-  restEndpoint = 'http://localhost:8090/spanners';
+  restEndpoint = '/spanners';
 
   constructor(private http: Http) { }
 
