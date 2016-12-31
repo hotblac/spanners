@@ -15,11 +15,29 @@
           <li><a routerLink="/display-spanners" routerLinkActive="active">Display Spanners</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Login / Logout</a></li>
+          <li>
+            <a href="javascript:void(0)" (click)="loginWarnModal.show()">Login / Logout</a>
+          </li>
         </ul>
       </div><!--/.nav-collapse -->
     </div><!--/.container-fluid -->
   </nav>
 
   <router-outlet></router-outlet>
+</div>
+
+<div bsModal #loginWarnModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="login-warn-modal-title" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="loginWarnModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="login-warn-modal-title">Not available</h4>
+      </div>
+      <div class="modal-body">
+        <p>The login / logout functionality is not yet implemented.</p>
+      </div>
+    </div>
+  </div>
 </div>
