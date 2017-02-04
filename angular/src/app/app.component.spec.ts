@@ -2,7 +2,7 @@
 
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import {CollapseModule} from "ng2-bootstrap";
+import {CollapseModule, ModalModule} from "ng2-bootstrap";
 import {RouterTestingModule} from "@angular/router/testing";
 
 describe('AppComponent', () => {
@@ -13,6 +13,7 @@ describe('AppComponent', () => {
       ],
       imports: [
         CollapseModule,
+        ModalModule.forRoot(),
         RouterTestingModule
       ]
     });
