@@ -151,23 +151,4 @@
 		</extensions>
     </build>
 
-	<profiles>
-		<!-- Angular is managed by npm, not Maven so is skipped by default.
-		     However, we can choose to trigger it from a maven build with
-		     this profile. -->
-		<profile>
-			<id>rebuildAngular</id>
-			<activation>
-				<!-- Activate this profile on Travis CI builds -->
-				<property>
-					<name>env.TRAVIS</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<modules>
-				<module>angular</module>
-			</modules>
-		</profile>
-	</profiles>
-
 </project>
