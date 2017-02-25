@@ -165,6 +165,18 @@
 			</activation>
 		</profile>
 		<profile>
+			<id>enableDocker-win10</id>
+			<properties>
+				<docker.skip>false</docker.skip>
+			</properties>
+			<activation>
+				<!-- Activate on Windows 10 systems with native Docker. Check for docker.exe in default install directory -->
+				<file>
+					<exists>C:\Program Files\Docker\Docker\resources\bin\docker.exe</exists>
+				</file>
+			</activation>
+		</profile>
+		<profile>
 			<id>enableDocker-toolbox</id>
 			<properties>
 				<docker.skip>false</docker.skip>
