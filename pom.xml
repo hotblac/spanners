@@ -23,9 +23,9 @@
 	</modules>
 
 	<properties>
-		<!-- Set docker.skip to true to disable Docker.
-			 Useful to build apps on systems where Docker is not installed. -->
-		<docker.skip>false</docker.skip>
+		<!-- Skip docker build by default as docker may not be available.
+		     The enableDocker profile will attempt to detect docker and enable the docker build -->
+		<docker.skip>true</docker.skip>
 		<docker.repository>docker.io</docker.repository>
 		<docker.image.prefix>hotblac</docker.image.prefix>
 	</properties>
@@ -150,5 +150,32 @@
 			</extension>
 		</extensions>
     </build>
+
+	<profiles>
+		<profile>
+			<id>enableDocker-linux</id>
+			<properties>
+				<docker.skip>false</docker.skip>
+			</properties>
+			<activation>
+				<!-- Activate on Linux systems. Assume presence of docker.pid file indicates Docker is available -->
+				<file>
+					<exists>/var/run/docker.pid</exists>
+				</file>
+			</activation>
+		</profile>
+		<profile>
+			<id>enableDocker-toolbox</id>
+			<properties>
+				<docker.skip>false</docker.skip>
+			</properties>
+			<activation>
+					<!-- Activate on Windows (Docker Toolbox) systems. Assume presence of DOCKER_HOST indicates Docker is available -->
+				<property>
+					<name>env.DOCKER_HOST</name>
+				</property>
+			</activation>
+		</profile>
+	</profiles>
 
 </project>
