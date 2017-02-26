@@ -81,13 +81,13 @@
 				<plugin>
 					<groupId>com.spotify</groupId>
 					<artifactId>docker-maven-plugin</artifactId>
-					<version>0.4.10</version>
+					<version>0.4.13</version>
 					<configuration>
 						<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
 						<baseImage>java:openjdk-8-jdk-alpine</baseImage>
 						<entryPoint>["java","-Djava.security.egd=file:/dev/./urandom","-jar","/${project.build.finalName}.jar"]</entryPoint>
 						<serverId>docker-hub</serverId>
-						<skipDockerBuild>${docker.skip}</skipDockerBuild>
+						<skipDocker>${docker.skip}</skipDocker>
 						<resources>
 							<!-- copy the service's jar file from target into the root directory of the image -->
 							<resource>
