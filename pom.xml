@@ -23,9 +23,9 @@
 	</modules>
 
 	<properties>
-		<!-- Set docker.skip to true to disable Docker.
-			 Useful to build apps on systems where Docker is not installed. -->
-		<docker.skip>false</docker.skip>
+		<!-- Skip docker build by default as docker may not be available.
+		     The enableDocker profile will attempt to detect docker and enable the docker build -->
+		<docker.skip>true</docker.skip>
 		<docker.repository>docker.io</docker.repository>
 		<docker.image.prefix>hotblac</docker.image.prefix>
 	</properties>
@@ -81,13 +81,13 @@
 				<plugin>
 					<groupId>com.spotify</groupId>
 					<artifactId>docker-maven-plugin</artifactId>
-					<version>0.4.10</version>
+					<version>0.4.13</version>
 					<configuration>
 						<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
 						<baseImage>java:openjdk-8-jdk-alpine</baseImage>
 						<entryPoint>["java","-Djava.security.egd=file:/dev/./urandom","-jar","/${project.build.finalName}.jar"]</entryPoint>
 						<serverId>docker-hub</serverId>
-						<skipDockerBuild>${docker.skip}</skipDockerBuild>
+						<skipDocker>${docker.skip}</skipDocker>
 						<resources>
 							<!-- copy the service's jar file from target into the root directory of the image -->
 							<resource>
@@ -150,5 +150,44 @@
 			</extension>
 		</extensions>
     </build>
+
+	<profiles>
+		<profile>
+			<id>enableDocker-linux</id>
+			<properties>
+				<docker.skip>false</docker.skip>
+			</properties>
+			<activation>
+				<!-- Activate on Linux systems. Assume presence of docker.pid file indicates Docker is available -->
+				<file>
+					<exists>/var/run/docker.pid</exists>
+				</file>
+			</activation>
+		</profile>
+		<profile>
+			<id>enableDocker-win10</id>
+			<properties>
+				<docker.skip>false</docker.skip>
+			</properties>
+			<activation>
+				<!-- Activate on Windows 10 systems with native Docker. Check for docker.exe in default install directory -->
+				<file>
+					<exists>C:\Program Files\Docker\Docker\resources\bin\docker.exe</exists>
+				</file>
+			</activation>
+		</profile>
+		<profile>
+			<id>enableDocker-toolbox</id>
+			<properties>
+				<docker.skip>false</docker.skip>
+			</properties>
+			<activation>
+					<!-- Activate on Windows (Docker Toolbox) systems. Assume presence of DOCKER_HOST indicates Docker is available -->
+				<property>
+					<name>env.DOCKER_HOST</name>
+				</property>
+			</activation>
+		</profile>
+	</profiles>
 
 </project>
