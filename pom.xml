@@ -38,8 +38,8 @@
 
     <distributionManagement>
 		<repository>
-		  <id>disasterarea-ftp</id>
-		  <url>ftp://user20247.vs.easily.co.uk/website/maven</url>
+		  <id>maven-disasterarea-ftp</id>
+		  <url>ftp://maven.disasterarea.co.uk/maven</url>
 		</repository>
     </distributionManagement>
 

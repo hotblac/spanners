@@ -85,3 +85,7 @@
 
 4.4
 - Add Eureka discovery server
+
+4.5
+- Disable Docker build unless Docker is detected
+- CORS to support spanners-angular app
