@@ -22,3 +22,4 @@ Technologies covered in previous versions:
 - SOAP / Spring-WS
 - SAML federated sign in
 - Node.js and Websocket push notification
+- Angular 2
