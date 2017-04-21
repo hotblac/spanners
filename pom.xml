@@ -23,6 +23,12 @@
 	</modules>
 
 	<properties>
+
+		<!-- Workaround for defect in version 1.1.7.
+		     Upgrading Spring Boot will resolve this, but causes issues with
+		     tiles and JSPs -->
+		<logback.version>1.1.8</logback.version>
+
 		<!-- Skip docker build by default as docker may not be available.
 		     The enableDocker profile will attempt to detect docker and enable the docker build -->
 		<docker.skip>true</docker.skip>
@@ -52,6 +58,19 @@
 				<version>Brixton.SR5</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>net.logstash.logback</groupId>
+				<artifactId>logstash-logback-encoder</artifactId>
+				<version>4.9</version>
+				<!-- Exclude older version of logback-core for conflicting with newer in spring-boot,
+                see https://github.com/logstash/logstash-logback-encoder/issues/153 -->
+				<exclusions>
+					<exclusion>
+						<artifactId>logback-core</artifactId>
+						<groupId>ch.qos.logback</groupId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

@@ -50,3 +50,11 @@ services:
     ports:
       - "8080:8080"
     restart: always
+    networks:
+          - default
+          - elk
+
+networks:
+  elk:
+    external:
+      name: dockerelk_elk
