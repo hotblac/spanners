@@ -1,6 +1,8 @@
 package org.dontpanic.spanners.springmvc.controllers;
 
 import org.dontpanic.spanners.springmvc.forms.SignupForm;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -11,6 +13,11 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.validation.DirectFieldBindingResult;
 import org.springframework.validation.Errors;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.junit.Assert.assertEquals;
@@ -31,6 +38,25 @@ public class SignupControllerTest {
     @Mock private UserDetailsManager userDetailsManager;
     @Mock private PasswordEncoder passwordEncoder;
     @InjectMocks private SignupController controller = new SignupController();
+
+    private PrintStream sysOut;
+    private PrintStream sysErr;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+
+    @Before
+    public void setUpStreams() {
+        sysOut = System.out;
+        sysErr = System.err;
+        System.setOut(new PrintStream(outContent));
+        System.setErr(new PrintStream(errContent));
+    }
+
+    @After
+    public void revertStreams() {
+        System.setOut(sysOut);
+        System.setErr(sysErr);
+    }
 
     @Test
     public void testSuccessForward() {
@@ -74,6 +100,29 @@ public class SignupControllerTest {
 
         // Verify that the hashed password was passed to the userDetailsManager
         verify(userDetailsManager).createUser(argThat(hasProperty("password", equalTo(HASHED_PASSWORD))));
+    }
+
+
+    @Test
+    public void testValidationFailIsLogged() {
+        SignupForm invalidForm = populateForm(null, null);
+        Errors errors = new DirectFieldBindingResult(invalidForm, "form");
+        errors.rejectValue("name", "Invalid name");
+        errors.rejectValue("password", "Invalid password");
+
+        controller.signup(invalidForm, errors);
+
+        assertThat(outContent.toString(), containsString("Oh no!"));
+    }
+
+    @Test
+    public void testSuccessIsLogged() {
+        SignupForm form = populateForm(NAME, PASSWORD);
+        Errors noErrors = new DirectFieldBindingResult(form, "form");
+
+        controller.signup(form, noErrors);
+
+        assertThat(outContent.toString(), containsString("Success!"));
     }
 
 
