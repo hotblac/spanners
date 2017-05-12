@@ -6,9 +6,9 @@ public class SignupForm {
 
 	private static final String NOT_BLANK_MESSAGE = "{notBlank.message}";
 
-	@NotBlank(message = SignupForm.NOT_BLANK_MESSAGE)
+	@NotBlank(message = NOT_BLANK_MESSAGE)
 	private String name;
-	@NotBlank(message = SignupForm.NOT_BLANK_MESSAGE)
+	@NotBlank(message = NOT_BLANK_MESSAGE)
 	private String password;
 
 	public String getName() {
