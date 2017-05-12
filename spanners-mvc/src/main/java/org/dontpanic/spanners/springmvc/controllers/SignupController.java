@@ -1,5 +1,6 @@
 package org.dontpanic.spanners.springmvc.controllers;
 
+import org.apache.log4j.Logger;
 import org.dontpanic.spanners.springmvc.domain.User;
 import org.dontpanic.spanners.springmvc.forms.SignupForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ import javax.validation.Valid;
 @Controller
 public class SignupController {
 
+    private Logger log = Logger.getLogger(SignupController.class);
+
     public static final String CONTROLLER_URL = "/signup";
 	public static final String VIEW_SUCCESS = "redirect:/";
 
@@ -40,7 +43,9 @@ public class SignupController {
 
     @RequestMapping(value = CONTROLLER_URL, method = RequestMethod.POST)
     public String signup(@Valid @ModelAttribute SignupForm signupForm, Errors errors) {
+
         if (errors.hasErrors()) {
+            log.warn("Oh no! Signup failed as there are validation errors.");
             return null;
         }
 
@@ -50,6 +55,8 @@ public class SignupController {
         // Create the account
         UserDetails userDetails = new User(signupForm.getName(), hashedPassword, ENABLED);
         userDetailsManager.createUser(userDetails);
+
+        log.info("Success! Created new user " + userDetails.getUsername());
 
         return VIEW_SUCCESS;
     }

@@ -1,6 +1,8 @@
 package org.dontpanic.spanners.springmvc.controllers;
 
 import org.dontpanic.spanners.springmvc.forms.SignupForm;
+import org.dontpanic.spanners.springmvc.rules.SystemOutResource;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -11,6 +13,8 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.validation.DirectFieldBindingResult;
 import org.springframework.validation.Errors;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.junit.Assert.assertEquals;
@@ -31,6 +35,8 @@ public class SignupControllerTest {
     @Mock private UserDetailsManager userDetailsManager;
     @Mock private PasswordEncoder passwordEncoder;
     @InjectMocks private SignupController controller = new SignupController();
+
+    @Rule public SystemOutResource sysOut = new SystemOutResource();
 
     @Test
     public void testSuccessForward() {
@@ -74,6 +80,29 @@ public class SignupControllerTest {
 
         // Verify that the hashed password was passed to the userDetailsManager
         verify(userDetailsManager).createUser(argThat(hasProperty("password", equalTo(HASHED_PASSWORD))));
+    }
+
+
+    @Test
+    public void testValidationFailIsLogged() {
+        SignupForm invalidForm = populateForm(null, null);
+        Errors errors = new DirectFieldBindingResult(invalidForm, "form");
+        errors.rejectValue("name", "Invalid name");
+        errors.rejectValue("password", "Invalid password");
+
+        controller.signup(invalidForm, errors);
+
+        assertThat(sysOut.asString(), containsString("Oh no!"));
+    }
+
+    @Test
+    public void testSuccessIsLogged() {
+        SignupForm form = populateForm(NAME, PASSWORD);
+        Errors noErrors = new DirectFieldBindingResult(form, "form");
+
+        controller.signup(form, noErrors);
+
+        assertThat(sysOut.asString(), containsString("Success!"));
     }
 
 
