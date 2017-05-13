@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-	<form class="form" action="#" th:action="@{/signup}" th:object="${signupForm}" method="post">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+	<form layout:fragment="content" class="form" action="#" th:action="@{/signup}" th:object="${signupForm}" method="post">
 		<h2 class="form-heading">Please Sign Up</h2>
 		<input type="text" th:field="*{name}" class="input-block-level" placeholder="Username" />
 		<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-error"/>

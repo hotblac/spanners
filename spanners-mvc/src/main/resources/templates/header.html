@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="header" class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span>
+			</a> 
+			<a class="brand" href="#">Spanners</a>
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+					<li class="active"><a href="/displaySpanners">Home</a></li>
+				</ul>					
+				<ul class="nav pull-right">
+					<security:authorize access="!isAuthenticated()">
+						<li><a href="/login">Sign in</a></li>
+					</security:authorize>
+					<security:authorize access="isAuthenticated()">
+						<security:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_PREVIOUS_ADMINISTRATOR')">
+						<li><a href="/admin/switchUser">Switch User</a></li>
+						</security:authorize>
+						<li><a href="/logout">Logout (<security:authentication property="principal.username"/>)</a></li>
+					</security:authorize>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</div>
+</div>
+</html>
