@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+	<form layout:fragment="content" class="form" action="#" th:action="@{/signup}" th:object="${signupForm}" method="post">
+		<h2 class="form-heading">Please Sign Up</h2>
+		<input type="text" th:field="*{name}" class="input-block-level" placeholder="Username" />
+		<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-error"/>
+		<input type="password" th:field="*{password}" class="input-block-level" th:errorclass="text-error" placeholder="Password" />
+		<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-error"/>
+		<button class="btn btn-large btn-primary" type="submit">Sign Up</button>
+		<p class="form-text">Already have an account? <a th:href="@{/signin}">Sign In</a></p>
+	</form>
+</html>

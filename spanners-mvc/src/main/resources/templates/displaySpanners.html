@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+
+<div layout:fragment="content">
+    <p>Hello <span sec:authentication="principal.username">User</span>! Welcome to the Spanners Spring MVC demo application!</p>
+
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Owner</th>
+            <th>View</th>
+            <th>Edit</th>
+            <th>Remove</th>
+        </tr>
+        <tr th:each="spanner: ${spanners}">
+            <td th:text="${spanner.name}">Name</td>
+            <td th:text="${spanner.size}">Size</td>
+            <td th:text="${spanner.owner}">Owner</td>
+            <td><a th:href="@{/detailSpanner(id=${spanner.id})}">View</a></td>
+            <td><a th:href="@{/editSpanner(id=${spanner.id})}">Edit</a></td>
+            <td><a th:href="@{/deleteSpanner(id=${spanner.id})}">Delete</a></td>
+        </tr>
+    </table>
+
+    <a class="btn btn-primary" th:href="@{/addSpanner}">Create new spanner</a>
+</div>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+	<title>Spanners MVC</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+	<link th:href="@{/css/bootstrap-msg.min.css}" rel="stylesheet" media="screen" />
+	<link th:href="@{/css/core.css}" rel="stylesheet" media="screen" />
+</head>
+<body>
+
+	<div th:replace="header :: header"/>
+	<!-- Page content -->
+	<div class="container" layout:fragment="content">
+		This is a placeholder for the page content
+	</div>
+	<!-- End of page content -->
+	
+	<script th:src="@{/js/jquery-1.10.2.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/bootstrap-msg.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+	<form layout:fragment="content" class="form" th:action="@{/login}" method="post">
+		<h2 class="form-heading">Please Sign In</h2>
+		<div th:if="${param.error != null}">
+			<div class="alert alert-error">
+				Sign in error. Please try again.
+			</div>
+		</div>
+		<input type="text" class="input-block-level" placeholder="User name" name="username" />
+		<input type="password" class="input-block-level" placeholder="Password" name="password" />
+		<button class="btn btn-large btn-primary" type="submit">Sign In</button>
+	</form>
+</html>

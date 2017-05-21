@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+
+<form layout:fragment="content" th:object="${spanner}" action="#" th:action="${spanner.id == null} ? @{/addSpanner} : @{/editSpanner}" method="post" class="form">
+    <label for="name">Spanner name:</label>
+    <input type="text" th:field="*{name}" class="input-block-level"/>
+    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-error"/>
+    <label for="size">Spanner size:</label>
+    <input type="text" th:field="*{size}" class="input-block-level"/>
+    <p th:if="${#fields.hasErrors('size')}" th:errors="*{size}" class="text-error"/>
+
+    <div th:if="${spanner.id} != null">
+        <input type="hidden" th:field="*{id}" value="${spanner.id}" />
+    </div>
+
+    <a th:href="@{/displaySpanners}" class="btn btn-default">Cancel</a>
+    <input type="submit" class="btn btn-primary" value="Save changes" />
+</form>
+</html>
