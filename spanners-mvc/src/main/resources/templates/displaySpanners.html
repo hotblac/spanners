@@ -20,9 +20,9 @@
             <td th:text="${spanner.name}">Name</td>
             <td th:text="${spanner.size}">Size</td>
             <td th:text="${spanner.owner}">Owner</td>
-            <td><a th:href="@{/detailSpanner(id=${spanner.id})}">/detailSpanner?id=0</a></td>
-            <td>Edit TODO</td>
-            <td>Delete TODO</td>
+            <td><a th:href="@{/detailSpanner(id=${spanner.id})}">View</a></td>
+            <td><a th:href="@{/editSpanner(id=${spanner.id})}">Edit</a></td>
+            <td><a th:href="@{/deleteSpanner(id=${spanner.id})}">Delete</a></td>
         </tr>
     </table>
 
