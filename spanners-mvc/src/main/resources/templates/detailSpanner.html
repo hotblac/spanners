@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+
+<p layout:fragment="content">
+
+    <h1>Spanner</h1>
+    <p>Spanner id: <span th:text="${spanner.id}"/></p>
+    <p>Spanner name:<span th:text="${spanner.name}"/></p>
+    <p>Spanner size: <span th:text="${spanner.size}"/></p>
+    <p>Spanner owner: <cspan th:text="${spanner.owner}"/></p>
+
+    <p><a th:href="@{/displaySpanners}">Back</a></p>
+
+</p>
+</html>
