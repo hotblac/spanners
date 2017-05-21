@@ -11,17 +11,17 @@
 			<a class="brand" href="#">Spanners</a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
-					<li class="active"><a href="/displaySpanners">Home</a></li>
+					<li class="active"><a th:href="@{/displaySpanners}">Home</a></li>
 				</ul>					
 				<ul class="nav pull-right">
 					<div sec:authorize="!isAuthenticated()">
-						<li><a href="/login">Sign in</a></li>
+						<li><a th:href="@{/login}">Sign in</a></li>
 					</div>
 					<div sec:authorize="isAuthenticated()">
 						<div sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_PREVIOUS_ADMINISTRATOR')">
-						<li><a href="/admin/switchUser">Switch User</a></li>
+						<li><a th:href="@{/admin/switchUser}">Switch User</a></li>
 						</div>
-						<li><a href="/logout">Logout (<span sec:authentication="principal.username"/>)</a></li>
+						<li><a th:href="@{/logout}">Logout (<span sec:authentication="principal.username"/>)</a></li>
 					</div>
 				</ul>
 			</div>

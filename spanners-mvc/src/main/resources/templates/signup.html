@@ -9,6 +9,6 @@
 		<input type="password" th:field="*{password}" class="input-block-level" th:errorclass="text-error" placeholder="Password" />
 		<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-error"/>
 		<button class="btn btn-large btn-primary" type="submit">Sign Up</button>
-		<p class="form-text">Already have an account? <a href="/signin">Sign In</a></p>
+		<p class="form-text">Already have an account? <a th:href="@{/signin}">Sign In</a></p>
 	</form>
 </html>
