@@ -23,9 +23,9 @@ import java.security.Principal;
 public class AddSpannerController {
 
     public static final String CONTROLLER_URL = "/addSpanner";
-    public static final String VIEW_ADD_SPANNER = "/editSpanner";
+    public static final String VIEW_ADD_SPANNER = "editSpanner";
     public static final String VIEW_SUCCESS = "redirect:/displaySpanners";
-    public static final String VIEW_VALIDATION_FAIL = "/editSpanner";
+    public static final String VIEW_VALIDATION_FAIL = "editSpanner";
 
     public static final String MODEL_SPANNER = "spanner";
 
