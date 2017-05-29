@@ -25,9 +25,9 @@ import javax.validation.Valid;
 @Controller
 public class EditSpannerController implements ApplicationEventPublisherAware {
 
-    public static final String VIEW_EDIT_SPANNER = "/editSpanner";
+    public static final String VIEW_EDIT_SPANNER = "editSpanner";
     public static final String VIEW_UPDATE_SUCCESS = "redirect:/displaySpanners";
-    public static final String VIEW_VALIDATION_ERRORS = "/editSpanner";
+    public static final String VIEW_VALIDATION_ERRORS = "editSpanner";
 
     public static final String MODEL_SPANNER = "spanner";
     public static final String CONTROLLER_URL = "/editSpanner";
