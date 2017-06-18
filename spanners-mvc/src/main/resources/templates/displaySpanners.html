@@ -21,10 +21,10 @@
             <td th:text="${spanner.size}">Size</td>
             <td th:text="${spanner.owner}">Owner</td>
             <td><a th:href="@{/detailSpanner(id=${spanner.id})}">View</a></td>
-            <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/editSpanner(id=${spanner.id})}">Edit</a></td>
-            <td sec:authorize="not hasRole('ADMIN')">Only Admin may Edit</td>
-            <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/deleteSpanner(id=${spanner.id})}">Delete</a></td>
-            <td sec:authorize="not hasRole('ADMIN')">Only Admin may Delete</td>
+            <td th:if="${#authentication.name } == ${spanner.owner}"><a th:href="@{/editSpanner(id=${spanner.id})}">Edit</a></td>
+            <td th:unless="${#authentication.name } == ${spanner.owner}">-</td>
+            <td th:if="${#authentication.name } == ${spanner.owner}"><a th:href="@{/deleteSpanner(id=${spanner.id})}">Delete</a></td>
+            <td th:unless="${#authentication.name } == ${spanner.owner}">-</td>
         </tr>
     </table>
 
