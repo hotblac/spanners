@@ -12,6 +12,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -56,6 +57,7 @@ public class SpannersService {
     }
 
 
+    @PreAuthorize("hasPermission(#spanner, 'owner')")
     public void delete(Spanner spanner) {
         restTemplate.delete("/{0}", spanner.getId());
     }
@@ -66,6 +68,7 @@ public class SpannersService {
     }
 
 
+    @PreAuthorize("hasPermission(#spanner, 'owner')")
     public void update(Spanner spanner) {
         restTemplate.put("/{0}", spanner, spanner.getId());
     }
