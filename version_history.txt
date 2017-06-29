@@ -89,3 +89,8 @@
 4.5
 - Disable Docker build unless Docker is detected
 - CORS to support spanners-angular app
+
+4.6
+- Spring Boot 1.5.3.RELEASE
+- Convert spanners-mvc from JSP to Thymeleaf
+- Edit / delete spanner restricted to owner
