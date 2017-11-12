@@ -65,3 +65,6 @@
 
 3.5
 - Added Node.js server for WebSocket push notifications on spanner updates
+
+3.6
+- Added JSP validation at build time
