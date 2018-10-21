@@ -94,3 +94,6 @@
 - Spring Boot 1.5.3.RELEASE
 - Convert spanners-mvc from JSP to Thymeleaf
 - Edit / delete spanner restricted to owner
+
+4.7
+- Add good morning greeting on main page

@@ -10,7 +10,7 @@ services:
       # handy to view the Eureka info page from the host machine.
     ports:
       - "8761:8761"
-    image: hotblac/disco:4.6
+    image: hotblac/disco:4.7
     restart: always
 
   database:
@@ -20,11 +20,11 @@ services:
     # handy to inspect the database from the host machine.
     ports:
       - "3306:3306"
-    image: hotblac/spanners-database:4.6
+    image: hotblac/spanners-database:4.7
     restart: always
 
   api:
-    image: hotblac/spanners-api:4.6
+    image: hotblac/spanners-api:4.7
     links:
       - discovery:discovery
       - database:spanners-database
@@ -35,7 +35,7 @@ services:
     restart: always
 
   users:
-    image: hotblac/spanners-users:4.6
+    image: hotblac/spanners-users:4.7
     links:
       - discovery:discovery
       - database:spanners-database
@@ -46,7 +46,7 @@ services:
     restart: always
 
   mvc:
-    image: hotblac/spanners-mvc:4.6
+    image: hotblac/spanners-mvc:4.7
     ports:
       - "8080:8080"
     restart: always
